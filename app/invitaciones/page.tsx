@@ -54,7 +54,7 @@ export default function InvitacionesPage() {
               </Link>
             </div>
           </div>
-          <div className="grid gap-3 border-t border-pearl/14 pt-5 text-sm text-pearl/74 sm:grid-cols-3">
+          <div className="grid gap-3 pt-5 text-sm text-pearl/74 sm:grid-cols-3">
             <Metric value="3 min" label="para enviar datos del evento" />
             <Metric value="12" label="modelos listos para vender" />
             <Metric value="24/7" label="abierta para tus invitados" />
