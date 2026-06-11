@@ -93,7 +93,7 @@ export function TemplateActions({ template }: TemplateActionsProps) {
           </label>
           <Input name="imageUrl" label="URL de imagen" defaultValue={template.imageUrl} required />
           <p className="-mt-2 text-xs leading-5 text-ink/55">
-            Puedes escribir solo el nombre del archivo, por ejemplo: boda-black-gold. También acepta /templates/boda-black-gold.jpg.
+            Usa una URL pública de imagen o el archivo guardado en la carpeta de plantillas del sitio.
           </p>
           <Input name="previewUrl" label="URL de vista previa" defaultValue={template.previewUrl ?? ""} />
           <label className="text-sm font-semibold text-ink">
