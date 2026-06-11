@@ -38,7 +38,7 @@ export function Countdown({ date, time }: CountdownProps) {
           <p className="font-display text-3xl leading-none text-pearl drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)] sm:text-5xl">
             {String(value).padStart(2, "0")}
           </p>
-          <p className="mt-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold sm:text-xs">{label}</p>
+          <p className="mt-2 text-[10px] font-black uppercase tracking-[0.2em] text-black sm:text-xs">{label}</p>
         </div>
       ))}
     </div>
