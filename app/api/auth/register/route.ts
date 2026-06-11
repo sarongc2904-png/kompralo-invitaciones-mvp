@@ -10,32 +10,43 @@ const schema = z.object({
 });
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => null);
-  const parsed = schema.safeParse(body);
+  try {
+    const body = await request.json().catch(() => null);
+    const parsed = schema.safeParse(body);
 
-  if (!parsed.success) {
-    return NextResponse.json({ error: "Datos inválidos." }, { status: 400 });
-  }
-
-  const email = parsed.data.email.toLowerCase().trim();
-  const exists = await prisma.user.findUnique({ where: { email } });
-
-  if (exists) {
-    return NextResponse.json({ error: "Este correo ya está registrado." }, { status: 409 });
-  }
-
-  const user = await prisma.user.create({
-    data: {
-      name: parsed.data.name,
-      email,
-      passwordHash: await bcrypt.hash(parsed.data.password, 10)
-    },
-    select: {
-      id: true,
-      name: true,
-      email: true
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Datos inválidos." }, { status: 400 });
     }
-  });
 
-  return NextResponse.json({ user }, { status: 201 });
+    const email = parsed.data.email.toLowerCase().trim();
+    const exists = await prisma.user.findUnique({ where: { email } });
+
+    if (exists) {
+      return NextResponse.json({ error: "Este correo ya está registrado." }, { status: 409 });
+    }
+
+    const user = await prisma.user.create({
+      data: {
+        name: parsed.data.name,
+        email,
+        passwordHash: await bcrypt.hash(parsed.data.password, 10)
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true
+      }
+    });
+
+    return NextResponse.json({ user }, { status: 201 });
+  } catch (error) {
+    console.error("Register error", error);
+    return NextResponse.json(
+      {
+        error:
+          "No se pudo conectar con la base de datos. En localhost, Hostinger puede bloquear MySQL remoto; prueba el registro en el dominio desplegado."
+      },
+      { status: 500 }
+    );
+  }
 }

@@ -1,0 +1,1 @@
+INSERT INTO `User` (`id`, `name`, `email`, `passwordHash`, `role`, `createdAt`, `updatedAt`) VALUES ('admin-user', 'Admin Kompralo', 'admin@kompralo.com.mx', '$2b$10$VJNtMWQRX4Gl/HFa3tt2G.zYFThUqFSl9vwnA5f.y3dfKf1EBihXa', 'ADMIN', NOW(3), NOW(3)) ON DUPLICATE KEY UPDATE `passwordHash`=VALUES(`passwordHash`), `role`='ADMIN', `updatedAt`=NOW(3);
