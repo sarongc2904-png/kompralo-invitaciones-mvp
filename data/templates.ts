@@ -3,7 +3,7 @@ import type { Template } from "@/types";
 export const templates: Template[] = [
   {
     id: "xv-rosa-dorado",
-    name: "Rosa Dorado",
+    name: "Rosa Imperial",
     category: "XV años",
     previewUrl: "/demo/xv",
     imageUrl: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80",
@@ -11,7 +11,7 @@ export const templates: Template[] = [
   },
   {
     id: "xv-royal-blue",
-    name: "Royal Blue",
+    name: "Azul Majestuoso",
     category: "XV años",
     previewUrl: "/demo/xv",
     imageUrl: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=900&q=80",
@@ -19,7 +19,7 @@ export const templates: Template[] = [
   },
   {
     id: "xv-princess-gold",
-    name: "Princess Gold",
+    name: "Princesa Dorada",
     category: "XV años",
     previewUrl: "/demo/xv",
     imageUrl: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=80",
@@ -27,15 +27,15 @@ export const templates: Template[] = [
   },
   {
     id: "boda-black-gold",
-    name: "Black Gold",
+    name: "Elegancia Dorada",
     category: "Bodas",
     previewUrl: "/demo/boda",
-    imageUrl: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80",
+    imageUrl: "boda-black-gold",
     palette: "Negro, oro, blanco"
   },
   {
     id: "boda-white-floral",
-    name: "White Floral",
+    name: "Jardín Blanco",
     category: "Bodas",
     previewUrl: "/demo/boda",
     imageUrl: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80",
@@ -43,7 +43,7 @@ export const templates: Template[] = [
   },
   {
     id: "boda-olive-luxury",
-    name: "Olive Luxury",
+    name: "Olivo Luxury",
     category: "Bodas",
     previewUrl: "/demo/boda",
     imageUrl: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=900&q=80",
@@ -51,15 +51,15 @@ export const templates: Template[] = [
   },
   {
     id: "bautizo-classic-beige",
-    name: "Classic Beige",
+    name: "Beige Celestial",
     category: "Bautizos",
     previewUrl: "/demo/bautizo",
     imageUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=80",
-    palette: "Beige clasico, blanco"
+    palette: "Beige clásico, blanco"
   },
   {
     id: "bautizo-sky-blue",
-    name: "Sky Blue",
+    name: "Cielo Azul",
     category: "Bautizos",
     previewUrl: "/demo/bautizo",
     imageUrl: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=80",
@@ -67,7 +67,7 @@ export const templates: Template[] = [
   },
   {
     id: "bautizo-minimal-white",
-    name: "Minimal White",
+    name: "Blanco Sagrado",
     category: "Bautizos",
     previewUrl: "/demo/bautizo",
     imageUrl: "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=900&q=80",
@@ -75,15 +75,15 @@ export const templates: Template[] = [
   },
   {
     id: "cumple-neon-party",
-    name: "Neon Party",
+    name: "Neón Celebration",
     category: "Cumpleaños",
     previewUrl: "/demo/cumple",
     imageUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=900&q=80",
-    palette: "Neon, negro, magenta"
+    palette: "Neón, negro, magenta"
   },
   {
     id: "cumple-black-premium",
-    name: "Black Premium",
+    name: "Noche Premium",
     category: "Cumpleaños",
     previewUrl: "/demo/cumple",
     imageUrl: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=900&q=80",

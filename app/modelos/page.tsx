@@ -15,15 +15,15 @@ export default function ModelosPage() {
         <div className="relative mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Catálogo curado"
-            title="Modelos con presencia de evento premium"
-            description="XV años, bodas, bautizos y cumpleaños con estética editorial, vista previa y selección directa."
+            title="Elige un diseño, abre la demo y personalízalo"
+            description="Modelos premium para bodas, XV años, bautizos y cumpleaños. Puedes ver una demo pública antes de comprar."
           />
           <div className="mt-14 grid gap-14">
             {categories.map((category) => (
               <section key={category}>
                 <div className="mb-6 flex items-end justify-between border-b border-ink/10 pb-4">
                   <h2 className="font-display text-4xl text-ink">{category}</h2>
-                  <span className="text-sm font-bold uppercase tracking-[0.2em] text-gold">Colección</span>
+                  <span className="text-sm font-bold uppercase tracking-[0.2em] text-gold">Desde $399 MXN</span>
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                   {templates

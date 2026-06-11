@@ -14,8 +14,8 @@ export function Header() {
     <header className="sticky top-0 z-40 bg-pearl/84 backdrop-blur-2xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/invitaciones" className="flex items-center gap-3 font-display text-2xl text-ink">
-          <span className="relative block size-12 overflow-hidden rounded-full bg-ink shadow-[0_14px_35px_rgba(17,17,20,0.16)] ring-1 ring-gold/35">
-            <Image src="/brand/kompralo-icon.png" alt="Kompralo" fill sizes="48px" className="object-cover" priority />
+          <span className="relative block size-11 overflow-hidden rounded-full bg-ink shadow-[0_14px_35px_rgba(17,17,20,0.16)] ring-1 ring-gold/35">
+            <Image src="/brand/kompralo-icon.png" alt="Kompralo" fill sizes="44px" className="object-cover" priority />
           </span>
           Kompralo
         </Link>
@@ -28,7 +28,7 @@ export function Header() {
         </div>
         <Link
           href="/login"
-          className="rounded-full bg-ink px-5 py-3 text-sm font-black text-pearl shadow-[0_18px_50px_rgba(17,17,20,0.16)] transition hover:-translate-y-0.5 hover:bg-emerald"
+          className="rounded-full border border-ink/10 bg-white/45 px-4 py-2 text-xs font-bold text-ink/62 transition hover:border-gold hover:text-ink"
         >
           Entrar
         </Link>

@@ -3,14 +3,11 @@ import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
-  CalendarCheck,
   Check,
   ChevronRight,
-  Clock,
   Gem,
   MapPinned,
   MessageCircle,
-  Play,
   QrCode,
   Sparkles,
   Star,
@@ -28,29 +25,27 @@ export default function InvitacionesPage() {
   return (
     <>
       <section className="relative min-h-screen overflow-hidden bg-ink text-pearl">
-        <Image src={heroImage} alt="Boda premium con invitación digital Kompralo" fill priority sizes="100vw" className="object-cover opacity-72" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(198,161,91,0.24),transparent_28%),linear-gradient(90deg,rgba(8,8,10,0.92),rgba(8,8,10,0.54)_48%,rgba(8,8,10,0.24))]" />
+        <Image src={heroImage} alt="Invitaciones digitales premium Kompralo" fill priority sizes="100vw" className="object-cover opacity-72" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(198,161,91,0.24),transparent_28%),linear-gradient(90deg,rgba(8,8,10,0.94),rgba(8,8,10,0.58)_50%,rgba(8,8,10,0.25))]" />
         <div className="relative mx-auto grid min-h-screen max-w-7xl items-end px-4 pb-10 pt-28 sm:px-6 lg:px-8">
           <div className="max-w-5xl pb-10">
             <div className="reveal inline-flex items-center gap-2 rounded-full border border-pearl/18 bg-pearl/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-gold backdrop-blur-xl">
               <Sparkles size={14} />
               Invitaciones digitales de alto impacto
             </div>
-            <h1 className="reveal mt-7 max-w-5xl font-display text-6xl leading-[0.9] text-balance sm:text-7xl lg:text-8xl">
-              El primer momento memorable de tu evento empieza aquí.
+            <h1 className="reveal mt-7 max-w-5xl font-display text-5xl leading-[0.95] text-balance sm:text-7xl lg:text-8xl">
+              Crea invitaciones digitales premium en minutos
             </h1>
-            <p className="reveal mt-7 max-w-2xl text-lg leading-8 text-pearl/76 sm:text-xl">
-              Diseñamos invitaciones digitales premium para XV años, bodas, bautizos y cumpleaños en México:
-              elegantes, rápidas, compartibles y hechas para confirmar asistencia.
+            <p className="reveal mt-7 max-w-2xl text-lg leading-8 text-pearl/82 sm:text-xl">
+              Diseños elegantes para bodas, XV años y eventos especiales. Personaliza, comparte por WhatsApp y recibe confirmaciones en tiempo real.
             </p>
             <div className="reveal mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/formulario" className="magnetic inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 text-sm font-black text-ink shadow-[0_20px_60px_rgba(198,161,91,0.28)] transition hover:-translate-y-0.5 hover:bg-pearl">
-                Crear mi invitación ahora
+              <Link href="/modelos" className="magnetic inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 text-sm font-black text-ink shadow-[0_20px_60px_rgba(198,161,91,0.28)] transition hover:-translate-y-0.5 hover:bg-pearl">
+                Ver modelos
                 <ArrowRight size={17} />
               </Link>
-              <Link href="/demo/boda" className="inline-flex items-center justify-center gap-2 rounded-full border border-pearl/22 bg-pearl/10 px-7 py-4 text-sm font-bold text-pearl backdrop-blur-xl transition hover:border-gold hover:text-gold">
-                <Play size={16} />
-                Ver demo real
+              <Link href="/formulario" className="inline-flex items-center justify-center gap-2 rounded-full border border-pearl/22 bg-pearl/10 px-7 py-4 text-sm font-bold text-pearl backdrop-blur-xl transition hover:border-gold hover:text-gold">
+                Crear mi invitación
               </Link>
             </div>
           </div>
@@ -97,7 +92,7 @@ export default function InvitacionesPage() {
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="eyebrow">Showcase</p>
-              <h2 className="mt-4 max-w-3xl font-display text-5xl leading-none text-ink sm:text-6xl">Modelos que se sienten diseñados, no rellenados.</h2>
+              <h2 className="mt-4 max-w-3xl font-display text-5xl leading-none text-ink sm:text-6xl">Modelos elegantes listos para personalizar.</h2>
             </div>
             <Link href="/modelos" className="inline-flex items-center gap-2 text-sm font-black text-emerald">
               Ver catálogo completo
@@ -116,9 +111,9 @@ export default function InvitacionesPage() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
           <div>
             <p className="eyebrow text-gold">Demo funcional</p>
-            <h2 className="mt-4 font-display text-5xl leading-none sm:text-6xl">Una invitación real, lista para compartir.</h2>
+            <h2 className="mt-4 font-display text-5xl leading-none sm:text-6xl">Prueba una invitación real antes de comprar.</h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-pearl/68">
-              Portada cinematográfica, fecha, hora, dirección, RSVP, WhatsApp y estética premium en móvil.
+              Mira portada, cuenta regresiva, mapa, RSVP, WhatsApp y código QR en una experiencia pública lista para compartir.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               {["Cuenta regresiva", "RSVP", "Mapa", "QR", "WhatsApp"].map((item) => (
@@ -126,7 +121,7 @@ export default function InvitacionesPage() {
               ))}
             </div>
             <Link href="/demo/boda" className="mt-9 inline-flex items-center gap-2 rounded-full bg-pearl px-7 py-4 text-sm font-black text-ink transition hover:bg-gold">
-              Abrir demo premium
+              Ver demo
               <ArrowRight size={17} />
             </Link>
           </div>
@@ -138,7 +133,7 @@ export default function InvitacionesPage() {
                 <div className="absolute inset-x-5 bottom-6 rounded-2xl border border-gold/35 bg-black/72 p-5 text-white shadow-[0_22px_55px_rgba(0,0,0,0.45)] backdrop-blur-md">
                   <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">Boda</p>
                   <h3 className="mt-2 font-display text-4xl leading-none text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">Andrea & Mateo</h3>
-                  <p className="mt-3 text-sm text-pearl/75">17 octubre · Hacienda Santa Elena</p>
+                  <p className="mt-3 text-sm font-semibold text-white/88">17 octubre · Hacienda Santa Elena</p>
                   <div className="mt-5 grid grid-cols-3 gap-2 text-center text-xs">
                     {["Mapa", "RSVP", "QR"].map((item) => (
                       <span key={item} className="rounded-full bg-white/16 px-3 py-2 font-black text-white backdrop-blur">{item}</span>
@@ -210,8 +205,8 @@ export default function InvitacionesPage() {
           <h2 className="mt-6 font-display text-5xl leading-none sm:text-7xl">Convierte tu evento en una experiencia desde el primer mensaje.</h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-pearl/68">Crea hoy tu invitación digital premium y compártela en minutos.</p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/formulario" className="rounded-full bg-gold px-8 py-4 text-sm font-black text-ink transition hover:bg-pearl">
-              Crear invitación
+            <Link href="/modelos" className="rounded-full bg-gold px-8 py-4 text-sm font-black text-ink transition hover:bg-pearl">
+              Ver modelos
             </Link>
             <Link href={buildWhatsAppUrl("Hola, quiero información sobre una invitación digital.")} target="_blank" className="inline-flex items-center gap-2 rounded-full border border-pearl/20 px-8 py-4 text-sm font-black text-pearl transition hover:border-gold hover:text-gold">
               <MessageCircle size={17} />
@@ -221,8 +216,8 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <Link href="/formulario" className="fixed inset-x-4 bottom-4 z-40 rounded-full bg-ink px-5 py-4 text-center text-sm font-black text-pearl shadow-[0_18px_60px_rgba(0,0,0,0.26)] md:hidden">
-        Crear mi invitación premium
+      <Link href="/modelos" className="fixed inset-x-4 bottom-4 z-40 rounded-full bg-ink px-5 py-4 text-center text-sm font-black text-pearl shadow-[0_18px_60px_rgba(0,0,0,0.26)] md:hidden">
+        Ver modelos disponibles
       </Link>
     </>
   );
