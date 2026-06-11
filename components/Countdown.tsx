@@ -31,9 +31,14 @@ export function Countdown({ date, time }: CountdownProps) {
   return (
     <div className="grid grid-cols-4 gap-2 sm:gap-3">
       {Object.entries(timeLeft).map(([label, value]) => (
-        <div key={label} className="rounded-lg bg-white/84 p-3 text-center shadow-glow luxury-border backdrop-blur">
-          <p className="font-display text-2xl text-ink sm:text-4xl">{String(value).padStart(2, "0")}</p>
-          <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.18em] text-ink/58">{label}</p>
+        <div
+          key={label}
+          className="rounded-xl border border-gold/55 bg-ink/82 p-3 text-center shadow-[0_18px_48px_rgba(0,0,0,0.38)] backdrop-blur-md sm:p-4"
+        >
+          <p className="font-display text-3xl leading-none text-pearl drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)] sm:text-5xl">
+            {String(value).padStart(2, "0")}
+          </p>
+          <p className="mt-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold sm:text-xs">{label}</p>
         </div>
       ))}
     </div>
