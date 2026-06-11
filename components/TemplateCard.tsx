@@ -2,15 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { Eye, MousePointer2 } from "lucide-react";
 import type { Template } from "@/types";
+import { resolveImageUrl } from "@/lib/media";
 
 export function TemplateCard({ template, variant = "default" }: { template: Template; variant?: "default" | "editorial" }) {
   const isEditorial = variant === "editorial";
+  const imageUrl = resolveImageUrl(template.imageUrl);
 
   return (
     <article className={`group relative overflow-hidden rounded-[1.35rem] bg-white shadow-[0_22px_70px_rgba(17,17,20,0.12)] transition duration-500 hover:-translate-y-2 ${isEditorial ? "min-h-[520px]" : ""}`}>
       <div className={`relative overflow-hidden ${isEditorial ? "h-full min-h-[520px]" : "aspect-[4/5]"}`}>
         <Image
-          src={template.imageUrl}
+          src={imageUrl}
           alt={`Modelo ${template.name}`}
           fill
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"

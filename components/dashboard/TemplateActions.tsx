@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Edit3, Save, X } from "lucide-react";
 import { DeleteButton } from "./DeleteButton";
 import { categories } from "@/lib/categories";
+import { resolveImageUrl } from "@/lib/media";
 
 type TemplateActionsProps = {
   template: {
@@ -21,6 +22,7 @@ type TemplateActionsProps = {
 
 export function TemplateActions({ template }: TemplateActionsProps) {
   const router = useRouter();
+  const imageUrl = resolveImageUrl(template.imageUrl);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
@@ -80,7 +82,7 @@ export function TemplateActions({ template }: TemplateActionsProps) {
       {editing ? (
         <form onSubmit={onSubmit} className="mt-5 grid gap-3 rounded-2xl border border-gold/25 bg-pearl p-4">
           <div className="relative aspect-video overflow-hidden rounded-xl bg-white">
-            <Image src={template.imageUrl} alt={template.name} fill sizes="420px" className="object-cover" />
+            <Image src={imageUrl} alt={template.name} fill sizes="420px" className="object-cover" />
           </div>
           <Input name="name" label="Nombre" defaultValue={template.name} required />
           <label className="text-sm font-semibold text-ink">
@@ -90,6 +92,9 @@ export function TemplateActions({ template }: TemplateActionsProps) {
             </select>
           </label>
           <Input name="imageUrl" label="URL de imagen" defaultValue={template.imageUrl} required />
+          <p className="-mt-2 text-xs leading-5 text-ink/55">
+            Puedes escribir solo el nombre del archivo, por ejemplo: boda-black-gold. También acepta /templates/boda-black-gold.jpg.
+          </p>
           <Input name="previewUrl" label="URL de vista previa" defaultValue={template.previewUrl ?? ""} />
           <label className="text-sm font-semibold text-ink">
             Descripción / paleta

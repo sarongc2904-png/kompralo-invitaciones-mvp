@@ -3,6 +3,7 @@ import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { TemplateCreateForm } from "@/components/dashboard/TemplateCreateForm";
 import { TemplateActions } from "@/components/dashboard/TemplateActions";
 import { requireAdmin } from "@/lib/auth-guards";
+import { resolveImageUrl } from "@/lib/media";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
@@ -18,7 +19,7 @@ export default async function AdminTemplatesPage() {
         {templates.map((template) => (
           <article key={template.id} className="overflow-hidden rounded-[1.35rem] bg-white shadow-[0_18px_65px_rgba(17,17,20,0.08)] ring-1 ring-ink/8">
             <div className="relative aspect-[16/10] bg-pearl">
-              <Image src={template.imageUrl} alt={template.name} fill sizes="(min-width: 1280px) 33vw, 50vw" className="object-cover" />
+              <Image src={resolveImageUrl(template.imageUrl)} alt={template.name} fill sizes="(min-width: 1280px) 33vw, 50vw" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
               <span className="absolute left-4 top-4 rounded-full bg-pearl/90 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-ink">
                 {template.category}
