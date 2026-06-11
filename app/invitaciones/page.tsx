@@ -49,9 +49,10 @@ export default function InvitacionesPage() {
               sizes="(min-width: 768px) 45vw, 100vw"
               className="object-cover"
             />
-            <div className="absolute inset-x-5 bottom-5 rounded-lg bg-pearl/92 p-5 backdrop-blur luxury-border">
-              <p className="font-display text-3xl text-ink">Andrea & Mateo</p>
-              <p className="mt-2 text-sm text-ink/62">17 octubre · Hacienda Santa Elena</p>
+            <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
+            <div className="absolute inset-x-5 bottom-5 rounded-lg border border-gold/50 bg-pearl/96 p-5 shadow-[0_18px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl">
+              <p className="font-display text-3xl text-ink drop-shadow-sm">Andrea & Mateo</p>
+              <p className="mt-2 text-sm font-semibold text-ink/75">17 octubre · Hacienda Santa Elena</p>
             </div>
           </div>
         </div>
