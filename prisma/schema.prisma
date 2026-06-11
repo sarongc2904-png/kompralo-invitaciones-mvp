@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum GuestStatus {
+  PENDING
+  CONFIRMED
+  DECLINED
+}
+
+enum PaymentProvider {
+  STRIPE
+  MERCADO_PAGO
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  passwordHash  String
+  role          Role      @default(CLIENT)
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  events        Event[]
+  payments      Payment[]
+  resetTokens   PasswordResetToken[]
+}
+
+model Template {
+  id          String   @id @default(cuid())
+  name        String
+  category    String
+  description String?
+  imageUrl    String
+  previewUrl  String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  events      Event[]
+}
+
+model Event {
+  id         String      @id @default(cuid())
+  ownerId    String
+  templateId String?
+  slug       String      @unique
+  title      String
+  type       String
+  honoree    String
+  eventDate  DateTime
+  eventTime  String
+  venue      String?
+  address    String
+  mapsUrl    String?
+  musicUrl   String?
+  dressCode  String?
+  giftTable  String?
+  notes      String?     @db.Text
+  heroImage  String?
+  gallery    Json?
+  status     EventStatus @default(DRAFT)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  owner      User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  template   Template?   @relation(fields: [templateId], references: [id], onDelete: SetNull)
+  guests     Guest[]
+  rsvps      Rsvp[]
+  payments   Payment[]
+
+  @@index([ownerId])
+  @@index([templateId])
+}
+
+model Guest {
+  id        String      @id @default(cuid())
+  eventId   String
+  name      String
+  email     String?
+  phone     String?
+  seats     Int         @default(1)
+  status    GuestStatus @default(PENDING)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  event     Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  rsvps     Rsvp[]
+
+  @@index([eventId])
+}
+
+model Rsvp {
+  id        String      @id @default(cuid())
+  eventId   String
+  guestId   String?
+  name      String
+  email     String?
+  phone     String?
+  status    GuestStatus
+  message   String?     @db.Text
+  createdAt DateTime    @default(now())
+
+  event     Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  guest     Guest?      @relation(fields: [guestId], references: [id], onDelete: SetNull)
+
+  @@index([eventId])
+  @@index([guestId])
+}
+
+model Payment {
+  id          String          @id @default(cuid())
+  userId      String?
+  eventId     String?
+  provider    PaymentProvider
+  status      PaymentStatus   @default(PENDING)
+  planId      String
+  amount      Int
+  currency    String          @default("mxn")
+  providerRef String?
+  checkoutUrl String?         @db.Text
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  user        User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  event       Event?          @relation(fields: [eventId], references: [id], onDelete: SetNull)
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
