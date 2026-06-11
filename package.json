@@ -10,7 +10,7 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
     "postinstall": "prisma generate --schema=prisma/schema.prisma",
-    "start": "next start",
+    "start": "node scripts/start.js",
     "lint": "next lint"
   },
   "dependencies": {
