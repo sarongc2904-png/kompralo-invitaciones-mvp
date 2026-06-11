@@ -13,7 +13,7 @@ export default function FormularioPage() {
         <SectionHeading
           eyebrow="Información del evento"
           title="Cuéntanos todo para crear tu invitación"
-          description="La información se guarda localmente en el navegador para este MVP y deja el flujo listo para conectar base de datos después."
+          description="Al enviar el formulario se crea una invitación pública y publicada, lista para compartir con tus invitados."
         />
         <div className="mt-10">
           <Suspense fallback={<div className="rounded-lg bg-white p-8 shadow-glow">Cargando formulario...</div>}>

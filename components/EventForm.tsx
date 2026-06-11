@@ -45,23 +45,48 @@ export function EventForm() {
   const paymentSessionId = searchParams.get("session_id");
   const [form, setForm] = useState(initialState);
   const [files, setFiles] = useState<File[]>([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   function updateField(field: keyof FormState, value: string) {
     setForm((current) => ({ ...current, [field]: value }));
   }
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setError("");
+    setLoading(true);
+
     const payload = {
       ...form,
       plan: selectedPlan,
       paymentSessionId,
       modelo: searchParams.get("modelo"),
-      photos: files.map((file) => ({ name: file.name, size: file.size, type: file.type })),
-      createdAt: new Date().toISOString()
+      photos: files.map((file) => ({ name: file.name, size: file.size, type: file.type }))
     };
-    window.localStorage.setItem("kompralo-invitacion-formulario", JSON.stringify(payload));
-    router.push("/gracias");
+
+    const response = await fetch("/api/public-events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json().catch(() => null);
+    setLoading(false);
+
+    if (!response.ok) {
+      setError(data?.error ?? "No se pudo crear la invitación. Intenta de nuevo.");
+      return;
+    }
+
+    window.localStorage.setItem("kompralo-invitacion-formulario", JSON.stringify({
+      ...payload,
+      publicUrl: data.publicUrl,
+      createdAt: new Date().toISOString()
+    }));
+
+    router.push(data.publicUrl ?? "/gracias");
+    router.refresh();
   }
 
   return (
@@ -131,8 +156,10 @@ export function EventForm() {
         />
       </label>
 
-      <button className="rounded-md bg-ink px-5 py-4 text-sm font-bold text-pearl transition hover:-translate-y-0.5 hover:bg-emerald">
-        Enviar información
+      {error ? <p className="text-sm font-semibold text-rose">{error}</p> : null}
+
+      <button disabled={loading} className="rounded-md bg-ink px-5 py-4 text-sm font-bold text-pearl transition hover:-translate-y-0.5 hover:bg-emerald disabled:cursor-not-allowed disabled:opacity-60">
+        {loading ? "Creando invitación..." : "Crear invitación"}
       </button>
     </form>
   );
