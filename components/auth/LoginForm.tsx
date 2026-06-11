@@ -26,7 +26,11 @@ export function LoginForm() {
     setLoading(false);
 
     if (result?.error) {
-      setError("Correo o contraseña incorrectos.");
+      setError(
+        result.error === "Configuration"
+          ? "La conexión del servidor necesita revisión. Verifica DATABASE_URL en Hostinger."
+          : "Correo o contraseña incorrectos."
+      );
       return;
     }
 
