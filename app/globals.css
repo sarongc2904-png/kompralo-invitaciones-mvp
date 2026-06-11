@@ -23,6 +23,15 @@ body {
   color: #111114;
 }
 
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
 ::selection {
   background: #c6a15b;
   color: #111114;
@@ -41,6 +50,61 @@ body {
 
 .fade-up {
   animation: fadeUp 0.8s ease both;
+}
+
+.reveal {
+  animation: fadeUp 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.reveal:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.reveal:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.reveal:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #c6a15b;
+}
+
+.premium-panel {
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 250, 242, 0.82)),
+    radial-gradient(circle at 20% 0%, rgba(198, 161, 91, 0.18), transparent 38%);
+  box-shadow: 0 24px 80px rgba(17, 17, 20, 0.1);
+}
+
+.magnetic {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @keyframes fadeUp {

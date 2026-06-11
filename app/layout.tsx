@@ -13,13 +13,14 @@ export const metadata: Metadata = {
     template: "%s | Kompralo Invitaciones"
   },
   description:
-    "Invitaciones digitales premium para XV años, bodas, bautizos y cumpleaños. Diseño elegante, RSVP, WhatsApp, galería, música, mapas y código QR.",
+    "Invitaciones digitales premium para XV años, bodas, bautizos y cumpleaños en México. Diseño elegante, RSVP, WhatsApp, galería, música, mapas y código QR.",
   keywords: [
     "invitaciones digitales",
-    "invitaciones xv años",
+    "invitaciones XV años",
     "invitaciones boda",
     "invitaciones bautizo",
     "invitaciones cumpleaños",
+    "invitaciones digitales México",
     "Kompralo"
   ],
   openGraph: {
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Kompralo Invitaciones Digitales Premium",
-    description: "Invitaciones digitales premium listas para vender en Mexico."
+    description: "Invitaciones digitales premium listas para vender en México."
   }
 };
 
