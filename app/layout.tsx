@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
-        width: 1200,
-        height: 630,
+        url: "/brand/kompralo-logo.png",
+        width: 900,
+        height: 668,
         alt: "Invitaciones digitales premium Kompralo"
       }
     ]

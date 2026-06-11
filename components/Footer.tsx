@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export function Footer() {
@@ -5,8 +6,15 @@ export function Footer() {
     <footer className="border-t border-gold/20 bg-ink text-pearl">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
         <div>
-          <p className="font-display text-3xl">Kompralo Invitaciones</p>
-          <p className="mt-4 max-w-md text-sm leading-6 text-pearl/68">
+          <Image
+            src="/brand/kompralo-logo.png"
+            alt="Kompralo Invitaciones Digitales Premium"
+            width={900}
+            height={668}
+            sizes="(min-width: 768px) 360px, 260px"
+            className="h-auto w-64 rounded-xl shadow-[0_22px_80px_rgba(0,0,0,0.28)] md:w-80"
+          />
+          <p className="mt-5 max-w-md text-sm leading-6 text-pearl/68">
             Invitaciones digitales premium para eventos memorables. Diseñadas para vender valor,
             confirmar asistencia y verse impecables en celular.
           </p>
