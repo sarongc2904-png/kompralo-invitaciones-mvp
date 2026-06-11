@@ -1,18 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BadgeCheck,
-  Check,
-  ChevronRight,
-  Gem,
-  MapPinned,
-  MessageCircle,
-  QrCode,
-  Sparkles,
-  Star,
-  Wand2
-} from "lucide-react";
+import { ArrowRight, BadgeCheck, Check, ChevronRight, Gem, MessageCircle, Sparkles, Star, Wand2 } from "lucide-react";
 import { faqs } from "@/data/faqs";
 import { templates } from "@/data/templates";
 import { PricingCards } from "@/components/PricingCards";
@@ -20,6 +8,29 @@ import { TemplateCard } from "@/components/TemplateCard";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const heroImage = "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=85";
+
+const socialProof = [
+  ["+100", "invitaciones creadas"],
+  ["México", "clientes en todo el país"],
+  ["Listas", "diseños para compartir"]
+];
+
+const steps = [
+  "Elige tu diseño.",
+  "Personaliza los datos de tu evento.",
+  "Recibe tu invitación digital.",
+  "Compártela por WhatsApp con tus invitados."
+];
+
+const benefits = [
+  "RSVP en tiempo real",
+  "Código QR para acceso",
+  "Música personalizada",
+  "Google Maps",
+  "Mesa de regalos",
+  "Galería de fotos",
+  "Diseño adaptable a celular"
+];
 
 export default function InvitacionesPage() {
   return (
@@ -53,6 +64,54 @@ export default function InvitacionesPage() {
             <Metric value="3 min" label="para enviar datos del evento" />
             <Metric value="12" label="modelos listos para vender" />
             <Metric value="24/7" label="abierta para tus invitados" />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-ink px-4 pb-12 text-pearl sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-3 sm:grid-cols-3">
+          {socialProof.map(([value, label]) => (
+            <article key={label} className="rounded-2xl border border-pearl/10 bg-white/6 p-5 shadow-[0_18px_55px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+              <p className="font-display text-4xl text-gold">{value}</p>
+              <p className="mt-1 text-sm font-semibold text-pearl/76">{label}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-pearl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <p className="eyebrow">¿Cómo funciona?</p>
+            <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">Tu invitación lista sin complicarte.</h2>
+            <p className="mt-5 text-lg leading-8 text-ink/66">
+              Un flujo simple para pasar de idea a invitación compartible en minutos, con una experiencia premium para tus invitados.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-4 md:grid-cols-4">
+            {steps.map((step, index) => (
+              <article key={step} className="rounded-[1.4rem] border border-ink/8 bg-white p-6 shadow-[0_18px_55px_rgba(17,17,20,0.08)]">
+                <span className="inline-grid size-10 place-items-center rounded-full bg-ink text-sm font-black text-gold">0{index + 1}</span>
+                <p className="mt-7 text-lg font-black leading-7 text-ink">{step}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <p className="eyebrow">Beneficios incluidos</p>
+            <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">Todo lo que tus invitados necesitan en un solo link.</h2>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {benefits.map((benefit) => (
+              <div key={benefit} className="flex items-center gap-3 rounded-2xl border border-ink/8 bg-pearl p-4">
+                <Check className="shrink-0 text-gold" size={19} />
+                <span className="text-sm font-bold text-ink/76">{benefit}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -149,10 +208,10 @@ export default function InvitacionesPage() {
       <section className="bg-pearl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="eyebrow">Comparativa</p>
-          <h2 className="mt-4 max-w-4xl font-display text-5xl leading-none text-ink sm:text-6xl">La diferencia no es digital. Es percepción.</h2>
+          <h2 className="mt-4 max-w-4xl font-display text-5xl leading-none text-ink sm:text-6xl">Invitación impresa vs Invitación digital Kompralo.</h2>
           <div className="mt-12 grid gap-5 lg:grid-cols-2">
-            <Comparison title="Invitación tradicional" muted items={["Se pierde en chats", "Sin RSVP automático", "Cambios lentos", "No mide interés", "Difícil de reenviar"]} />
-            <Comparison title="Digital Premium Kompralo" items={["Link listo para WhatsApp", "Confirmación RSVP", "Mapa, música y galería", "Diseño premium móvil", "QR y actualización rápida"]} />
+            <Comparison title="Invitación impresa" muted items={["Mayor costo por impresión", "Entrega más lenta", "Difícil de compartir", "Sin confirmaciones automáticas", "No incluye mapa ni música"]} />
+            <Comparison title="Digital Premium Kompralo" items={["Ahorro desde el primer envío", "Lista para compartir rápido", "WhatsApp, QR y Google Maps", "Confirmaciones RSVP en tiempo real", "Experiencia premium en celular"]} />
           </div>
         </div>
       </section>
@@ -160,7 +219,7 @@ export default function InvitacionesPage() {
       <section className="bg-white px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="eyebrow">Prueba social</p>
+            <p className="eyebrow">Resultados</p>
             <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">Hecho para vender valor, no solo una imagen bonita.</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
