@@ -134,14 +134,14 @@ export default function InvitacionesPage() {
             <div className="overflow-hidden rounded-[1.8rem] bg-ink">
               <div className="relative aspect-[9/16]">
                 <Image src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=82" alt="Demo de invitación digital para boda" fill sizes="360px" className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute inset-x-5 bottom-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/10" />
+                <div className="absolute inset-x-5 bottom-6 rounded-2xl border border-gold/35 bg-black/72 p-5 text-white shadow-[0_22px_55px_rgba(0,0,0,0.45)] backdrop-blur-md">
                   <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">Boda</p>
-                  <h3 className="mt-2 font-display text-4xl leading-none">Andrea & Mateo</h3>
+                  <h3 className="mt-2 font-display text-4xl leading-none text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">Andrea & Mateo</h3>
                   <p className="mt-3 text-sm text-pearl/75">17 octubre · Hacienda Santa Elena</p>
                   <div className="mt-5 grid grid-cols-3 gap-2 text-center text-xs">
                     {["Mapa", "RSVP", "QR"].map((item) => (
-                      <span key={item} className="rounded-full bg-pearl/14 px-3 py-2 backdrop-blur">{item}</span>
+                      <span key={item} className="rounded-full bg-white/16 px-3 py-2 font-black text-white backdrop-blur">{item}</span>
                     ))}
                   </div>
                 </div>
