@@ -1,5 +1,3 @@
-"use client";
-
 import { MessageCircle } from "lucide-react";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
