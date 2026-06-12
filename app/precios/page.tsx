@@ -94,9 +94,12 @@ export default async function PreciosPage({
               <article
                 key={plan.id}
                 className={[
-                  "relative flex min-h-[560px] flex-col rounded-[1.35rem] border bg-white p-7 shadow-[0_20px_70px_rgba(17,17,20,0.08)]",
-                  plan.highlighted ? "border-blue-500 ring-2 ring-blue-500" : "border-black/10",
-                  plan.id === "premium" ? "bg-[#111114] text-white" : ""
+                  "relative flex min-h-[560px] flex-col rounded-[1.35rem] border p-7 shadow-[0_20px_70px_rgba(17,17,20,0.08)]",
+                  plan.id === "premium"
+                    ? "border-[#d2ae5f]/45 bg-[#111114] text-white"
+                    : plan.highlighted
+                      ? "border-blue-500 bg-white text-[#111114] ring-2 ring-blue-500"
+                      : "border-black/10 bg-white text-[#111114]"
                 ].join(" ")}
               >
                 {plan.badge || plan.highlighted ? (
@@ -118,7 +121,7 @@ export default async function PreciosPage({
                 </p>
                 <ul className="mt-7 grid gap-4">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-3 text-sm font-bold">
+                    <li key={feature} className={["flex items-center gap-3 text-sm font-bold", plan.id === "premium" ? "text-white" : "text-black/82"].join(" ")}>
                       <span className={["grid size-7 place-items-center rounded-full", plan.id === "premium" ? "bg-white/10 text-[#d2ae5f]" : "bg-[#f4ead4] text-[#ae7d2e]"].join(" ")}>
                         <IconCheck size={17} stroke={2.2} />
                       </span>
