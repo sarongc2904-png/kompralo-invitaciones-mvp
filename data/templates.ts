@@ -96,5 +96,29 @@ export const templates: Template[] = [
     previewUrl: "/demo/cumple",
     imageUrl: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80",
     palette: "Tropical, oro, coral"
+  },
+  {
+    id: "baby-blush-gold",
+    name: "Dulce Blush",
+    category: "Baby Shower",
+    previewUrl: "/demo/bautizo",
+    imageUrl: "https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=900&q=80",
+    palette: "Blush, marfil, oro suave"
+  },
+  {
+    id: "baby-sky-dream",
+    name: "Cielo de Ensueño",
+    category: "Baby Shower",
+    previewUrl: "/demo/bautizo",
+    imageUrl: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=80",
+    palette: "Azul cielo, blanco, perla"
+  },
+  {
+    id: "baby-minimal-luxe",
+    name: "Minimal Baby Luxe",
+    category: "Baby Shower",
+    previewUrl: "/demo/bautizo",
+    imageUrl: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=80",
+    palette: "Crema, dorado, champagne"
   }
 ];

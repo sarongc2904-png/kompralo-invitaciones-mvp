@@ -8,7 +8,7 @@ import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
-const categoryOrder = ["Bodas", "XV años", "Bautizos", "Cumpleaños"];
+const categoryOrder = ["Bodas", "XV años", "Bautizos", "Cumpleaños", "Baby Shower"];
 
 const commercialNames: Record<string, string> = {
   "boda-black-gold": "Elegancia Dorada",
@@ -22,7 +22,10 @@ const commercialNames: Record<string, string> = {
   "bautizo-minimal-white": "Blanco Sagrado",
   "cumple-neon-party": "Neón Celebration",
   "cumple-black-premium": "Noche Premium",
-  "cumple-tropical-luxury": "Tropical Luxury"
+  "cumple-tropical-luxury": "Tropical Luxury",
+  "baby-blush-gold": "Dulce Blush",
+  "baby-sky-dream": "Cielo de Ensueño",
+  "baby-minimal-luxe": "Minimal Baby Luxe"
 };
 
 type AdminTemplate = Awaited<ReturnType<typeof prisma.template.findMany>>[number];

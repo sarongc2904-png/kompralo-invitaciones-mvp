@@ -1,4 +1,4 @@
-export type EventCategory = "XV años" | "Bodas" | "Bautizos" | "Cumpleaños";
+export type EventCategory = "XV años" | "Bodas" | "Bautizos" | "Cumpleaños" | "Baby Shower";
 
 export type Template = {
   id: string;
