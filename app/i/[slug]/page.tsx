@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CalendarDays, Clock, Gift, LockKeyhole, MapPin, Shirt } from "lucide-react";
+import { auth } from "@/auth";
 import { PublicRsvpForm } from "@/components/public/PublicRsvpForm";
 import { parseEventCustomContent } from "@/lib/event-notes";
 import { prisma } from "@/lib/prisma";
@@ -31,10 +32,12 @@ export default async function PublicInvitationPage({ params }: PublicInvitationP
   }
 
   const customContent = parseEventCustomContent(event.notes);
+  const session = await auth();
+  const isAdmin = session?.user?.role === "ADMIN";
   const hasConfirmedPayment =
     event.payments.some((payment) => payment.status === "PAID") || Boolean(customContent.paymentSessionId);
 
-  if (!hasConfirmedPayment) {
+  if (!hasConfirmedPayment && !isAdmin) {
     return <PaymentRequiredInvitation />;
   }
 
