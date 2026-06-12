@@ -101,7 +101,7 @@ export const templates: Template[] = [
     id: "baby-blush-gold",
     name: "Dulce Blush",
     category: "Baby Shower",
-    previewUrl: "/demo/bautizo",
+    previewUrl: "/templates/baby-shower-deluxe/",
     imageUrl: "https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=900&q=80",
     palette: "Blush, marfil, oro suave"
   },
@@ -109,7 +109,7 @@ export const templates: Template[] = [
     id: "baby-sky-dream",
     name: "Cielo de Ensueño",
     category: "Baby Shower",
-    previewUrl: "/demo/bautizo",
+    previewUrl: "/templates/baby-shower-deluxe/",
     imageUrl: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=80",
     palette: "Azul cielo, blanco, perla"
   },
@@ -117,7 +117,7 @@ export const templates: Template[] = [
     id: "baby-minimal-luxe",
     name: "Minimal Baby Luxe",
     category: "Baby Shower",
-    previewUrl: "/demo/bautizo",
+    previewUrl: "/templates/baby-shower-deluxe/",
     imageUrl: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=80",
     palette: "Crema, dorado, champagne"
   }

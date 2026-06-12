@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Baby Shower de Isabella | Kompralo</title>
+    <meta
+      name="description"
+      content="Invitación digital premium para Baby Shower con RSVP, galería, música, ubicación, WhatsApp y código QR."
+    />
+    <meta property="og:title" content="Baby Shower de Isabella" />
+    <meta property="og:description" content="Acompáñanos a celebrar la dulce espera de Isabella." />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=1400&q=85"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #141313;
+        --muted: #685f58;
+        --cream: #fffaf3;
+        --pearl: #f7efe4;
+        --blush: #e9b7b1;
+        --rose: #c9857d;
+        --gold: #bd8f47;
+        --gold-soft: #f2d9a6;
+        --sage: #7f9076;
+        --white: #ffffff;
+        --shadow: 0 32px 90px rgba(51, 38, 30, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 20% 0%, rgba(233, 183, 177, 0.42), transparent 32rem),
+          radial-gradient(circle at 90% 12%, rgba(242, 217, 166, 0.42), transparent 28rem),
+          linear-gradient(180deg, var(--cream), #f3e7da 55%, #fffaf3);
+        color: var(--ink);
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        overflow: hidden;
+      }
+
+      .topbar {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px clamp(18px, 5vw, 64px);
+        background: rgba(255, 250, 243, 0.78);
+        border-bottom: 1px solid rgba(189, 143, 71, 0.18);
+        backdrop-filter: blur(18px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--gold-soft);
+        box-shadow: 0 14px 34px rgba(20, 19, 19, 0.18);
+      }
+
+      .topbar nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(12px, 3vw, 26px);
+        color: rgba(20, 19, 19, 0.68);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .topbar nav a {
+        transition: color 0.2s ease;
+      }
+
+      .topbar nav a:hover {
+        color: var(--ink);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        display: grid;
+        place-items: end start;
+        padding: 110px clamp(20px, 6vw, 92px) 42px;
+        isolation: isolate;
+      }
+
+      .hero::before {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        content: "";
+        background:
+          linear-gradient(90deg, rgba(20, 19, 19, 0.78), rgba(20, 19, 19, 0.42) 48%, rgba(20, 19, 19, 0.1)),
+          linear-gradient(0deg, rgba(20, 19, 19, 0.64), transparent 42%),
+          url("https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=1800&q=86") center/cover;
+      }
+
+      .hero::after {
+        position: absolute;
+        inset: auto 0 0;
+        z-index: -1;
+        height: 42%;
+        content: "";
+        background: linear-gradient(0deg, rgba(20, 19, 19, 0.72), transparent);
+      }
+
+      .hero-content {
+        width: min(100%, 980px);
+        color: var(--white);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 20px;
+        padding: 9px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.42);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--gold-soft);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        backdrop-filter: blur(14px);
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+      }
+
+      h1 {
+        max-width: 980px;
+        margin: 0;
+        font-size: clamp(64px, 13vw, 164px);
+        font-weight: 700;
+        line-height: 0.82;
+        letter-spacing: -0.04em;
+        text-wrap: balance;
+      }
+
+      .hero-subtitle {
+        max-width: 690px;
+        margin: 26px 0 0;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: clamp(18px, 2.5vw, 27px);
+        font-weight: 600;
+        line-height: 1.35;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 54px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border: 0;
+        border-radius: 999px;
+        padding: 0 24px;
+        cursor: pointer;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 900;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button-primary {
+        background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+        color: var(--ink);
+        box-shadow: 0 18px 44px rgba(189, 143, 71, 0.34);
+      }
+
+      .button-ghost {
+        border: 1px solid rgba(255, 255, 255, 0.36);
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        backdrop-filter: blur(16px);
+      }
+
+      .countdown {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        width: min(100%, 720px);
+        margin-top: 38px;
+      }
+
+      .time-card {
+        min-height: 104px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(242, 217, 166, 0.48);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.16);
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+        backdrop-filter: blur(18px);
+      }
+
+      .time-card strong {
+        display: block;
+        color: var(--white);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(42px, 7vw, 72px);
+        font-weight: 700;
+        line-height: 0.86;
+        text-shadow: 0 5px 18px rgba(0, 0, 0, 0.4);
+      }
+
+      .time-card span {
+        display: block;
+        margin-top: 10px;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .section {
+        padding: clamp(72px, 10vw, 132px) clamp(20px, 6vw, 92px);
+      }
+
+      .section-inner {
+        width: min(100%, 1180px);
+        margin: 0 auto;
+      }
+
+      .section-heading {
+        max-width: 780px;
+        margin-bottom: 42px;
+      }
+
+      .section-heading p {
+        margin: 0 0 12px;
+        color: var(--gold);
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        font-size: clamp(46px, 7vw, 92px);
+        line-height: 0.94;
+        letter-spacing: -0.035em;
+      }
+
+      .section-heading .lead {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: clamp(17px, 2vw, 22px);
+        font-weight: 600;
+        line-height: 1.55;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: clamp(22px, 4vw, 54px);
+        align-items: center;
+      }
+
+      .portrait {
+        overflow: hidden;
+        border: 1px solid rgba(189, 143, 71, 0.24);
+        border-radius: 36px;
+        box-shadow: var(--shadow);
+      }
+
+      .portrait img {
+        width: 100%;
+        height: min(74vw, 680px);
+        object-fit: cover;
+      }
+
+      .details-card {
+        border: 1px solid rgba(189, 143, 71, 0.22);
+        border-radius: 34px;
+        background: rgba(255, 255, 255, 0.62);
+        box-shadow: var(--shadow);
+        padding: clamp(24px, 4vw, 48px);
+        backdrop-filter: blur(18px);
+      }
+
+      .detail-list {
+        display: grid;
+        gap: 18px;
+        margin-top: 26px;
+      }
+
+      .detail {
+        display: grid;
+        grid-template-columns: 46px 1fr;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .icon {
+        display: grid;
+        width: 46px;
+        height: 46px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--gold-soft);
+        font-weight: 900;
+      }
+
+      .detail span {
+        display: block;
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 950;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .detail strong {
+        display: block;
+        margin-top: 3px;
+        font-size: 18px;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 18px;
+      }
+
+      .gallery img {
+        width: 100%;
+        height: 100%;
+        min-height: 280px;
+        object-fit: cover;
+        border-radius: 30px;
+        box-shadow: 0 22px 70px rgba(51, 38, 30, 0.16);
+      }
+
+      .gallery-stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .mini-card {
+        min-height: 220px;
+        border: 1px solid rgba(189, 143, 71, 0.22);
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.64);
+        padding: 28px;
+        box-shadow: 0 20px 64px rgba(51, 38, 30, 0.1);
+      }
+
+      .mini-card h3 {
+        margin: 12px 0 8px;
+        font-size: 32px;
+        line-height: 1;
+      }
+
+      .mini-card p {
+        color: var(--muted);
+        font-weight: 600;
+        line-height: 1.55;
+      }
+
+      .rsvp-panel {
+        display: grid;
+        grid-template-columns: 1fr 0.8fr;
+        gap: 22px;
+        align-items: stretch;
+      }
+
+      .rsvp-form,
+      .qr-card {
+        border: 1px solid rgba(189, 143, 71, 0.22);
+        border-radius: 34px;
+        background: rgba(255, 255, 255, 0.7);
+        padding: clamp(24px, 4vw, 42px);
+        box-shadow: var(--shadow);
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      label {
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid rgba(20, 19, 19, 0.14);
+        border-radius: 18px;
+        background: rgba(255, 250, 243, 0.86);
+        color: var(--ink);
+        font: inherit;
+        font-weight: 650;
+        padding: 15px 16px;
+        outline: none;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 4px rgba(189, 143, 71, 0.14);
+      }
+
+      .qr-card {
+        display: grid;
+        place-items: center;
+        text-align: center;
+      }
+
+      .qr-card img {
+        width: min(100%, 230px);
+        border-radius: 26px;
+        background: var(--white);
+        padding: 14px;
+      }
+
+      .success {
+        display: none;
+        margin-top: 16px;
+        border-radius: 18px;
+        background: rgba(127, 144, 118, 0.16);
+        color: #314333;
+        padding: 14px 16px;
+        font-weight: 800;
+      }
+
+      .success.is-visible {
+        display: block;
+      }
+
+      .final {
+        position: relative;
+        color: var(--white);
+        text-align: center;
+        isolation: isolate;
+      }
+
+      .final::before {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        content: "";
+        background:
+          linear-gradient(rgba(20, 19, 19, 0.68), rgba(20, 19, 19, 0.78)),
+          url("https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1800&q=84") center/cover;
+      }
+
+      .final .section-heading {
+        margin-inline: auto;
+      }
+
+      .final .section-heading .lead {
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .whatsapp {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 60;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 999px;
+        background: #1f7a4d;
+        color: var(--white);
+        padding: 15px 18px;
+        box-shadow: 0 18px 50px rgba(31, 122, 77, 0.34);
+        font-weight: 950;
+      }
+
+      .music-toggle {
+        position: fixed;
+        right: 18px;
+        bottom: 82px;
+        z-index: 60;
+        width: 52px;
+        height: 52px;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(20, 19, 19, 0.88);
+        color: var(--gold-soft);
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 18px 44px rgba(20, 19, 19, 0.22);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 900px) {
+        .topbar nav {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 96px;
+        }
+
+        .story-grid,
+        .gallery,
+        .rsvp-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .cards {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .brand span {
+          font-size: 12px;
+        }
+
+        .hero {
+          min-height: 92svh;
+          padding-inline: 18px;
+        }
+
+        .countdown {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .time-card {
+          min-height: 88px;
+          border-radius: 18px;
+        }
+
+        .section {
+          padding-inline: 18px;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        .whatsapp {
+          left: 18px;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Edita aqui: nombre, fecha, lugar, enlaces, WhatsApp e imagenes. -->
+    <div class="page">
+      <header class="topbar">
+        <a class="brand" href="#inicio" aria-label="Inicio de la invitación">
+          <span class="brand-mark">✦</span>
+          <span>Kompralo Baby</span>
+        </a>
+        <nav aria-label="Secciones">
+          <a href="#detalles">Detalles</a>
+          <a href="#galeria">Galería</a>
+          <a href="#regalos">Mesa de regalos</a>
+          <a href="#rsvp">RSVP</a>
+        </nav>
+      </header>
+
+      <main>
+        <section id="inicio" class="hero">
+          <div class="hero-content reveal">
+            <p class="eyebrow">Baby Shower Deluxe</p>
+            <h1>Isabella está por llegar</h1>
+            <p class="hero-subtitle">
+              Acompáñanos a celebrar una espera llena de amor, detalles suaves y momentos que empiezan antes del primer abrazo.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#rsvp">Confirmar asistencia</a>
+              <a class="button button-ghost" href="#detalles">Ver detalles</a>
+            </div>
+            <div class="countdown" aria-label="Cuenta regresiva">
+              <div class="time-card"><div><strong id="days">00</strong><span>Días</span></div></div>
+              <div class="time-card"><div><strong id="hours">00</strong><span>Horas</span></div></div>
+              <div class="time-card"><div><strong id="minutes">00</strong><span>Min</span></div></div>
+              <div class="time-card"><div><strong id="seconds">00</strong><span>Seg</span></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="detalles" class="section">
+          <div class="section-inner story-grid">
+            <div class="portrait reveal">
+              <img
+                src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1000&q=84"
+                alt="Decoración elegante para baby shower"
+                loading="lazy"
+              />
+            </div>
+            <div class="details-card reveal">
+              <div class="section-heading">
+                <p>Una tarde especial</p>
+                <h2>Celebramos la dulce espera</h2>
+                <div class="lead">
+                  Preparamos una reunión íntima y elegante para compartir este momento con las personas más importantes.
+                </div>
+              </div>
+              <div class="detail-list">
+                <div class="detail">
+                  <div class="icon">01</div>
+                  <div><span>Fecha</span><strong>Sábado 21 de noviembre de 2026</strong></div>
+                </div>
+                <div class="detail">
+                  <div class="icon">02</div>
+                  <div><span>Hora</span><strong>4:30 PM</strong></div>
+                </div>
+                <div class="detail">
+                  <div class="icon">03</div>
+                  <div><span>Lugar</span><strong>Jardín Casa Magnolia, Monterrey</strong></div>
+                </div>
+                <div class="detail">
+                  <div class="icon">04</div>
+                  <div><span>Dress code</span><strong>Tonos nude, blanco y dorado suave</strong></div>
+                </div>
+              </div>
+              <div class="hero-actions">
+                <a class="button button-primary" href="https://maps.google.com/?q=Monterrey" target="_blank" rel="noreferrer">Abrir Google Maps</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="galeria" class="section">
+          <div class="section-inner">
+            <div class="section-heading reveal">
+              <p>Galería</p>
+              <h2>Detalles suaves, memorias para siempre</h2>
+              <div class="lead">Una estética cálida, delicada y premium para que la invitación se sienta como parte del evento.</div>
+            </div>
+            <div class="gallery">
+              <img
+                class="reveal"
+                src="https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=1100&q=84"
+                alt="Mesa decorada para baby shower"
+                loading="lazy"
+              />
+              <div class="gallery-stack">
+                <img
+                  class="reveal"
+                  src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=900&q=84"
+                  alt="Flores y decoración fina"
+                  loading="lazy"
+                />
+                <img
+                  class="reveal"
+                  src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=84"
+                  alt="Decoración elegante de celebración"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="regalos" class="section">
+          <div class="section-inner">
+            <div class="section-heading reveal">
+              <p>Detalles útiles</p>
+              <h2>Todo listo para tus invitados</h2>
+              <div class="lead">La invitación puede incluir lo que necesitas para confirmar, llegar, regalar y compartir.</div>
+            </div>
+            <div class="cards">
+              <article class="mini-card reveal">
+                <div class="icon">QR</div>
+                <h3>Código QR</h3>
+                <p>Ideal para imprimir en mesa de bienvenida o compartir la invitación al instante.</p>
+              </article>
+              <article class="mini-card reveal">
+                <div class="icon">🎁</div>
+                <h3>Mesa de regalos</h3>
+                <p>Agrega Liverpool, Amazon, Palacio de Hierro o cualquier enlace personalizado.</p>
+              </article>
+              <article class="mini-card reveal">
+                <div class="icon">♪</div>
+                <h3>Música suave</h3>
+                <p>La experiencia puede iniciar con una canción especial desde el botón de música.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="rsvp" class="section">
+          <div class="section-inner">
+            <div class="section-heading reveal">
+              <p>RSVP</p>
+              <h2>Confirma tu asistencia</h2>
+              <div class="lead">Tu respuesta queda guardada en este dispositivo y se puede enviar por WhatsApp.</div>
+            </div>
+            <div class="rsvp-panel">
+              <form class="rsvp-form reveal" id="rsvpForm">
+                <div class="field">
+                  <label for="guestName">Nombre completo</label>
+                  <input id="guestName" name="guestName" placeholder="Ej. Mariana López" required />
+                </div>
+                <div class="field">
+                  <label for="attendance">Asistencia</label>
+                  <select id="attendance" name="attendance" required>
+                    <option value="Confirmaré asistencia">Confirmaré asistencia</option>
+                    <option value="No podré asistir">No podré asistir</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="message">Mensaje para los papás</label>
+                  <textarea id="message" name="message" rows="4" placeholder="Escribe un mensaje especial..."></textarea>
+                </div>
+                <button class="button button-primary" type="submit">Guardar respuesta</button>
+                <a class="button button-ghost" id="sendWhatsapp" href="#" style="margin-top: 10px; color: var(--ink); border-color: rgba(20,19,19,.16)">
+                  Enviar por WhatsApp
+                </a>
+                <div class="success" id="successMessage">Respuesta guardada. Gracias por confirmar.</div>
+              </form>
+              <aside class="qr-card reveal">
+                <img
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=https%3A%2F%2Fkompralo.com.mx%2Ftemplates%2Fbaby-shower-deluxe%2F"
+                  alt="Código QR de la invitación"
+                  loading="lazy"
+                />
+                <h3>Escanea la invitación</h3>
+                <p>Comparte este QR con tus invitados o úsalo en la recepción del evento.</p>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="section final">
+          <div class="section-inner">
+            <div class="section-heading reveal">
+              <p>Con cariño</p>
+              <h2>Te esperamos para celebrar a Isabella</h2>
+              <div class="lead">Gracias por formar parte de este capítulo tan especial para nuestra familia.</div>
+            </div>
+            <a class="button button-primary reveal" href="#rsvp">Confirmar ahora</a>
+          </div>
+        </section>
+      </main>
+
+      <button class="music-toggle" id="musicToggle" aria-label="Activar música">♪</button>
+      <audio id="music" preload="none" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=inspiring-ambient-110397.mp3" type="audio/mpeg" />
+      </audio>
+
+      <a
+        class="whatsapp"
+        href="https://wa.me/5218112345678?text=Hola%2C%20confirmo%20mi%20asistencia%20al%20Baby%20Shower%20de%20Isabella."
+        target="_blank"
+        rel="noreferrer"
+      >
+        WhatsApp
+      </a>
+    </div>
+
+    <script>
+      const eventDate = new Date("2026-11-21T16:30:00-06:00").getTime();
+      const units = {
+        days: document.getElementById("days"),
+        hours: document.getElementById("hours"),
+        minutes: document.getElementById("minutes"),
+        seconds: document.getElementById("seconds")
+      };
+
+      function updateCountdown() {
+        const distance = Math.max(0, eventDate - Date.now());
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((distance / (1000 * 60)) % 60);
+        const seconds = Math.floor((distance / 1000) % 60);
+        units.days.textContent = String(days).padStart(2, "0");
+        units.hours.textContent = String(hours).padStart(2, "0");
+        units.minutes.textContent = String(minutes).padStart(2, "0");
+        units.seconds.textContent = String(seconds).padStart(2, "0");
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("is-visible");
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+      const music = document.getElementById("music");
+      const musicToggle = document.getElementById("musicToggle");
+      musicToggle.addEventListener("click", async () => {
+        if (music.paused) {
+          await music.play();
+          musicToggle.textContent = "Ⅱ";
+        } else {
+          music.pause();
+          musicToggle.textContent = "♪";
+        }
+      });
+
+      const form = document.getElementById("rsvpForm");
+      const success = document.getElementById("successMessage");
+      const whatsapp = document.getElementById("sendWhatsapp");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        localStorage.setItem("baby-shower-isabella-rsvp", JSON.stringify({ ...data, savedAt: new Date().toISOString() }));
+        success.classList.add("is-visible");
+        const text = `Hola, soy ${data.guestName}. ${data.attendance} al Baby Shower de Isabella. ${data.message || ""}`;
+        whatsapp.href = `https://wa.me/5218112345678?text=${encodeURIComponent(text)}`;
+      });
+    </script>
+  </body>
+</html>
