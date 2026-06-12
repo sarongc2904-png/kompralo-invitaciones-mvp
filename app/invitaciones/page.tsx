@@ -76,7 +76,7 @@ const benefits = [
 export default function InvitacionesPage() {
   return (
     <>
-      <section className="relative min-h-screen overflow-hidden bg-ink text-pearl">
+      <section id="inicio" className="relative min-h-screen scroll-mt-24 overflow-hidden bg-ink text-pearl">
         <Image src={heroImage} alt="Invitaciones digitales premium Kompralo" fill priority sizes="100vw" className="object-cover opacity-72" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(198,161,91,0.24),transparent_28%),linear-gradient(90deg,rgba(8,8,10,0.94),rgba(8,8,10,0.58)_50%,rgba(8,8,10,0.25))]" />
         <div className="relative mx-auto grid min-h-screen max-w-7xl items-end px-4 pb-10 pt-28 sm:px-6 lg:px-8">
@@ -109,7 +109,7 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink px-4 py-14 text-pearl sm:px-6 lg:px-8">
+      <section id="prueba-social" className="relative scroll-mt-24 overflow-hidden bg-ink px-4 py-14 text-pearl sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(198,161,91,0.16),transparent_28%),radial-gradient(circle_at_85%_35%,rgba(255,255,255,0.08),transparent_22%)]" />
         <div className="relative mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1fr_0.9fr] lg:items-stretch">
           <div className="grid gap-4 sm:grid-cols-3">
@@ -147,7 +147,7 @@ export default function InvitacionesPage() {
             ))}
           </div>
         </div>
-      </section>      <section className="bg-pearl px-4 py-20 sm:px-6 lg:px-8">
+      </section>      <section id="como-funciona" className="scroll-mt-24 bg-pearl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
             <p className="eyebrow">¿Cómo funciona?</p>
@@ -178,7 +178,7 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section className="bg-white px-4 py-20 sm:px-6 lg:px-8">
+      <section id="beneficios" className="scroll-mt-24 bg-white px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div>
             <p className="eyebrow">Beneficios incluidos</p>
@@ -195,7 +195,7 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section className="bg-pearl px-4 py-20 sm:px-6 lg:px-8">
+      <section id="experiencia" className="scroll-mt-24 bg-pearl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
           <div>
             <p className="eyebrow">Experiencia del invitado</p>
@@ -225,7 +225,7 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section className="overflow-hidden bg-white py-20">
+      <section id="modelos" className="scroll-mt-24 overflow-hidden bg-white py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
@@ -245,7 +245,7 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section className="bg-ink px-4 py-20 text-pearl sm:px-6 lg:px-8">
+      <section id="demo" className="scroll-mt-24 bg-ink px-4 py-20 text-pearl sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
           <div>
             <p className="eyebrow text-gold">Demo funcional</p>
@@ -312,7 +312,7 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section className="bg-pearl px-4 py-20 sm:px-6 lg:px-8">
+      <section id="comparativa" className="scroll-mt-24 bg-pearl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="eyebrow">Comparativa</p>
           <h2 className="mt-4 max-w-4xl font-display text-5xl leading-none text-ink sm:text-6xl">Invitación impresa vs Invitación digital Kompralo.</h2>
@@ -323,7 +323,7 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section className="bg-white px-4 py-20 sm:px-6 lg:px-8">
+      <section id="resultados" className="scroll-mt-24 bg-white px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
             <p className="eyebrow">Resultados</p>
@@ -337,7 +337,7 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section className="bg-champagne/55 px-4 py-20 sm:px-6 lg:px-8">
+      <section id="planes" className="scroll-mt-24 bg-champagne/55 px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center">
             <p className="eyebrow">Planes</p>
@@ -349,7 +349,7 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section className="bg-pearl px-4 py-20 sm:px-6 lg:px-8">
+      <section id="faq" className="scroll-mt-24 bg-pearl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <p className="eyebrow text-center">FAQ</p>
           <h2 className="mt-4 text-center font-display text-5xl leading-none text-ink">Preguntas antes de empezar</h2>
@@ -364,7 +364,7 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink px-4 py-24 text-center text-pearl sm:px-6 lg:px-8">
+      <section id="cta-final" className="relative scroll-mt-24 overflow-hidden bg-ink px-4 py-24 text-center text-pearl sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(198,161,91,0.22),transparent_35%)]" />
         <div className="relative mx-auto max-w-4xl">
           <Wand2 className="mx-auto text-gold" size={38} />
@@ -423,4 +423,3 @@ function Proof({ value, label }: { value: string; label: string }) {
     </article>
   );
 }
-
