@@ -6,34 +6,39 @@
     <title>Baby Shower de Isabella | Kompralo</title>
     <meta
       name="description"
-      content="Invitación digital premium para Baby Shower con RSVP, galería, música, ubicación, WhatsApp y código QR."
+      content="Invitacion digital premium para baby shower de bebe nina con RSVP, galeria, musica, ubicacion, WhatsApp y codigo QR."
     />
     <meta property="og:title" content="Baby Shower de Isabella" />
-    <meta property="og:description" content="Acompáñanos a celebrar la dulce espera de Isabella." />
+    <meta property="og:description" content="Acompananos a celebrar la dulce espera de nuestra bebe." />
     <meta property="og:type" content="website" />
     <meta
       property="og:image"
-      content="https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=1400&q=85"
+      content="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1400&q=86"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;6..96,700&family=Nunito:wght@400;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --ink: #141313;
-        --muted: #685f58;
-        --cream: #fffaf3;
-        --pearl: #f7efe4;
-        --blush: #e9b7b1;
-        --rose: #c9857d;
-        --gold: #bd8f47;
-        --gold-soft: #f2d9a6;
-        --sage: #7f9076;
+        --ink: #2c2024;
+        --text: #44333a;
+        --muted: #806d73;
+        --cream: #fff9f5;
+        --porcelain: #fffdfb;
+        --blush-50: #fff1f2;
+        --blush-100: #f9dfe2;
+        --blush-200: #efc0c9;
+        --blush-300: #d99aa7;
+        --rose: #b96d7d;
+        --mauve: #8d5261;
+        --gold: #c79a52;
+        --champagne: #f4dfb8;
+        --sage: #8c9a87;
         --white: #ffffff;
-        --shadow: 0 32px 90px rgba(51, 38, 30, 0.18);
+        --shadow: 0 26px 80px rgba(91, 56, 64, 0.16);
       }
 
       * {
@@ -46,12 +51,13 @@
 
       body {
         margin: 0;
+        overflow-x: hidden;
         background:
-          radial-gradient(circle at 20% 0%, rgba(233, 183, 177, 0.42), transparent 32rem),
-          radial-gradient(circle at 90% 12%, rgba(242, 217, 166, 0.42), transparent 28rem),
-          linear-gradient(180deg, var(--cream), #f3e7da 55%, #fffaf3);
+          radial-gradient(circle at 9% 5%, rgba(249, 223, 226, 0.95), transparent 34rem),
+          radial-gradient(circle at 92% 14%, rgba(244, 223, 184, 0.7), transparent 28rem),
+          linear-gradient(180deg, #fffaf6 0%, #faedf0 44%, #fff9f5 100%);
         color: var(--ink);
-        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: Nunito, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
 
       img {
@@ -65,7 +71,35 @@
       }
 
       .page {
+        position: relative;
         overflow: hidden;
+      }
+
+      .page::before,
+      .page::after {
+        position: fixed;
+        z-index: -1;
+        width: 36vw;
+        height: 36vw;
+        min-width: 280px;
+        min-height: 280px;
+        content: "";
+        border-radius: 999px;
+        filter: blur(8px);
+        opacity: 0.48;
+        pointer-events: none;
+      }
+
+      .page::before {
+        left: -14vw;
+        top: 18vh;
+        background: radial-gradient(circle, rgba(239, 192, 201, 0.78), transparent 65%);
+      }
+
+      .page::after {
+        right: -12vw;
+        bottom: 8vh;
+        background: radial-gradient(circle, rgba(244, 223, 184, 0.82), transparent 66%);
       }
 
       .topbar {
@@ -75,81 +109,58 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 14px clamp(18px, 5vw, 64px);
-        background: rgba(255, 250, 243, 0.78);
-        border-bottom: 1px solid rgba(189, 143, 71, 0.18);
-        backdrop-filter: blur(18px);
+        padding: 12px clamp(18px, 5vw, 70px);
+        background: rgba(255, 250, 246, 0.78);
+        border-bottom: 1px solid rgba(185, 109, 125, 0.14);
+        backdrop-filter: blur(22px);
       }
 
       .brand {
         display: flex;
         align-items: center;
         gap: 12px;
-        font-weight: 800;
-        letter-spacing: 0.08em;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
       }
 
       .brand-mark {
         display: grid;
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
         place-items: center;
+        border: 1px solid rgba(199, 154, 82, 0.36);
         border-radius: 50%;
-        background: var(--ink);
-        color: var(--gold-soft);
-        box-shadow: 0 14px 34px rgba(20, 19, 19, 0.18);
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent),
+          var(--ink);
+        color: var(--champagne);
+        box-shadow: 0 18px 44px rgba(44, 32, 36, 0.18);
       }
 
       .topbar nav {
         display: flex;
         align-items: center;
-        gap: clamp(12px, 3vw, 26px);
-        color: rgba(20, 19, 19, 0.68);
+        gap: clamp(12px, 3vw, 28px);
+        color: rgba(44, 32, 36, 0.68);
         font-size: 13px;
-        font-weight: 800;
-      }
-
-      .topbar nav a {
-        transition: color 0.2s ease;
-      }
-
-      .topbar nav a:hover {
-        color: var(--ink);
+        font-weight: 900;
       }
 
       .hero {
         position: relative;
         min-height: 100svh;
         display: grid;
-        place-items: end start;
-        padding: 110px clamp(20px, 6vw, 92px) 42px;
-        isolation: isolate;
+        grid-template-columns: minmax(0, 0.98fr) minmax(320px, 0.82fr);
+        gap: clamp(28px, 6vw, 92px);
+        align-items: center;
+        padding: 112px clamp(20px, 6vw, 92px) 56px;
       }
 
-      .hero::before {
-        position: absolute;
-        inset: 0;
-        z-index: -2;
-        content: "";
-        background:
-          linear-gradient(90deg, rgba(20, 19, 19, 0.78), rgba(20, 19, 19, 0.42) 48%, rgba(20, 19, 19, 0.1)),
-          linear-gradient(0deg, rgba(20, 19, 19, 0.64), transparent 42%),
-          url("https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=1800&q=86") center/cover;
-      }
-
-      .hero::after {
-        position: absolute;
-        inset: auto 0 0;
-        z-index: -1;
-        height: 42%;
-        content: "";
-        background: linear-gradient(0deg, rgba(20, 19, 19, 0.72), transparent);
-      }
-
-      .hero-content {
-        width: min(100%, 980px);
-        color: var(--white);
+      .hero-copy {
+        position: relative;
+        z-index: 2;
       }
 
       .eyebrow {
@@ -157,48 +168,68 @@
         align-items: center;
         gap: 10px;
         margin: 0 0 20px;
-        padding: 9px 16px;
-        border: 1px solid rgba(255, 255, 255, 0.42);
+        padding: 10px 17px;
+        border: 1px solid rgba(185, 109, 125, 0.22);
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--gold-soft);
+        background: rgba(255, 255, 255, 0.52);
+        color: var(--mauve);
         font-size: 12px;
-        font-weight: 900;
+        font-weight: 950;
         letter-spacing: 0.24em;
         text-transform: uppercase;
-        backdrop-filter: blur(14px);
+        box-shadow: 0 14px 40px rgba(91, 56, 64, 0.08);
+        backdrop-filter: blur(18px);
+      }
+
+      .eyebrow::before {
+        width: 8px;
+        height: 8px;
+        content: "";
+        border-radius: 999px;
+        background: var(--gold);
+        box-shadow: 0 0 0 6px rgba(199, 154, 82, 0.12);
       }
 
       h1,
       h2,
       h3 {
-        font-family: "Cormorant Garamond", Georgia, serif;
+        font-family: "Bodoni Moda", Georgia, serif;
       }
 
       h1 {
-        max-width: 980px;
+        max-width: 790px;
         margin: 0;
-        font-size: clamp(64px, 13vw, 164px);
-        font-weight: 700;
-        line-height: 0.82;
-        letter-spacing: -0.04em;
+        font-size: clamp(58px, 10vw, 138px);
+        font-weight: 600;
+        line-height: 0.9;
+        letter-spacing: -0.055em;
         text-wrap: balance;
       }
 
+      .script-note {
+        display: block;
+        margin: 12px 0 0;
+        color: var(--rose);
+        font-family: "Bodoni Moda", Georgia, serif;
+        font-size: clamp(30px, 5vw, 62px);
+        font-weight: 500;
+        letter-spacing: -0.04em;
+      }
+
       .hero-subtitle {
-        max-width: 690px;
-        margin: 26px 0 0;
-        color: rgba(255, 255, 255, 0.9);
-        font-size: clamp(18px, 2.5vw, 27px);
-        font-weight: 600;
-        line-height: 1.35;
+        max-width: 640px;
+        margin: 25px 0 0;
+        color: var(--text);
+        font-size: clamp(18px, 2.3vw, 25px);
+        font-weight: 700;
+        line-height: 1.45;
       }
 
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
-        margin-top: 32px;
+        margin-top: 30px;
       }
 
       .button {
@@ -213,7 +244,7 @@
         cursor: pointer;
         font: inherit;
         font-size: 14px;
-        font-weight: 900;
+        font-weight: 950;
         transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       }
 
@@ -222,16 +253,82 @@
       }
 
       .button-primary {
-        background: linear-gradient(135deg, var(--gold-soft), var(--gold));
-        color: var(--ink);
-        box-shadow: 0 18px 44px rgba(189, 143, 71, 0.34);
+        background: linear-gradient(135deg, var(--rose), var(--mauve));
+        color: var(--white);
+        box-shadow: 0 18px 46px rgba(185, 109, 125, 0.32);
       }
 
       .button-ghost {
-        border: 1px solid rgba(255, 255, 255, 0.36);
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--white);
+        border: 1px solid rgba(185, 109, 125, 0.2);
+        background: rgba(255, 255, 255, 0.58);
+        color: var(--ink);
         backdrop-filter: blur(16px);
+      }
+
+      .hero-visual {
+        position: relative;
+        min-height: min(72vw, 720px);
+      }
+
+      .photo-card {
+        position: absolute;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.82);
+        border-radius: 42px;
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+
+      .photo-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .photo-card.main {
+        inset: 0 0 8% 8%;
+      }
+
+      .photo-card.small {
+        left: -2%;
+        bottom: 0;
+        width: 42%;
+        height: 38%;
+        border-radius: 32px;
+        transform: rotate(-4deg);
+      }
+
+      .baby-seal {
+        position: absolute;
+        right: 8%;
+        bottom: 5%;
+        display: grid;
+        width: 158px;
+        height: 158px;
+        place-items: center;
+        border: 1px solid rgba(199, 154, 82, 0.48);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.68);
+        color: var(--mauve);
+        text-align: center;
+        box-shadow: 0 22px 58px rgba(91, 56, 64, 0.14);
+        backdrop-filter: blur(16px);
+      }
+
+      .baby-seal strong {
+        display: block;
+        font-family: "Bodoni Moda", Georgia, serif;
+        font-size: 44px;
+        line-height: 1;
+      }
+
+      .baby-seal span {
+        display: block;
+        margin-top: 4px;
+        font-size: 10px;
+        font-weight: 950;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
       }
 
       .countdown {
@@ -239,34 +336,33 @@
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 12px;
         width: min(100%, 720px);
-        margin-top: 38px;
+        margin-top: 34px;
       }
 
       .time-card {
         min-height: 104px;
         display: grid;
         place-items: center;
-        border: 1px solid rgba(242, 217, 166, 0.48);
-        border-radius: 22px;
-        background: rgba(255, 255, 255, 0.16);
-        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+        border: 1px solid rgba(185, 109, 125, 0.18);
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.58);
+        box-shadow: 0 18px 52px rgba(91, 56, 64, 0.1);
         backdrop-filter: blur(18px);
       }
 
       .time-card strong {
         display: block;
-        color: var(--white);
-        font-family: "Cormorant Garamond", Georgia, serif;
-        font-size: clamp(42px, 7vw, 72px);
-        font-weight: 700;
+        color: var(--ink);
+        font-family: "Bodoni Moda", Georgia, serif;
+        font-size: clamp(42px, 7vw, 70px);
+        font-weight: 600;
         line-height: 0.86;
-        text-shadow: 0 5px 18px rgba(0, 0, 0, 0.4);
       }
 
       .time-card span {
         display: block;
         margin-top: 10px;
-        color: var(--ink);
+        color: var(--mauve);
         font-size: 12px;
         font-weight: 950;
         letter-spacing: 0.22em;
@@ -274,7 +370,7 @@
       }
 
       .section {
-        padding: clamp(72px, 10vw, 132px) clamp(20px, 6vw, 92px);
+        padding: clamp(72px, 10vw, 128px) clamp(20px, 6vw, 92px);
       }
 
       .section-inner {
@@ -283,13 +379,13 @@
       }
 
       .section-heading {
-        max-width: 780px;
+        max-width: 790px;
         margin-bottom: 42px;
       }
 
       .section-heading p {
         margin: 0 0 12px;
-        color: var(--gold);
+        color: var(--rose);
         font-size: 12px;
         font-weight: 950;
         letter-spacing: 0.26em;
@@ -298,16 +394,19 @@
 
       .section-heading h2 {
         margin: 0;
-        font-size: clamp(46px, 7vw, 92px);
-        line-height: 0.94;
-        letter-spacing: -0.035em;
+        font-size: clamp(45px, 7vw, 88px);
+        font-weight: 600;
+        line-height: 0.95;
+        letter-spacing: -0.045em;
+        text-wrap: balance;
       }
 
       .section-heading .lead {
         margin-top: 18px;
         color: var(--muted);
+        font-family: Nunito, system-ui, sans-serif;
         font-size: clamp(17px, 2vw, 22px);
-        font-weight: 600;
+        font-weight: 700;
         line-height: 1.55;
         letter-spacing: 0;
         text-transform: none;
@@ -315,34 +414,50 @@
 
       .story-grid {
         display: grid;
-        grid-template-columns: 0.9fr 1.1fr;
+        grid-template-columns: 0.92fr 1.08fr;
         gap: clamp(22px, 4vw, 54px);
         align-items: center;
       }
 
       .portrait {
         overflow: hidden;
-        border: 1px solid rgba(189, 143, 71, 0.24);
-        border-radius: 36px;
+        border: 1px solid rgba(255, 255, 255, 0.86);
+        border-radius: 42px;
         box-shadow: var(--shadow);
       }
 
       .portrait img {
         width: 100%;
-        height: min(74vw, 680px);
+        height: min(76vw, 690px);
         object-fit: cover;
       }
 
       .details-card {
-        border: 1px solid rgba(189, 143, 71, 0.22);
-        border-radius: 34px;
-        background: rgba(255, 255, 255, 0.62);
+        position: relative;
+        border: 1px solid rgba(185, 109, 125, 0.18);
+        border-radius: 38px;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.84), rgba(255, 241, 242, 0.72)),
+          var(--white);
         box-shadow: var(--shadow);
         padding: clamp(24px, 4vw, 48px);
         backdrop-filter: blur(18px);
       }
 
+      .details-card::after {
+        position: absolute;
+        right: 28px;
+        top: 22px;
+        color: rgba(185, 109, 125, 0.22);
+        content: "Isabella";
+        font-family: "Bodoni Moda", Georgia, serif;
+        font-size: clamp(42px, 8vw, 92px);
+        font-weight: 600;
+        pointer-events: none;
+      }
+
       .detail-list {
+        position: relative;
         display: grid;
         gap: 18px;
         margin-top: 26px;
@@ -350,25 +465,26 @@
 
       .detail {
         display: grid;
-        grid-template-columns: 46px 1fr;
+        grid-template-columns: 48px 1fr;
         gap: 14px;
         align-items: center;
       }
 
       .icon {
         display: grid;
-        width: 46px;
-        height: 46px;
+        width: 48px;
+        height: 48px;
         place-items: center;
         border-radius: 50%;
-        background: var(--ink);
-        color: var(--gold-soft);
-        font-weight: 900;
+        background: linear-gradient(135deg, var(--blush-200), var(--rose));
+        color: var(--white);
+        font-weight: 950;
+        box-shadow: 0 14px 34px rgba(185, 109, 125, 0.22);
       }
 
       .detail span {
         display: block;
-        color: var(--gold);
+        color: var(--rose);
         font-size: 11px;
         font-weight: 950;
         letter-spacing: 0.18em;
@@ -378,12 +494,13 @@
       .detail strong {
         display: block;
         margin-top: 3px;
+        color: var(--ink);
         font-size: 18px;
       }
 
       .gallery {
         display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
+        grid-template-columns: 1.08fr 0.92fr;
         gap: 18px;
       }
 
@@ -392,8 +509,9 @@
         height: 100%;
         min-height: 280px;
         object-fit: cover;
-        border-radius: 30px;
-        box-shadow: 0 22px 70px rgba(51, 38, 30, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 34px;
+        box-shadow: 0 22px 70px rgba(91, 56, 64, 0.14);
       }
 
       .gallery-stack {
@@ -408,23 +526,25 @@
       }
 
       .mini-card {
-        min-height: 220px;
-        border: 1px solid rgba(189, 143, 71, 0.22);
-        border-radius: 30px;
-        background: rgba(255, 255, 255, 0.64);
+        min-height: 224px;
+        border: 1px solid rgba(185, 109, 125, 0.16);
+        border-radius: 34px;
+        background: rgba(255, 255, 255, 0.66);
         padding: 28px;
-        box-shadow: 0 20px 64px rgba(51, 38, 30, 0.1);
+        box-shadow: 0 20px 64px rgba(91, 56, 64, 0.1);
       }
 
       .mini-card h3 {
-        margin: 12px 0 8px;
-        font-size: 32px;
+        margin: 14px 0 8px;
+        color: var(--ink);
+        font-size: 34px;
+        font-weight: 600;
         line-height: 1;
       }
 
       .mini-card p {
         color: var(--muted);
-        font-weight: 600;
+        font-weight: 700;
         line-height: 1.55;
       }
 
@@ -437,9 +557,11 @@
 
       .rsvp-form,
       .qr-card {
-        border: 1px solid rgba(189, 143, 71, 0.22);
-        border-radius: 34px;
-        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(185, 109, 125, 0.16);
+        border-radius: 38px;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 241, 242, 0.7)),
+          var(--white);
         padding: clamp(24px, 4vw, 42px);
         box-shadow: var(--shadow);
       }
@@ -451,20 +573,21 @@
       }
 
       label {
+        color: var(--ink);
         font-size: 13px;
-        font-weight: 900;
+        font-weight: 950;
       }
 
       input,
       select,
       textarea {
         width: 100%;
-        border: 1px solid rgba(20, 19, 19, 0.14);
-        border-radius: 18px;
-        background: rgba(255, 250, 243, 0.86);
+        border: 1px solid rgba(185, 109, 125, 0.16);
+        border-radius: 20px;
+        background: rgba(255, 253, 251, 0.9);
         color: var(--ink);
         font: inherit;
-        font-weight: 650;
+        font-weight: 750;
         padding: 15px 16px;
         outline: none;
       }
@@ -472,8 +595,8 @@
       input:focus,
       select:focus,
       textarea:focus {
-        border-color: var(--gold);
-        box-shadow: 0 0 0 4px rgba(189, 143, 71, 0.14);
+        border-color: var(--rose);
+        box-shadow: 0 0 0 4px rgba(185, 109, 125, 0.12);
       }
 
       .qr-card {
@@ -484,7 +607,7 @@
 
       .qr-card img {
         width: min(100%, 230px);
-        border-radius: 26px;
+        border-radius: 28px;
         background: var(--white);
         padding: 14px;
       }
@@ -493,10 +616,10 @@
         display: none;
         margin-top: 16px;
         border-radius: 18px;
-        background: rgba(127, 144, 118, 0.16);
+        background: rgba(140, 154, 135, 0.16);
         color: #314333;
         padding: 14px 16px;
-        font-weight: 800;
+        font-weight: 900;
       }
 
       .success.is-visible {
@@ -516,16 +639,20 @@
         z-index: -2;
         content: "";
         background:
-          linear-gradient(rgba(20, 19, 19, 0.68), rgba(20, 19, 19, 0.78)),
-          url("https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1800&q=84") center/cover;
+          linear-gradient(90deg, rgba(44, 32, 36, 0.72), rgba(141, 82, 97, 0.58)),
+          url("https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1800&q=86") center/cover;
       }
 
       .final .section-heading {
         margin-inline: auto;
       }
 
+      .final .section-heading p {
+        color: var(--champagne);
+      }
+
       .final .section-heading .lead {
-        color: rgba(255, 255, 255, 0.82);
+        color: rgba(255, 255, 255, 0.86);
       }
 
       .whatsapp {
@@ -537,10 +664,10 @@
         align-items: center;
         gap: 10px;
         border-radius: 999px;
-        background: #1f7a4d;
+        background: #217a50;
         color: var(--white);
         padding: 15px 18px;
-        box-shadow: 0 18px 50px rgba(31, 122, 77, 0.34);
+        box-shadow: 0 18px 50px rgba(33, 122, 80, 0.34);
         font-weight: 950;
       }
 
@@ -553,11 +680,11 @@
         height: 52px;
         border: 0;
         border-radius: 50%;
-        background: rgba(20, 19, 19, 0.88);
-        color: var(--gold-soft);
+        background: rgba(44, 32, 36, 0.9);
+        color: var(--champagne);
         cursor: pointer;
         font-size: 20px;
-        box-shadow: 0 18px 44px rgba(20, 19, 19, 0.22);
+        box-shadow: 0 18px 44px rgba(44, 32, 36, 0.22);
       }
 
       .reveal {
@@ -571,13 +698,18 @@
         transform: translateY(0);
       }
 
-      @media (max-width: 900px) {
+      @media (max-width: 980px) {
         .topbar nav {
           display: none;
         }
 
         .hero {
+          grid-template-columns: 1fr;
           padding-top: 96px;
+        }
+
+        .hero-visual {
+          min-height: 520px;
         }
 
         .story-grid,
@@ -593,12 +725,37 @@
 
       @media (max-width: 640px) {
         .brand span {
-          font-size: 12px;
+          font-size: 11px;
         }
 
         .hero {
-          min-height: 92svh;
+          min-height: auto;
           padding-inline: 18px;
+          padding-bottom: 40px;
+        }
+
+        .hero-visual {
+          min-height: 430px;
+        }
+
+        .photo-card.main {
+          inset: 0 0 16% 0;
+        }
+
+        .photo-card.small {
+          width: 52%;
+          height: 32%;
+        }
+
+        .baby-seal {
+          right: 4%;
+          bottom: 3%;
+          width: 126px;
+          height: 126px;
+        }
+
+        .baby-seal strong {
+          font-size: 34px;
         }
 
         .countdown {
@@ -607,7 +764,7 @@
 
         .time-card {
           min-height: 88px;
-          border-radius: 18px;
+          border-radius: 20px;
         }
 
         .section {
@@ -629,35 +786,59 @@
     <!-- Edita aqui: nombre, fecha, lugar, enlaces, WhatsApp e imagenes. -->
     <div class="page">
       <header class="topbar">
-        <a class="brand" href="#inicio" aria-label="Inicio de la invitación">
-          <span class="brand-mark">✦</span>
-          <span>Kompralo Baby</span>
+        <a class="brand" href="#inicio" aria-label="Inicio de la invitacion">
+          <span class="brand-mark">IB</span>
+          <span>Baby Shower</span>
         </a>
         <nav aria-label="Secciones">
           <a href="#detalles">Detalles</a>
-          <a href="#galeria">Galería</a>
-          <a href="#regalos">Mesa de regalos</a>
+          <a href="#galeria">Galeria</a>
+          <a href="#regalos">Regalos</a>
           <a href="#rsvp">RSVP</a>
         </nav>
       </header>
 
       <main>
         <section id="inicio" class="hero">
-          <div class="hero-content reveal">
-            <p class="eyebrow">Baby Shower Deluxe</p>
-            <h1>Isabella está por llegar</h1>
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Baby shower de nina</p>
+            <h1>
+              Isabella
+              <span class="script-note">esta por llegar</span>
+            </h1>
             <p class="hero-subtitle">
-              Acompáñanos a celebrar una espera llena de amor, detalles suaves y momentos que empiezan antes del primer abrazo.
+              Una celebracion dulce, elegante y llena de amor para recibir a nuestra bebe como merece: rodeada de los corazones que mas la esperan.
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#rsvp">Confirmar asistencia</a>
               <a class="button button-ghost" href="#detalles">Ver detalles</a>
             </div>
             <div class="countdown" aria-label="Cuenta regresiva">
-              <div class="time-card"><div><strong id="days">00</strong><span>Días</span></div></div>
+              <div class="time-card"><div><strong id="days">00</strong><span>Dias</span></div></div>
               <div class="time-card"><div><strong id="hours">00</strong><span>Horas</span></div></div>
               <div class="time-card"><div><strong id="minutes">00</strong><span>Min</span></div></div>
               <div class="time-card"><div><strong id="seconds">00</strong><span>Seg</span></div></div>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal">
+            <figure class="photo-card main">
+              <img
+                src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=86"
+                alt="Habitacion delicada para bebe nina"
+              />
+            </figure>
+            <figure class="photo-card small">
+              <img
+                src="https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=700&q=84"
+                alt="Detalles suaves para bebe"
+              />
+            </figure>
+            <div class="baby-seal">
+              <div>
+                <strong>21</strong>
+                <span>Noviembre</span>
+              </div>
             </div>
           </div>
         </section>
@@ -666,23 +847,23 @@
           <div class="section-inner story-grid">
             <div class="portrait reveal">
               <img
-                src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1000&q=84"
-                alt="Decoración elegante para baby shower"
+                src="https://images.unsplash.com/photo-1546015720-b8b30df5aa27?auto=format&fit=crop&w=1000&q=84"
+                alt="Mama embarazada en sesion delicada"
                 loading="lazy"
               />
             </div>
             <div class="details-card reveal">
               <div class="section-heading">
-                <p>Una tarde especial</p>
-                <h2>Celebramos la dulce espera</h2>
+                <p>Una tarde para Isabella</p>
+                <h2>Celebramos la espera mas bonita</h2>
                 <div class="lead">
-                  Preparamos una reunión íntima y elegante para compartir este momento con las personas más importantes.
+                  Queremos compartir contigo una tarde suave, femenina y especial antes de conocer a nuestra pequena Isabella.
                 </div>
               </div>
               <div class="detail-list">
                 <div class="detail">
                   <div class="icon">01</div>
-                  <div><span>Fecha</span><strong>Sábado 21 de noviembre de 2026</strong></div>
+                  <div><span>Fecha</span><strong>Sabado 21 de noviembre de 2026</strong></div>
                 </div>
                 <div class="detail">
                   <div class="icon">02</div>
@@ -690,15 +871,15 @@
                 </div>
                 <div class="detail">
                   <div class="icon">03</div>
-                  <div><span>Lugar</span><strong>Jardín Casa Magnolia, Monterrey</strong></div>
+                  <div><span>Lugar</span><strong>Jardin Casa Magnolia, Monterrey</strong></div>
                 </div>
                 <div class="detail">
                   <div class="icon">04</div>
-                  <div><span>Dress code</span><strong>Tonos nude, blanco y dorado suave</strong></div>
+                  <div><span>Dress code</span><strong>Rosa blush, blanco, beige o dorado suave</strong></div>
                 </div>
               </div>
               <div class="hero-actions">
-                <a class="button button-primary" href="https://maps.google.com/?q=Monterrey" target="_blank" rel="noreferrer">Abrir Google Maps</a>
+                <a class="button button-primary" href="https://maps.google.com/?q=Monterrey" target="_blank" rel="noreferrer">Abrir ubicacion</a>
               </div>
             </div>
           </div>
@@ -707,28 +888,28 @@
         <section id="galeria" class="section">
           <div class="section-inner">
             <div class="section-heading reveal">
-              <p>Galería</p>
-              <h2>Detalles suaves, memorias para siempre</h2>
-              <div class="lead">Una estética cálida, delicada y premium para que la invitación se sienta como parte del evento.</div>
+              <p>Galeria</p>
+              <h2>Rosa suave, flores y detalles de bebe</h2>
+              <div class="lead">Una invitacion pensada para sentirse delicada, tierna y premium desde el primer scroll.</div>
             </div>
             <div class="gallery">
               <img
                 class="reveal"
-                src="https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=1100&q=84"
-                alt="Mesa decorada para baby shower"
+                src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1100&q=84"
+                alt="Decoracion rosa para bebe nina"
                 loading="lazy"
               />
               <div class="gallery-stack">
                 <img
                   class="reveal"
-                  src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=900&q=84"
-                  alt="Flores y decoración fina"
+                  src="https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=900&q=84"
+                  alt="Ropita y detalles para bebe"
                   loading="lazy"
                 />
                 <img
                   class="reveal"
-                  src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=84"
-                  alt="Decoración elegante de celebración"
+                  src="https://images.unsplash.com/photo-1546015720-b8b30df5aa27?auto=format&fit=crop&w=900&q=84"
+                  alt="Sesion elegante de maternidad"
                   loading="lazy"
                 />
               </div>
@@ -739,25 +920,25 @@
         <section id="regalos" class="section">
           <div class="section-inner">
             <div class="section-heading reveal">
-              <p>Detalles útiles</p>
-              <h2>Todo listo para tus invitados</h2>
-              <div class="lead">La invitación puede incluir lo que necesitas para confirmar, llegar, regalar y compartir.</div>
+              <p>Detalles utiles</p>
+              <h2>Todo listo para tus invitadas</h2>
+              <div class="lead">Confirmacion, mesa de regalos, musica, codigo QR y ubicacion en una experiencia facil de compartir.</div>
             </div>
             <div class="cards">
               <article class="mini-card reveal">
                 <div class="icon">QR</div>
-                <h3>Código QR</h3>
-                <p>Ideal para imprimir en mesa de bienvenida o compartir la invitación al instante.</p>
+                <h3>Codigo QR</h3>
+                <p>Perfecto para compartir la invitacion o imprimirlo en la mesa de bienvenida.</p>
               </article>
               <article class="mini-card reveal">
-                <div class="icon">🎁</div>
+                <div class="icon">MG</div>
                 <h3>Mesa de regalos</h3>
-                <p>Agrega Liverpool, Amazon, Palacio de Hierro o cualquier enlace personalizado.</p>
+                <p>Agrega Amazon, Liverpool, Palacio de Hierro o cualquier enlace personalizado.</p>
               </article>
               <article class="mini-card reveal">
                 <div class="icon">♪</div>
-                <h3>Música suave</h3>
-                <p>La experiencia puede iniciar con una canción especial desde el botón de música.</p>
+                <h3>Musica suave</h3>
+                <p>Una melodia delicada para abrir la invitacion con una sensacion mas emocional.</p>
               </article>
             </div>
           </div>
@@ -774,21 +955,21 @@
               <form class="rsvp-form reveal" id="rsvpForm">
                 <div class="field">
                   <label for="guestName">Nombre completo</label>
-                  <input id="guestName" name="guestName" placeholder="Ej. Mariana López" required />
+                  <input id="guestName" name="guestName" placeholder="Ej. Mariana Lopez" required />
                 </div>
                 <div class="field">
                   <label for="attendance">Asistencia</label>
                   <select id="attendance" name="attendance" required>
-                    <option value="Confirmaré asistencia">Confirmaré asistencia</option>
-                    <option value="No podré asistir">No podré asistir</option>
+                    <option value="Confirmare asistencia">Confirmare asistencia</option>
+                    <option value="No podre asistir">No podre asistir</option>
                   </select>
                 </div>
                 <div class="field">
-                  <label for="message">Mensaje para los papás</label>
+                  <label for="message">Mensaje para los papas</label>
                   <textarea id="message" name="message" rows="4" placeholder="Escribe un mensaje especial..."></textarea>
                 </div>
                 <button class="button button-primary" type="submit">Guardar respuesta</button>
-                <a class="button button-ghost" id="sendWhatsapp" href="#" style="margin-top: 10px; color: var(--ink); border-color: rgba(20,19,19,.16)">
+                <a class="button button-ghost" id="sendWhatsapp" href="#" style="margin-top: 10px">
                   Enviar por WhatsApp
                 </a>
                 <div class="success" id="successMessage">Respuesta guardada. Gracias por confirmar.</div>
@@ -796,11 +977,11 @@
               <aside class="qr-card reveal">
                 <img
                   src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=https%3A%2F%2Fkompralo.com.mx%2Ftemplates%2Fbaby-shower-deluxe%2F"
-                  alt="Código QR de la invitación"
+                  alt="Codigo QR de la invitacion"
                   loading="lazy"
                 />
-                <h3>Escanea la invitación</h3>
-                <p>Comparte este QR con tus invitados o úsalo en la recepción del evento.</p>
+                <h3>Escanea la invitacion</h3>
+                <p>Comparte este QR con tus invitados o usalo en la recepcion del evento.</p>
               </aside>
             </div>
           </div>
@@ -809,16 +990,16 @@
         <section class="section final">
           <div class="section-inner">
             <div class="section-heading reveal">
-              <p>Con cariño</p>
+              <p>Con amor</p>
               <h2>Te esperamos para celebrar a Isabella</h2>
-              <div class="lead">Gracias por formar parte de este capítulo tan especial para nuestra familia.</div>
+              <div class="lead">Gracias por formar parte de esta espera tan dulce para nuestra familia.</div>
             </div>
             <a class="button button-primary reveal" href="#rsvp">Confirmar ahora</a>
           </div>
         </section>
       </main>
 
-      <button class="music-toggle" id="musicToggle" aria-label="Activar música">♪</button>
+      <button class="music-toggle" id="musicToggle" aria-label="Activar musica">♪</button>
       <audio id="music" preload="none" loop>
         <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=inspiring-ambient-110397.mp3" type="audio/mpeg" />
       </audio>
