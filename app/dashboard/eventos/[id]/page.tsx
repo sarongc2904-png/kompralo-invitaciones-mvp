@@ -29,9 +29,9 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
     <DashboardShell title={event.title} description="Gestiona invitados, RSVP y publicación." role={session.user.role}>
       <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr]">
         <div className="rounded-lg bg-white p-6 shadow-glow luxury-border">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">Liga pública</p>
-          <Link href={`/i/${event.slug}`} className="mt-3 block break-all font-semibold text-ink">
-            /i/{event.slug}
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">Invitación pública</p>
+          <Link href={`/i/${event.slug}`} className="mt-3 inline-flex rounded-full bg-ink px-5 py-3 text-sm font-black text-pearl hover:bg-emerald">
+            Abrir invitación pública
           </Link>
           <dl className="mt-6 grid gap-3 text-sm text-ink/70 sm:grid-cols-2">
             <Info label="Festejado" value={event.honoree} />

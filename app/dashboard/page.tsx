@@ -28,7 +28,7 @@ export default async function DashboardPage() {
         <div className="rounded-[1.5rem] bg-white p-7 shadow-[0_18px_65px_rgba(17,17,20,0.08)] ring-1 ring-ink/8">
           <h2 className="font-display text-4xl text-ink">Siguiente acción</h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-ink/65">
-            Crea un evento, publícalo y comparte su liga pública. Cada invitación queda disponible en formato `/i/[slug]`.
+            Crea un evento, publícalo y comparte el enlace de la invitación con tus invitados.
           </p>
           <Link href="/dashboard/eventos" className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-black text-pearl hover:bg-emerald">
             Gestionar eventos
