@@ -20,14 +20,14 @@ export function TemplateCard({ template, variant = "default" }: { template: Temp
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover transition duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/18 to-transparent" />
-        <span className="absolute left-4 top-4 rounded-full border border-pearl/40 bg-black/55 px-3 py-1 text-xs font-black text-white shadow-[0_10px_28px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/22 to-transparent" />
+        <span className="absolute left-4 top-4 rounded-full border border-pearl/40 bg-black/60 px-3 py-1 text-xs font-black text-white shadow-[0_10px_28px_rgba(0,0,0,0.35)] backdrop-blur-xl">
           {template.category}
         </span>
         <div className="absolute inset-x-0 bottom-0 p-5 text-white">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-gold">Desde $399 MXN</p>
           <h3 className="mt-2 font-display text-3xl leading-none drop-shadow-[0_3px_10px_rgba(0,0,0,0.75)]">{template.name}</h3>
-          <p className="mt-2 text-sm font-semibold text-white/88">{template.palette}</p>
+          <p className="mt-2 text-sm font-semibold text-white/90">{template.palette}</p>
         </div>
       </div>
 

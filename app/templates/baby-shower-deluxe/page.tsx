@@ -5,5 +5,5 @@ export const metadata = {
 };
 
 export default function BabyShowerDeluxeTemplatePage() {
-  redirect("/templates/baby-shower-deluxe/index.html");
+  redirect("/demo/baby-shower");
 }

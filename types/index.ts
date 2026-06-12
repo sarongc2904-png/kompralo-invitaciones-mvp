@@ -29,6 +29,7 @@ export type DemoEvent = {
   host: string;
   title: string;
   subtitle: string;
+  story: string;
   date: string;
   time: string;
   venue: string;
@@ -36,8 +37,11 @@ export type DemoEvent = {
   mapsUrl: string;
   dressCode: string;
   giftTable: string;
+  music: string;
   heroImage: string;
   gallery: string[];
   whatsappMessage: string;
   accent: string;
+  secondaryAccent: string;
+  invitationNote: string;
 };

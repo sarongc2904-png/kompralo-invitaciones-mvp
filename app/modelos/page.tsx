@@ -16,7 +16,7 @@ export default function ModelosPage() {
           <SectionHeading
             eyebrow="Catálogo curado"
             title="Elige un diseño, abre la demo y personalízalo"
-            description="Modelos premium para bodas, XV años, bautizos y cumpleaños. Puedes ver una demo pública antes de comprar."
+            description="Modelos premium para bodas, XV años, baby shower, bautizos y cumpleaños. Puedes ver una demo pública antes de comprar."
           />
           <div className="mt-14 grid gap-14">
             {categories.map((category) => (
