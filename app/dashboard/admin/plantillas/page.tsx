@@ -2,6 +2,7 @@ import Image from "next/image";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { TemplateCreateForm } from "@/components/dashboard/TemplateCreateForm";
 import { TemplateActions } from "@/components/dashboard/TemplateActions";
+import { templates as defaultTemplates } from "@/data/templates";
 import { requireAdmin } from "@/lib/auth-guards";
 import { resolveImageUrl } from "@/lib/media";
 import { prisma } from "@/lib/prisma";
@@ -23,24 +24,41 @@ const commercialNames: Record<string, string> = {
   "cumple-neon-party": "Neón Celebration",
   "cumple-black-premium": "Noche Premium",
   "cumple-tropical-luxury": "Tropical Luxury",
+  "baby-shower-deluxe": "Baby Shower Deluxe",
   "baby-blush-gold": "Dulce Blush",
   "baby-sky-dream": "Cielo de Ensueño",
   "baby-minimal-luxe": "Minimal Baby Luxe"
 };
 
 type AdminTemplate = Awaited<ReturnType<typeof prisma.template.findMany>>[number];
+type TemplateForAdmin = Pick<AdminTemplate, "id" | "name" | "category" | "description" | "imageUrl" | "previewUrl" | "isActive">;
 
 export default async function AdminTemplatesPage() {
   const session = await requireAdmin();
+  await ensureDefaultTemplates();
+
   const templates = await prisma.template
     .findMany({ orderBy: [{ category: "asc" }, { createdAt: "desc" }] })
     .catch(() => []);
+  const existingTemplateIds = new Set(templates.map((template) => template.id));
+  const missingDefaultTemplates: TemplateForAdmin[] = defaultTemplates
+    .filter((template) => !existingTemplateIds.has(template.id))
+    .map((template) => ({
+      id: template.id,
+      name: template.name,
+      category: template.category,
+      description: template.palette,
+      imageUrl: template.imageUrl,
+      previewUrl: template.previewUrl,
+      isActive: true
+    }));
+  const allTemplates: TemplateForAdmin[] = [...templates, ...missingDefaultTemplates];
 
   const groupedTemplates = categoryOrder.map((category) => ({
     category,
-    templates: templates.filter((template) => template.category === category)
+    templates: allTemplates.filter((template) => template.category === category)
   }));
-  const uncategorized = templates.filter((template) => !categoryOrder.includes(template.category));
+  const uncategorized = allTemplates.filter((template) => !categoryOrder.includes(template.category));
   const sections = [
     ...groupedTemplates,
     ...(uncategorized.length ? [{ category: "Sin categoría", templates: uncategorized }] : [])
@@ -81,7 +99,34 @@ export default async function AdminTemplatesPage() {
   );
 }
 
-function TemplateAdminCard({ template }: { template: AdminTemplate }) {
+async function ensureDefaultTemplates() {
+  await Promise.all(
+    defaultTemplates.map((template) =>
+      prisma.template.upsert({
+        where: { id: template.id },
+        update: {
+          name: template.name,
+          category: template.category,
+          description: template.palette,
+          imageUrl: template.imageUrl,
+          previewUrl: template.previewUrl,
+          isActive: true
+        },
+        create: {
+          id: template.id,
+          name: template.name,
+          category: template.category,
+          description: template.palette,
+          imageUrl: template.imageUrl,
+          previewUrl: template.previewUrl,
+          isActive: true
+        }
+      })
+    )
+  ).catch(() => null);
+}
+
+function TemplateAdminCard({ template }: { template: TemplateForAdmin }) {
   const displayName = commercialNames[template.id] ?? template.name;
   const displayDescription = template.description || "Diseño premium listo para personalizar.";
 

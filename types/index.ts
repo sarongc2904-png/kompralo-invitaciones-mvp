@@ -11,11 +11,15 @@ export type Template = {
 
 export type Plan = {
   id: string;
+  slug?: string;
   name: string;
   price: string;
+  oldPrice?: string;
   amount: number;
   description: string;
   features: string[];
+  sections?: string[];
+  badge?: string;
   highlighted?: boolean;
 };
 

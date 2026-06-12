@@ -15,7 +15,7 @@ export function Footer() {
             className="h-auto w-64 rounded-xl shadow-[0_22px_80px_rgba(0,0,0,0.28)] md:w-80"
           />
           <p className="mt-5 max-w-md text-sm leading-6 text-pearl/68">
-            Invitaciones digitales premium para eventos memorables. Diseñadas para vender valor,
+            Invitaciones digitales premium para eventos memorables. Disenadas para vender valor,
             confirmar asistencia y verse impecables en celular.
           </p>
         </div>
@@ -24,16 +24,16 @@ export function Footer() {
           <div className="grid gap-2 text-pearl/70">
             <Link href="/modelos">Modelos</Link>
             <Link href="/precios">Precios</Link>
-            <Link href="/formulario">Crear invitación</Link>
+            <Link href="/formulario">Crear invitacion</Link>
           </div>
         </div>
         <div className="text-sm">
           <p className="mb-3 font-black uppercase tracking-[0.18em] text-gold">Demos</p>
           <div className="grid gap-2 text-pearl/70">
-            <Link href="/demo/xv">XV años</Link>
+            <Link href="/demo/xv">XV anos</Link>
             <Link href="/demo/boda">Boda</Link>
             <Link href="/demo/bautizo">Bautizo</Link>
-            <Link href="/demo/cumple">Cumpleaños</Link>
+            <Link href="/demo/cumple">Cumpleanos</Link>
           </div>
         </div>
       </div>

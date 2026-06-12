@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CalendarDays, Clock, Gift, MapPin, Shirt } from "lucide-react";
+import { CalendarDays, Clock, Gift, LockKeyhole, MapPin, Shirt } from "lucide-react";
 import { PublicRsvpForm } from "@/components/public/PublicRsvpForm";
+import { parseEventCustomContent } from "@/lib/event-notes";
 import { prisma } from "@/lib/prisma";
 
 type PublicInvitationPageProps = {
@@ -14,11 +16,26 @@ export default async function PublicInvitationPage({ params }: PublicInvitationP
   const { slug } = await params;
   const event = await prisma.event.findUnique({
     where: { slug },
-    include: { template: true }
+    include: {
+      template: true,
+      payments: {
+        select: {
+          status: true
+        }
+      }
+    }
   }).catch(() => null);
 
   if (!event || event.status !== "PUBLISHED") {
     notFound();
+  }
+
+  const customContent = parseEventCustomContent(event.notes);
+  const hasConfirmedPayment =
+    event.payments.some((payment) => payment.status === "PAID") || Boolean(customContent.paymentSessionId);
+
+  if (!hasConfirmedPayment) {
+    return <PaymentRequiredInvitation />;
   }
 
   const hero = event.heroImage || event.template?.imageUrl || "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80";
@@ -46,6 +63,37 @@ export default async function PublicInvitationPage({ params }: PublicInvitationP
         <PublicRsvpForm eventId={event.id} />
       </section>
     </div>
+  );
+}
+
+function PaymentRequiredInvitation() {
+  return (
+    <section className="grid min-h-[72vh] place-items-center bg-pearl px-4 py-16 text-center">
+      <div className="w-full max-w-2xl rounded-lg bg-white p-6 shadow-glow luxury-border sm:p-8">
+        <div className="mx-auto grid size-14 place-items-center rounded-full bg-ink text-gold">
+          <LockKeyhole size={25} />
+        </div>
+        <p className="mt-6 text-xs font-bold uppercase tracking-[0.28em] text-gold">Invitacion pendiente</p>
+        <h1 className="mt-3 font-display text-4xl text-ink sm:text-5xl">Falta finalizar el pago</h1>
+        <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-ink/65 sm:text-base">
+          Tu invitacion ya puede previsualizarse, pero para publicarla y compartirla con tus invitados primero debes elegir un plan y completar el pago.
+        </p>
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <Link
+            href="/precios"
+            className="inline-flex items-center justify-center rounded-md bg-ink px-6 py-4 text-sm font-bold text-pearl transition hover:bg-emerald"
+          >
+            Ver planes y pagar
+          </Link>
+          <Link
+            href="/formulario"
+            className="inline-flex items-center justify-center rounded-md border border-ink/15 bg-white px-6 py-4 text-sm font-bold text-ink transition hover:border-gold hover:text-gold"
+          >
+            Editar borrador
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }
 

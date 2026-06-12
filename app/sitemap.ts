@@ -5,7 +5,6 @@ const routes = [
   "/modelos",
   "/precios",
   "/pago-exitoso",
-  "/formulario",
   "/gracias",
   "/login",
   "/registro",

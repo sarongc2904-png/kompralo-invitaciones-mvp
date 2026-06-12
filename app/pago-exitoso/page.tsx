@@ -10,7 +10,6 @@ type PagoExitosoPageProps = {
 };
 
 type PaymentSummary = {
-  planId: string | null;
   planName: string;
   amount: string;
   status: string;
@@ -22,13 +21,12 @@ async function getPaymentSummary(sessionId?: string): Promise<PaymentSummary | n
   }
 
   const session = await getStripe().checkout.sessions.retrieve(sessionId);
-  const planId = session.metadata?.planId ?? null;
+  const planId = session.metadata?.plan_slug ?? session.metadata?.planId ?? null;
   const plan = getPlanById(planId);
   const amount = typeof session.amount_total === "number" ? session.amount_total / 100 : plan ? plan.amount / 100 : 0;
 
   return {
-    planId,
-    planName: session.metadata?.planName ?? plan?.name ?? "Invitación digital",
+    planName: session.metadata?.plan_name ?? session.metadata?.planName ?? plan?.name ?? "Invitacion digital",
     amount: amount.toLocaleString("es-MX", {
       style: "currency",
       currency: (session.currency ?? "mxn").toUpperCase()
@@ -44,11 +42,6 @@ export const metadata = {
 export default async function PagoExitosoPage({ searchParams }: PagoExitosoPageProps) {
   const { session_id: sessionId } = await searchParams;
   const summary = await getPaymentSummary(sessionId).catch(() => null);
-  const formParams = new URLSearchParams({
-    ...(summary?.planId ? { plan: summary.planId } : {}),
-    ...(sessionId ? { session_id: sessionId } : {})
-  });
-  const formHref = `/formulario${formParams.toString() ? `?${formParams.toString()}` : ""}`;
 
   return (
     <section className="grid min-h-[72vh] place-items-center bg-pearl px-4 py-16">
@@ -56,7 +49,7 @@ export default async function PagoExitosoPage({ searchParams }: PagoExitosoPageP
         <CheckCircle2 className="mx-auto text-emerald" size={58} />
         <h1 className="mt-5 font-display text-4xl text-ink sm:text-5xl">Pago exitoso</h1>
         <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-ink/65 sm:text-base">
-          Gracias por tu compra. Ahora completa los datos del evento para preparar tu invitación digital.
+          Gracias por tu compra. Ahora entra a tu dashboard para editar las secciones incluidas en tu plan.
         </p>
 
         <div className="mt-8 grid gap-3 rounded-lg bg-pearl p-4 text-left luxury-border sm:grid-cols-3">
@@ -66,11 +59,11 @@ export default async function PagoExitosoPage({ searchParams }: PagoExitosoPageP
         </div>
 
         <Link
-          href={formHref}
+          href="/dashboard"
           className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-md bg-ink px-6 py-4 text-sm font-bold text-pearl transition hover:bg-emerald sm:w-auto"
         >
           <ClipboardList size={17} />
-          Llenar formulario
+          Ir al dashboard
         </Link>
       </div>
     </section>

@@ -98,6 +98,14 @@ export const templates: Template[] = [
     palette: "Tropical, oro, coral"
   },
   {
+    id: "baby-shower-deluxe",
+    name: "Baby Shower Deluxe",
+    category: "Baby Shower",
+    previewUrl: "/templates/baby-shower-deluxe/",
+    imageUrl: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=900&q=84",
+    palette: "Rosa blush, marfil, dorado suave"
+  },
+  {
     id: "baby-blush-gold",
     name: "Dulce Blush",
     category: "Baby Shower",

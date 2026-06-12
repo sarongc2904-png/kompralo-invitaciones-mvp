@@ -2,28 +2,54 @@ import type { Plan } from "@/types";
 
 export const plans: Plan[] = [
   {
-    id: "basico",
-    name: "Plan Básico",
+    id: "esencial",
+    slug: "esencial",
+    name: "Esencial",
+    oldPrice: "$799",
     price: "$499 MXN",
     amount: 49900,
-    description: "Invitación elegante para compartir por WhatsApp.",
-    features: ["Portada premium", "Fecha, hora y ubicación", "Botón WhatsApp", "RSVP local"]
+    description: "Ideal para anunciar tu evento con elegancia y empezar a recibir confirmaciones sin complicarte.",
+    features: ["Diseno elegante", "Fecha y hora claras", "RSVP para invitados", "Boton directo a WhatsApp", "Entrega lista para compartir"],
+    sections: ["design", "datetime", "rsvp", "whatsapp", "delivery"]
   },
   {
-    id: "premium",
-    name: "Plan Premium",
+    id: "completo",
+    slug: "completo",
+    name: "Completo",
+    oldPrice: "$1299",
     price: "$799 MXN",
     amount: 79900,
-    description: "Experiencia completa con secciones visuales y galería.",
-    features: ["Todo el plan básico", "Galería de fotos", "Código QR", "Mesa de regalos", "Dress code"],
+    description: "Para eventos donde quieres que cada invitado tenga toda la informacion y sienta una experiencia completa.",
+    features: ["Todo Esencial", "Galeria para emocionar", "Codigo QR de acceso", "Mesa de regalos", "Dress code", "Mapa de llegada"],
+    sections: ["design", "datetime", "rsvp", "whatsapp", "delivery", "gallery", "qr", "gift_table", "dresscode", "map"],
     highlighted: true
   },
   {
-    id: "ia-premium",
-    name: "Plan IA Premium",
+    id: "premium",
+    slug: "premium",
+    name: "Premium",
+    oldPrice: "$2199",
     price: "$1499 MXN",
     amount: 149900,
-    description: "Diseño personalizado con estilo premium y apoyo creativo IA.",
-    features: ["Todo el plan premium", "Copy personalizado", "Look visual a medida", "Optimización de fotos"]
+    description: "La opcion deluxe para una invitacion hecha a tu estilo, con copy cuidado y acompanamiento premium.",
+    features: ["Todo Completo", "Texto personalizado", "Direccion visual deluxe", "Optimizacion de fotos", "Revisiones incluidas", "Soporte prioritario"],
+    sections: [
+      "design",
+      "datetime",
+      "rsvp",
+      "whatsapp",
+      "delivery",
+      "gallery",
+      "qr",
+      "gift_table",
+      "dresscode",
+      "map",
+      "custom_copy",
+      "visual_style",
+      "photo_optimize",
+      "revisions",
+      "support"
+    ],
+    badge: "Todo incluido"
   }
 ];

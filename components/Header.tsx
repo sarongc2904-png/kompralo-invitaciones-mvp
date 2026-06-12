@@ -5,7 +5,7 @@ const navItems = [
   { href: "/invitaciones", label: "Inicio" },
   { href: "/modelos", label: "Modelos" },
   { href: "/precios", label: "Precios" },
-  { href: "/formulario", label: "Crear invitación" },
+  { href: "/formulario", label: "Crear invitacion" },
   { href: "/dashboard", label: "Dashboard" }
 ];
 
@@ -23,7 +23,7 @@ export function Header() {
         </Link>
         <div className="hidden items-center gap-7 text-sm font-semibold text-ink/62 md:flex">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="transition hover:text-ink">
+            <Link key={`${item.href}-${item.label}`} href={item.href} className="transition hover:text-ink">
               {item.label}
             </Link>
           ))}
