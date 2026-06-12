@@ -65,12 +65,12 @@ const steps = [
 
 const benefits = [
   "RSVP en tiempo real",
-  "CÃ³digo QR para acceso",
-  "MÃºsica personalizada",
+  "Código QR para acceso",
+  "Música personalizada",
   "Google Maps",
   "Mesa de regalos",
-  "GalerÃ­a de fotos",
-  "DiseÃ±o adaptable a celular"
+  "Galería de fotos",
+  "Diseño adaptable a celular"
 ];
 
 export default function InvitacionesPage() {
@@ -89,7 +89,7 @@ export default function InvitacionesPage() {
               Crea invitaciones digitales premium en minutos
             </h1>
             <p className="reveal mt-7 max-w-2xl text-lg leading-8 text-pearl/82 sm:text-xl">
-              DiseÃ±os elegantes para bodas, XV aÃ±os y eventos especiales. Personaliza, comparte por WhatsApp y recibe confirmaciones en tiempo real.
+              Diseños elegantes para bodas, XV años y eventos especiales. Personaliza, comparte por WhatsApp y recibe confirmaciones en tiempo real.
             </p>
             <div className="reveal mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/modelos" className="magnetic inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 text-sm font-black text-ink shadow-[0_20px_60px_rgba(198,161,91,0.28)] transition hover:-translate-y-0.5 hover:bg-pearl">
@@ -97,7 +97,7 @@ export default function InvitacionesPage() {
                 <ArrowRight size={17} />
               </Link>
               <Link href="/formulario" className="inline-flex items-center justify-center gap-2 rounded-full border border-pearl/22 bg-pearl/10 px-7 py-4 text-sm font-bold text-pearl backdrop-blur-xl transition hover:border-gold hover:text-gold">
-                Crear mi invitaciÃ³n
+                Crear mi invitación
               </Link>
             </div>
           </div>
@@ -150,10 +150,10 @@ export default function InvitacionesPage() {
       </section>      <section className="bg-pearl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="eyebrow">Â¿CÃ³mo funciona?</p>
-            <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">Tu invitaciÃ³n lista sin complicarte.</h2>
+            <p className="eyebrow">¿Cómo funciona?</p>
+            <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">Tu invitación lista sin complicarte.</h2>
             <p className="mt-5 text-lg leading-8 text-ink/66">
-              Un flujo simple para pasar de idea a invitaciÃ³n compartible en minutos, con una experiencia premium para tus invitados.
+              Un flujo simple para pasar de idea a invitación compartible en minutos, con una experiencia premium para tus invitados.
             </p>
           </div>
           <div className="mt-12 grid gap-4 md:grid-cols-4">
@@ -199,10 +199,10 @@ export default function InvitacionesPage() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
           <div>
             <p className="eyebrow">Experiencia del invitado</p>
-            <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">No mandas un link. Mandas una sensaciÃ³n.</h2>
+            <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">No mandas un link. Mandas una sensación.</h2>
             <p className="mt-6 text-lg leading-8 text-ink/68">
-              Tus invitados abren la invitaciÃ³n desde WhatsApp, sienten el estilo del evento, ven mapa, mÃºsica, galerÃ­a,
-              dress code, mesa de regalos y confirman asistencia sin fricciÃ³n.
+              Tus invitados abren la invitación desde WhatsApp, sienten el estilo del evento, ven mapa, música, galería,
+              dress code, mesa de regalos y confirman asistencia sin fricción.
             </p>
           </div>
           <div className="relative">
@@ -210,7 +210,7 @@ export default function InvitacionesPage() {
             <div className="relative grid gap-4 md:grid-cols-3">
               {[
                 ["Abre", "Un enlace elegante llega por WhatsApp.", MessageCircle],
-                ["Explora", "Fotos, mÃºsica, mapa y cÃ³digo de vestir.", Gem],
+                ["Explora", "Fotos, música, mapa y código de vestir.", Gem],
                 ["Confirma", "RSVP y contacto inmediato en segundos.", BadgeCheck]
               ].map(([title, text, Icon], index) => (
                 <article key={String(title)} className="premium-panel min-h-64 p-6 transition duration-500 hover:-translate-y-2">
@@ -233,7 +233,7 @@ export default function InvitacionesPage() {
               <h2 className="mt-4 max-w-3xl font-display text-5xl leading-none text-ink sm:text-6xl">Modelos elegantes listos para personalizar.</h2>
             </div>
             <Link href="/modelos" className="inline-flex items-center gap-2 text-sm font-black text-emerald">
-              Ver catÃ¡logo completo
+              Ver catálogo completo
               <ChevronRight size={16} />
             </Link>
           </div>
@@ -249,9 +249,9 @@ export default function InvitacionesPage() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
           <div>
             <p className="eyebrow text-gold">Demo funcional</p>
-            <h2 className="mt-4 font-display text-5xl leading-none sm:text-6xl">Prueba una invitaciÃ³n real antes de comprar.</h2>
+            <h2 className="mt-4 font-display text-5xl leading-none sm:text-6xl">Prueba una invitación real antes de comprar.</h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-pearl/68">
-              Mira portada, cuenta regresiva, mapa, RSVP, WhatsApp y cÃ³digo QR en una experiencia pÃºblica lista para compartir.
+              Mira portada, cuenta regresiva, mapa, RSVP, WhatsApp y código QR en una experiencia pública lista para compartir.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               {["Cuenta regresiva", "RSVP", "Mapa", "QR", "WhatsApp"].map((item) => (
@@ -315,10 +315,10 @@ export default function InvitacionesPage() {
       <section className="bg-pearl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="eyebrow">Comparativa</p>
-          <h2 className="mt-4 max-w-4xl font-display text-5xl leading-none text-ink sm:text-6xl">InvitaciÃ³n impresa vs InvitaciÃ³n digital Kompralo.</h2>
+          <h2 className="mt-4 max-w-4xl font-display text-5xl leading-none text-ink sm:text-6xl">Invitación impresa vs Invitación digital Kompralo.</h2>
           <div className="mt-12 grid gap-5 lg:grid-cols-2">
-            <Comparison title="InvitaciÃ³n impresa" muted items={["Mayor costo por impresiÃ³n", "Entrega mÃ¡s lenta", "DifÃ­cil de compartir", "Sin confirmaciones automÃ¡ticas", "No incluye mapa ni mÃºsica"]} />
-            <Comparison title="Digital Premium Kompralo" items={["Ahorro desde el primer envÃ­o", "Lista para compartir rÃ¡pido", "WhatsApp, QR y Google Maps", "Confirmaciones RSVP en tiempo real", "Experiencia premium en celular"]} />
+            <Comparison title="Invitación impresa" muted items={["Mayor costo por impresión", "Entrega más lenta", "Difícil de compartir", "Sin confirmaciones automáticas", "No incluye mapa ni música"]} />
+            <Comparison title="Digital Premium Kompralo" items={["Ahorro desde el primer envío", "Lista para compartir rápido", "WhatsApp, QR y Google Maps", "Confirmaciones RSVP en tiempo real", "Experiencia premium en celular"]} />
           </div>
         </div>
       </section>
@@ -330,7 +330,7 @@ export default function InvitacionesPage() {
             <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">Hecho para vender valor, no solo una imagen bonita.</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
-            <Proof value="+40%" label="mÃ¡s intenciÃ³n de confirmar" />
+            <Proof value="+40%" label="más intención de confirmar" />
             <Proof value="1 link" label="para toda la experiencia" />
             <Proof value="95+" label="objetivo Lighthouse" />
           </div>
@@ -341,7 +341,7 @@ export default function InvitacionesPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center">
             <p className="eyebrow">Planes</p>
-            <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">Elige el nivel de presencia que tendrÃ¡ tu evento.</h2>
+            <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">Elige el nivel de presencia que tendrá tu evento.</h2>
           </div>
           <div className="mt-12">
             <PricingCards />
@@ -369,12 +369,12 @@ export default function InvitacionesPage() {
         <div className="relative mx-auto max-w-4xl">
           <Wand2 className="mx-auto text-gold" size={38} />
           <h2 className="mt-6 font-display text-5xl leading-none sm:text-7xl">Convierte tu evento en una experiencia desde el primer mensaje.</h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-pearl/68">Crea hoy tu invitaciÃ³n digital premium y compÃ¡rtela en minutos.</p>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-pearl/68">Crea hoy tu invitación digital premium y compártela en minutos.</p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href="/modelos" className="rounded-full bg-gold px-8 py-4 text-sm font-black text-ink transition hover:bg-pearl">
               Ver modelos
             </Link>
-            <Link href={buildWhatsAppUrl("Hola, quiero informaciÃ³n sobre una invitaciÃ³n digital.")} target="_blank" className="inline-flex items-center gap-2 rounded-full border border-pearl/20 px-8 py-4 text-sm font-black text-pearl transition hover:border-gold hover:text-gold">
+            <Link href={buildWhatsAppUrl("Hola, quiero información sobre una invitación digital.")} target="_blank" className="inline-flex items-center gap-2 rounded-full border border-pearl/20 px-8 py-4 text-sm font-black text-pearl transition hover:border-gold hover:text-gold">
               <MessageCircle size={17} />
               Hablar por WhatsApp
             </Link>
