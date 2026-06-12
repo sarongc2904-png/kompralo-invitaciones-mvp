@@ -135,9 +135,6 @@ export function EventForm() {
     }
 
     const urlFields: Array<[keyof FormState, string]> = [
-      ["googleMaps", "La liga de Google Maps debe iniciar con http:// o https://"],
-      ["musica", "La liga de musica debe iniciar con http:// o https://"],
-      ["mesaRegalos", "La liga de mesa de regalos debe iniciar con http:// o https://"],
       ["imagenPrincipal", "La imagen principal debe ser una URL valida."],
       ["imagenGaleria1", "La imagen de galeria 1 debe ser una URL valida."],
       ["imagenGaleria2", "La imagen de galeria 2 debe ser una URL valida."],
@@ -294,10 +291,10 @@ export function EventForm() {
         <Input label="Fecha" type="date" value={form.fecha} onChange={(value) => updateField("fecha", value)} error={errors.fecha} required />
         <Input label="Hora" type="time" value={form.hora} onChange={(value) => updateField("hora", value)} error={errors.hora} required />
         <Input label="Direccion" value={form.direccion} onChange={(value) => updateField("direccion", value)} error={errors.direccion} required />
-        <Input label="Google Maps" value={form.googleMaps} onChange={(value) => updateField("googleMaps", value)} error={errors.googleMaps} />
-        <Input label="Musica" value={form.musica} onChange={(value) => updateField("musica", value)} error={errors.musica} placeholder="URL de cancion o audio" />
+        <Input label="Google Maps (opcional)" value={form.googleMaps} onChange={(value) => updateField("googleMaps", value)} error={errors.googleMaps} placeholder="Liga de Google Maps o pendiente" />
+        <Input label="Musica (opcional)" value={form.musica} onChange={(value) => updateField("musica", value)} error={errors.musica} placeholder="Liga de cancion, nombre de cancion o Sin musica" />
         <Input label="Dress Code" value={form.dressCode} onChange={(value) => updateField("dressCode", value)} />
-        <Input label="Mesa de regalos" value={form.mesaRegalos} onChange={(value) => updateField("mesaRegalos", value)} error={errors.mesaRegalos} />
+        <Input label="Mesa de regalos (opcional)" value={form.mesaRegalos} onChange={(value) => updateField("mesaRegalos", value)} error={errors.mesaRegalos} placeholder="Liga, tienda, numero de evento o Sin mesa" />
         <Input label="Imagen principal URL" value={form.imagenPrincipal} onChange={(value) => updateField("imagenPrincipal", value)} error={errors.imagenPrincipal} placeholder="https://..." />
         <Input label="Imagen galeria 1 URL" value={form.imagenGaleria1} onChange={(value) => updateField("imagenGaleria1", value)} error={errors.imagenGaleria1} placeholder="https://..." />
         <Input label="Imagen galeria 2 URL" value={form.imagenGaleria2} onChange={(value) => updateField("imagenGaleria2", value)} error={errors.imagenGaleria2} placeholder="https://..." />
