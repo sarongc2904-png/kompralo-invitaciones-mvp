@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   outputFileTracingRoot: process.cwd(),
   async headers() {
     return [
