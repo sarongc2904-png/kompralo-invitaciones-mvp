@@ -2,6 +2,14 @@ import type { Template } from "@/types";
 
 export const templates: Template[] = [
   {
+    id: "boda-deluxe",
+    name: "Boda Deluxe",
+    category: "Bodas",
+    previewUrl: "/templates/boda-deluxe",
+    imageUrl: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=88",
+    palette: "Vino, marfil, oro"
+  },
+  {
     id: "boda-black-gold",
     name: "Elegancia Dorada",
     category: "Bodas",

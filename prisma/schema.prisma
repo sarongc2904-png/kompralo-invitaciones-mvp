@@ -12,6 +12,17 @@ enum Role {
   CLIENT
 }
 
+enum WeddingStyle {
+  JARDIN
+  CIELO
+  ARENA
+}
+
+enum WeddingRsvpStatus {
+  CONFIRMED
+  DECLINED
+}
+
 enum EventStatus {
   DRAFT
   PUBLISHED
@@ -47,9 +58,10 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  events        Event[]
-  payments      Payment[]
-  resetTokens   PasswordResetToken[]
+  events               Event[]
+  payments             Payment[]
+  resetTokens          PasswordResetToken[]
+  weddingInvitations   WeddingInvitation[]
 }
 
 model Template {
@@ -161,4 +173,66 @@ model PasswordResetToken {
   createdAt DateTime @default(now())
 
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Wedding Invitations ────────────────────────────────────────────────────
+
+model WeddingInvitation {
+  id          String       @id @default(cuid())
+  userId      String
+  slug        String       @unique
+
+  style       WeddingStyle @default(JARDIN)
+
+  nombre1     String
+  nombre2     String
+  frase       String?      @db.Text
+
+  fecha       DateTime
+  hora        String
+  lugar       String
+  direccion   String?
+  mapsUrl     String?
+  musicaUrl   String?
+
+  dresscode   String?
+  regalos     String?      @db.Text
+
+  fotoportada String?
+  fotos       Json?
+
+  // { countdown, galeria, confirmacion, musica, mapa, historia, qr }
+  modules     Json?
+
+  vistas      Int          @default(0)
+  confirmados Int          @default(0)
+  rechazados  Int          @default(0)
+
+  pagado      Boolean      @default(false)
+
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rsvps       WeddingRsvp[]
+
+  @@index([userId])
+}
+
+model WeddingRsvp {
+  id           String            @id @default(cuid())
+  invitationId String
+
+  nombre       String
+  email        String?
+  telefono     String?
+  asistentes   Int               @default(1)
+  status       WeddingRsvpStatus
+  mensaje      String?           @db.Text
+
+  createdAt    DateTime          @default(now())
+
+  invitation   WeddingInvitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+
+  @@index([invitationId])
 }

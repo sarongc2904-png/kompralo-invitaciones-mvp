@@ -1,0 +1,137 @@
+REGISTRO DE CAMBIOS REALIZADOS - INVITACIONES VIRTUALES
+
+Este archivo registra las modificaciones realizadas en el espacio de trabajo para que otros agentes de IA (como Codex) puedan sincronizar el estado actual del proyecto.
+
+---
+
+1. RESPALDO DE PLANTILLA BÁSICA ANTERIOR:
+   - Archivo de origen: `public/templates/boda-deluxe/index.html` (original de 23 KB con panel de edición izquierdo básico).
+   - Archivo de destino: `public/templates/boda-deluxe/index_old.html` (copia de respaldo).
+
+2. INTEGRACIÓN DE LA NUEVA PLANTILLA PREMIUM (BODA INVI):
+   - Copiados los archivos de la plantilla premium móvil-first desde "d:\josed\Descargas\BODA INVI\" hacia la carpeta del proyecto en Next.js "public/templates/boda-deluxe/".
+   - Archivos copiados:
+     - `index.html` (123 KB, incluye el editor in-situ mediante contenteditable, controles para ocultar secciones, modal RSVP y script para exportar HTML personalizado).
+     - `floral_bouquet.png` (imagen decorativa de flores).
+     - `wedding_couple_1.png` (foto principal de previsualización de la pareja).
+     - `wedding_couple_2.png` (segunda foto de la pareja).
+     - `wedding_couple_3.png` (tercera foto de la pareja).
+
+3. SERVIDOR DE DESARROLLO LOCAL:
+   - Servidor Next.js iniciado localmente en el puerto 3001.
+
+4. CORRECCIÓN DE ERROR DE CUOTA (QuotaExceededError) EN FORMULARIO:
+   - Archivo modificado: `components/EventForm.tsx` (función `saveDraft`).
+   - Solución: Se sanitizan las imágenes locales de tipo Base64 en `saveDraft` para no desbordar el almacenamiento del navegador, y se añade un bloque try-catch.
+
+5. REDISEÑO PREMIUM Y COMPACTO DE SECCIÓN "PRUEBA SOCIAL DELUXE":
+   - Archivo modificado: `app/invitaciones/page.tsx` (sección `#prueba-social`).
+   - Mejoras: Se redujo el padding vertical, tamaño de títulos y tarjetas, convirtiendo las citas a una tipografía serif elegante en cursiva y optimizando las sombras del efecto glassmorphism.
+
+6. ELIMINACIÓN DE ESPACIO VACÍO AL OCULTAR ELEMENTOS DEL ITINERARIO:
+   - Archivo modificado: `public/templates/boda-deluxe/index.html` (CSS y JavaScript).
+   - Solución: Se configuró para que los elementos ocultados del itinerario se eliminen por completo del flujo visual (`display: none !important`) en lugar de mostrarse a un 45% de opacidad. Además, se añadió un fallback de nombres automáticos como "Evento X" en el modal de control si los títulos quedan en blanco.
+
+7. CORRECCIÓN DE ERRORES DE CODIFICACIÓN (CARACTERES RAROS):
+   - Archivo modificado: `components/EventForm.tsx`
+   - Problema: Múltiples palabras en español con tildes y caracteres especiales (como `ó`, `í`, `é`, `ñ`, `á`) se mostraban corruptas con secuencias extrañas (ej. `Ã³`, `Ã©`, `Ã­`, `aÃ±os`).
+   - Solución: Se reemplazaron todas las secuencias corruptas por las letras acentuadas correspondientes en español, corrigiendo todos los labels, placeholders y descripciones de error del formulario.
+
+8. IMPLEMENTACIÓN DEL SISTEMA DE DESHACER/REHACER (UNDO/REDO):
+   - Archivos modificados:
+     - `public/templates/boda-deluxe/index.html` (Workspace)
+     - `d:\josed\Descargas\BODA INVI\index.html` (Descargas del usuario)
+   - Solución:
+     - Se añadieron botones de "Deshacer" y "Rehacer" en `#editor-bar` con diseño e iconos SVG premium que se muestran únicamente en modo edición.
+     - Se implementó una máquina de estados con stacks de historial `undoStack` y `redoStack` limitados a 50 estados.
+     - Se configuró el guardado del estado de personalización completo: textos `.editable` (capturados en el evento `blur`), fotos actualizadas (`handlePhotoChange`), secciones ocultas (`hideSection`/`restoreSection`), ítems del itinerario ocultos (`toggleTimelineItem`/`toggleTimelineItemFromModal`) y la paleta de colores activa (`changePalette`).
+     - Se programó soporte para atajos de teclado estándar: `Ctrl+Z` para deshacer y `Ctrl+Y` / `Ctrl+Shift+Z` para rehacer.
+     - Se verificó el correcto funcionamiento de todos los flujos mediante pruebas en el navegador.
+
+9. SECTOR DE FECHA DE BODA E ICONOS DE VESTIMENTA:
+   - Archivos modificados:
+     - `public/templates/boda-deluxe/index.html` (Workspace)
+     - `d:\josed\Descargas\BODA INVI\index.html` (Descargas del usuario)
+   - Solución:
+     - Se reemplazaron los círculos de colores del código de vestimenta por dos iconos SVG premium y minimalistas: uno de esmoquin (Hombres) y otro de vestido de gala (Mujeres) en círculos dorados con efecto sombra.
+     - Se añadió un control `<input type="datetime-local">` en el modal de personalización que permite cambiar la fecha y hora de la boda.
+     - Se sincronizó el selector con el atributo `data-wedding-date` en la etiqueta `<body>` y con el cálculo en tiempo real de la cuenta regresiva.
+     - Se integró la fecha de la boda dentro del historial deshacer/rehacer y se configuró la persistencia mediante `localStorage`.
+
+10. DISEÑO RESPONSIVO DE LA BARRA DE EDICIÓN PARA CELULARES:
+    - Archivos modificados:
+      - `public/templates/boda-deluxe/index.html` (Workspace)
+      - `d:\josed\Descargas\BODA INVI\index.html` (Descargas del usuario)
+    - Solución:
+      - Se añadió una regla `@media (max-width: 600px)` en el CSS que reestructura la barra `#editor-bar` en pantallas móviles.
+      - En lugar de envolver los botones de forma desordenada o apilarlos verticalmente, se habilitó el desplazamiento horizontal suave (`overflow-x: auto; -webkit-overflow-scrolling: touch;`) con botones compactos y sin encogimiento (`flex-shrink: 0`), similar al comportamiento de aplicaciones nativas premium.
+      - Se ocultó la barra de scroll visual y el texto de ayuda secundario en celulares para optimizar espacio.
+
+11. SEPARACIÓN DE LETRAS EN MONOGRAMA PRINCIPAL M&M:
+    - Archivos modificados:
+      - `public/templates/boda-deluxe/index.html` (Workspace)
+      - `d:\josed\Descargas\BODA INVI\index.html` (Descargas del usuario)
+    - Solución:
+      - Se desestructuró el bloque `.mono-letters` para separar la primera letra, el ornamento central (❧) y la segunda letra en tres elementos `<span>` independientes con clase `editable`.
+      - Esto permite modificar las letras una por una sin perder el ornamento dorado o cambiar involuntariamente el color Borgoña y Dorado original de los caracteres individuales.
+
+12. PALETA DE COLORES CON DEGRADADOS DE LUJO Y AVISO DESLIZABLE MÓVIL:
+    - Archivos modificados:
+      - `public/templates/boda-deluxe/index.html` (Workspace)
+      - `d:\josed\Descargas\BODA INVI\index.html` (Descargas del usuario)
+    - Solución:
+      - Se reescribieron las tres paletas de colores (`burgundy`, `emerald`, `midnight`) para utilizar degradados CSS variables (`--palette-grad-cover`, `--palette-grad-flap`, `--palette-grad-countdown`, `--palette-grad-music`, `--palette-grad-closing`). Al cambiar de paleta en la modal, todas las secciones con fondo degradado se actualizan a un juego de colores premium coherentes.
+      - Se creó el letrero flotante `#mobile-swipe-hint` con una animación de mano deslizante que aparece al activar el modo edición en pantallas móviles y se desvanece de forma automática tras 3.5 segundos.
+
+13. CORRECCIÓN Y MEJORA DEL AVISO MÓVIL DESLIZABLE:
+    - Archivos modificados:
+      - `public/templates/boda-deluxe/index.html` (Workspace)
+      - `d:\josed\Descargas\BODA INVI\index.html` (Descargas del usuario)
+    - Solución:
+      - Se corrigió un error de sintaxis crítico en el archivo CSS: faltaba la llave de cierre `}` de la media query `@media (max-width: 600px)` antes de `@keyframes swipe-hand-anim`, lo que envolvía incorrectamente el resto de las reglas CSS.
+      - Se incrementó el punto de interrupción (breakpoint) de la media query móvil de `600px` a `768px` para dar soporte a dispositivos y orientaciones más grandes (ej. tabletas en vertical u horizontal).
+      - Se vinculó el disparo del aviso deslizable `#mobile-swipe-hint` a la función `toggleEditorBar()` en JavaScript. Esto asegura que la indicación flotante se muestre inmediatamente en celulares tanto al entrar a la invitación (cuando la barra se desliza hacia abajo automáticamente después de 2.2 segundos) como al volver a abrir la barra manualmente mediante el botón flotante dorado.
+      - Se actualizó el breakpoint condicional en `toggleEdit()` de `600px` a `768px`.
+
+14. BOTÓN INLINE PARA CAMBIO DE FECHA Y HORA:
+    - Archivos modificados:
+      - `public/templates/boda-deluxe/index.html` (Workspace)
+      - `d:\josed\Descargas\BODA INVI\index.html` (Descargas del usuario)
+    - Solución:
+      - Se añadió un botón inline con clase `.btn-change-date-inline` y texto "Cambiar Fecha y Hora" con un icono de calendario en la sección de cuenta regresiva (`#s-countdown`) justo debajo de la cuadrícula de tiempo.
+      - Este botón tiene estilos premium y está configurado para mostrarse únicamente en modo edición (`body.edit-mode .btn-change-date-inline { display: inline-flex; }`).
+      - Al hacer clic, abre el modal de personalización (`openSectionsModal()`), donde se encuentra el selector de fecha y hora, permitiendo una edición directa e intuitiva.
+      - Se añadió la clase `.btn-change-date-inline` a la lista `elementsToRemove` de la función `exportEditedHTML()` para asegurar que se limpie por completo y no se incluya en el HTML final exportado para producción.
+
+15. CONTROLES DE FORMATO DE TEXTO (TAMAÑO Y COLOR):
+    - Archivos modificados:
+      - `public/templates/boda-deluxe/index.html` (Workspace)
+      - `d:\josed\Descargas\BODA INVI\index.html` (Descargas del usuario)
+    - Solución:
+      - Se integró una barra de herramientas de formato con ID `#editor-formatting-controls` dentro de `#editor-bar` (visible únicamente en modo edición).
+      - Incluye un selector de tamaño de fuente (`select` con opciones de 12px a 64px) y un selector de color de texto (`input type="color"`).
+      - Se programó la lógica en JavaScript: si el usuario tiene una selección de texto activa y resaltada, se le aplica el estilo envolviéndolo en una etiqueta `<span>` con estilo inline (`style="font-size: Xpx; color: Y;"`). Si no hay selección, pero hay un elemento de texto enfocado o clicado (`activeEditableElement`), se le aplica el formato (tamaño o color) a todo el elemento completo.
+      - Se adaptaron las funciones `getEditorState()` y `restoreEditorState()` para incluir el color y tamaño de fuente en el historial de deshacer/rehacer (`Ctrl+Z` / `Ctrl+Y`).
+      - Se adaptaron `saveCard()` y `loadSavedData()` para guardar y cargar persistentemente estos estilos en `localStorage` de forma compatible hacia atrás (si se encuentra una cadena simple anterior, se lee el texto directamente sin error).
+
+16. SINCRONIZACIÓN AUTOMÁTICA DE TEXTOS ESTÁTICOS DE FECHA DE BODA:
+    - Archivos modificados:
+      - `public/templates/boda-deluxe/index.html` (Workspace)
+      - `d:\josed\Descargas\BODA INVI\index.html` (Descargas del usuario)
+    - Solución:
+      - Se añadieron atributos `data-date-format` en el HTML a los dos textos estáticos que muestran la fecha de boda original (el banner de portada en la primera sección, con valor `"long-uppercase"`, y el letrero superior de la cuenta regresiva, con valor `"medium"`).
+      - Se programó una función de traducción y formato en JavaScript (`formatWeddingDate`) que convierte objetos `Date` a strings descriptivos en español (ej. día de la semana y mes correspondientes con puntos de separación).
+      - Se creó la función `syncDateTextDisplays()` para barrer estos elementos en el DOM y actualizar sus contenidos automáticamente.
+      - Se integró este refresco en `updateWeddingDate(val)` (cuando el usuario cambia la fecha en el calendario) y al final de `loadSavedData()` (cuando el editor se carga con datos guardados del localStorage).
+
+17. BOTÓN DESHACER INMEDIATO EN NOTIFICACIONES DE ELIMINACIÓN/OCULTACIÓN:
+    - Archivos modificados:
+      - `public/templates/boda-deluxe/index.html` (Workspace)
+      - `d:\josed\Descargas\BODA INVI\index.html` (Descargas del usuario)
+    - Solución:
+      - Se actualizó el CSS de la notificación flotante `#toast` para ampliar su ancho máximo a `320px` y habilitar diseño flex alineado para soportar botones interactivos de forma responsiva.
+      - Se modificó la función `showToast(msg, showUndo)` para renderizar un botón inline dorado "Deshacer" cuando `showUndo` es verdadero y el modo edición está activo. Este botón ejecuta directamente la función `undo()` de forma inmediata en la posición actual del usuario.
+      - Se enlazó este botón con el flag `true` en las llamadas a `showToast()` en las siguientes acciones: ocultar itinerario (`toggleTimelineItem`), ocultar itinerario desde modal (`toggleTimelineItemFromModal`), ocultar sección (`hideSection`) y restaurar sección (`restoreSection`).
+
+---
+Registro actualizado el: 2026-06-13

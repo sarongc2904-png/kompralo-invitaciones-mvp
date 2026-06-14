@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Boda Deluxe | Kompralo</title>
+    <meta name="description" content="Invitación digital premium de boda editable con música, galería, RSVP, mapa, mesa de regalos y código QR." />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Manrope:wght@500;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #171315;
+        --wine: #6f1831;
+        --wine-soft: #9d2e4f;
+        --gold: #d8b45c;
+        --cream: #fffaf1;
+        --paper: #f4ece0;
+        --muted: #75665d;
+        --line: rgba(216, 180, 92, 0.34);
+        --shadow: 0 24px 70px rgba(12, 8, 10, 0.28);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at 10% 0%, rgba(157, 46, 79, 0.28), transparent 34rem), #10080d;
+        color: var(--cream);
+        font-family: Manrope, system-ui, sans-serif;
+      }
+
+      button, input, textarea, select { font: inherit; }
+      .app { display: grid; grid-template-columns: 330px minmax(0, 1fr); min-height: 100vh; }
+      .editor {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: rgba(14, 7, 12, 0.98);
+        border-right: 1px solid rgba(216, 180, 92, 0.18);
+      }
+      .tabs { display: grid; grid-template-columns: repeat(5, 1fr); border-bottom: 1px solid rgba(216, 180, 92, 0.18); }
+      .tab {
+        min-height: 52px;
+        border: 0;
+        background: transparent;
+        color: rgba(255, 250, 241, 0.42);
+        cursor: pointer;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .tab.is-active { color: var(--gold); box-shadow: inset 0 -2px 0 var(--gold); }
+      .panel-wrap { height: calc(100vh - 52px); overflow-y: auto; }
+      .panel { display: none; padding: 18px; }
+      .panel.is-active { display: block; }
+      .group-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0 14px;
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .group-title::after { content: ""; flex: 1; height: 1px; background: rgba(216, 180, 92, 0.16); }
+      label { display: grid; gap: 6px; margin-bottom: 12px; color: rgba(255, 250, 241, 0.55); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+      input, textarea, select {
+        width: 100%;
+        border: 1px solid rgba(216, 180, 92, 0.22);
+        border-radius: 12px;
+        background: rgba(255, 250, 241, 0.06);
+        color: var(--cream);
+        outline: none;
+        padding: 12px;
+        font-size: 14px;
+        font-weight: 800;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+      input:focus, textarea:focus, select:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(216, 180, 92, 0.12); }
+      textarea { min-height: 96px; resize: vertical; }
+      .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 9px; margin-bottom: 18px; }
+      .swatch { aspect-ratio: 1; border: 2px solid transparent; border-radius: 50%; cursor: pointer; }
+      .swatch.is-active { border-color: var(--cream); box-shadow: 0 0 0 3px rgba(216, 180, 92, 0.35); }
+      .upload {
+        display: grid;
+        min-height: 86px;
+        place-items: center;
+        border: 1px dashed rgba(216, 180, 92, 0.34);
+        border-radius: 16px;
+        color: var(--gold);
+        cursor: pointer;
+        margin-bottom: 12px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .upload input { display: none; }
+      .mini-preview { display: none; width: 100%; height: 86px; object-fit: cover; border-radius: 14px; margin-bottom: 12px; }
+      .action {
+        width: 100%;
+        min-height: 48px;
+        border: 0;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--gold), #f0cf7d);
+        color: #18120a;
+        cursor: pointer;
+        font-weight: 950;
+        margin: 7px 0;
+      }
+      .action.secondary { border: 1px solid rgba(216, 180, 92, 0.26); background: rgba(255, 250, 241, 0.06); color: var(--gold); }
+
+      .preview { padding: 32px clamp(16px, 5vw, 70px); overflow-x: hidden; }
+      .preview-label { margin-bottom: 20px; color: rgba(216, 180, 92, 0.48); font-size: 11px; font-weight: 900; letter-spacing: 0.22em; text-align: center; text-transform: uppercase; }
+      .invite {
+        width: min(100%, 420px);
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 34px;
+        background: var(--cream);
+        color: var(--ink);
+        box-shadow: var(--shadow);
+      }
+      .cover {
+        position: relative;
+        min-height: 620px;
+        display: grid;
+        align-items: end;
+        padding: 26px;
+        isolation: isolate;
+        background: #21161a;
+      }
+      .cover::before {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        content: "";
+        background: var(--hero-image) center/cover no-repeat;
+        filter: saturate(0.95) contrast(1.05);
+      }
+      .cover::after {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        content: "";
+        background: linear-gradient(180deg, rgba(12, 8, 10, 0.18), rgba(12, 8, 10, 0.56) 48%, rgba(12, 8, 10, 0.9));
+      }
+      .hero-card {
+        border: 1px solid rgba(216, 180, 92, 0.44);
+        border-radius: 26px;
+        background: rgba(18, 10, 13, 0.7);
+        padding: 24px;
+        color: var(--cream);
+        backdrop-filter: blur(18px);
+      }
+      .kicker { color: var(--gold); font-size: 11px; font-weight: 950; letter-spacing: 0.32em; text-transform: uppercase; }
+      h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 0.95; }
+      h1 { margin: 12px 0 10px; font-size: 54px; letter-spacing: -0.045em; }
+      .date-line { font-size: 15px; font-weight: 900; opacity: 0.9; }
+      .section { padding: 34px 28px; border-bottom: 1px solid rgba(111, 24, 49, 0.1); }
+      .section.dark { background: var(--wine); color: var(--cream); }
+      .section h2 { margin: 0 0 16px; font-size: 36px; letter-spacing: -0.03em; }
+      .lead { color: var(--muted); font-size: 16px; font-weight: 800; line-height: 1.65; }
+      .dark .lead { color: rgba(255, 250, 241, 0.72); }
+      .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; margin-top: 18px; }
+      .time { border: 1px solid rgba(216, 180, 92, 0.38); border-radius: 18px; background: rgba(255, 250, 241, 0.1); padding: 13px 6px; text-align: center; }
+      .time strong { display: block; color: var(--cream); font-family: Fraunces, Georgia, serif; font-size: 30px; line-height: 1; }
+      .time span { display: block; margin-top: 7px; color: var(--gold); font-size: 9px; font-weight: 950; letter-spacing: 0.18em; text-transform: uppercase; }
+      .info-grid { display: grid; gap: 12px; }
+      .info { border: 1px solid rgba(111, 24, 49, 0.12); border-radius: 22px; background: #fffdf8; padding: 18px; }
+      .info i { color: var(--wine); font-size: 22px; }
+      .info strong { display: block; margin-top: 12px; font-size: 16px; }
+      .info span { display: block; margin-top: 5px; color: var(--muted); font-weight: 800; }
+      .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .gallery img { width: 100%; height: 145px; object-fit: cover; border-radius: 18px; }
+      .button {
+        display: inline-flex;
+        min-height: 50px;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--cream);
+        padding: 0 20px;
+        font-weight: 950;
+        text-decoration: none;
+      }
+      .button.gold { background: linear-gradient(135deg, var(--gold), #f0cf7d); color: #18120a; }
+      .rsvp input, .rsvp textarea, .rsvp select { background: #fffdf8; color: var(--ink); border-color: rgba(111, 24, 49, 0.14); }
+      .success { display: none; margin-top: 14px; border-radius: 16px; background: rgba(31, 122, 76, 0.13); color: #1d5c3b; padding: 13px; font-weight: 900; }
+      .success.show { display: block; }
+      .footer { padding: 28px; text-align: center; background: var(--ink); color: rgba(255, 250, 241, 0.72); }
+      .toast { position: fixed; left: 50%; bottom: 18px; transform: translate(-50%, 80px); z-index: 30; border-radius: 999px; background: var(--wine); color: var(--cream); padding: 13px 20px; font-weight: 900; transition: transform 0.25s ease; }
+      .toast.show { transform: translate(-50%, 0); }
+
+      @media (max-width: 860px) {
+        .app { grid-template-columns: 1fr; }
+        .editor { position: relative; height: auto; }
+        .panel-wrap { height: auto; max-height: 70vh; }
+      }
+
+      @media (max-width: 520px) {
+        .preview { padding: 18px 10px 28px; }
+        .invite { border-radius: 28px; }
+        .cover { min-height: 580px; padding: 18px; }
+        h1 { font-size: 45px; }
+        .section { padding: 28px 20px; }
+        .countdown { grid-template-columns: repeat(2, 1fr); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="editor">
+        <div class="tabs">
+          <button class="tab is-active" data-tab="datos">Datos</button>
+          <button class="tab" data-tab="diseno">Diseño</button>
+          <button class="tab" data-tab="fotos">Fotos</button>
+          <button class="tab" data-tab="evento">Evento</button>
+          <button class="tab" data-tab="share">Compartir</button>
+        </div>
+        <div class="panel-wrap">
+          <section class="panel is-active" id="datos">
+            <div class="group-title">Novios</div>
+            <label>Nombre 1<input id="name1" value="Andrea" /></label>
+            <label>Nombre 2<input id="name2" value="Mateo" /></label>
+            <label>Mensaje<textarea id="message">Nos casamos y queremos compartir este día contigo.</textarea></label>
+            <div class="group-title">Fecha y lugar</div>
+            <label>Fecha<input id="date" type="date" value="2026-10-17" /></label>
+            <label>Hora<input id="time" type="time" value="17:30" /></label>
+            <label>Lugar<input id="venue" value="Hacienda Santa Elena" /></label>
+            <label>Dirección<input id="address" value="Valle de Guadalupe, Baja California" /></label>
+          </section>
+
+          <section class="panel" id="diseno">
+            <div class="group-title">Paleta premium</div>
+            <div class="swatches">
+              <button class="swatch is-active" style="background:#6f1831" data-wine="#6f1831" data-gold="#d8b45c"></button>
+              <button class="swatch" style="background:#101010" data-wine="#101010" data-gold="#d6b05a"></button>
+              <button class="swatch" style="background:#214030" data-wine="#214030" data-gold="#c6a863"></button>
+              <button class="swatch" style="background:#243455" data-wine="#243455" data-gold="#d7bd7a"></button>
+              <button class="swatch" style="background:#6b5137" data-wine="#6b5137" data-gold="#e0bd76"></button>
+              <button class="swatch" style="background:#5d4768" data-wine="#5d4768" data-gold="#dfc277"></button>
+            </div>
+            <label>Texto de dress code<input id="dress" value="Formal elegante" /></label>
+            <label>Mesa de regalos<input id="gift" value="Liverpool / Sobre elegante" /></label>
+            <label>Google Maps<input id="map" value="https://maps.google.com" /></label>
+          </section>
+
+          <section class="panel" id="fotos">
+            <div class="group-title">Imagen principal</div>
+            <label class="upload"><i class="ti ti-cloud-upload"></i> Subir foto principal<input type="file" accept="image/*" id="heroUpload" /></label>
+            <img class="mini-preview" id="heroPreview" alt="" />
+            <div class="group-title">Galería</div>
+            <label class="upload"><i class="ti ti-photo-plus"></i> Subir hasta 4 fotos<input type="file" accept="image/*" id="galleryUpload" multiple /></label>
+          </section>
+
+          <section class="panel" id="evento">
+            <div class="group-title">Itinerario</div>
+            <label>Ceremonia<input id="ceremony" value="Ceremonia civil y religiosa" /></label>
+            <label>Recepción<input id="reception" value="Cena, brindis y baile" /></label>
+            <label>Música<input id="music" value="Perfect - Ed Sheeran" /></label>
+          </section>
+
+          <section class="panel" id="share">
+            <div class="group-title">Compartir</div>
+            <label>URL pública<input id="slug" value="andrea-y-mateo" /></label>
+            <button class="action" id="copyLink"><i class="ti ti-copy"></i> Copiar enlace</button>
+            <button class="action secondary" id="saveDraft"><i class="ti ti-device-floppy"></i> Guardar vista local</button>
+          </section>
+        </div>
+      </aside>
+
+      <main class="preview">
+        <div class="preview-label">Vista previa editable en tiempo real</div>
+        <article class="invite" style="--hero-image:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1200&q=88')">
+          <section class="cover">
+            <div class="hero-card">
+              <div class="kicker">Boda</div>
+              <h1><span id="outName1">Andrea</span> &amp; <span id="outName2">Mateo</span></h1>
+              <p class="date-line"><span id="outDate">17 octubre 2026</span> · <span id="outVenue">Hacienda Santa Elena</span></p>
+            </div>
+          </section>
+
+          <section class="section dark">
+            <div class="kicker">Nuestra historia</div>
+            <h2>El día que empieza para siempre</h2>
+            <p class="lead" id="outMessage">Nos casamos y queremos compartir este día contigo.</p>
+            <div class="countdown">
+              <div class="time"><strong id="days">00</strong><span>Días</span></div>
+              <div class="time"><strong id="hours">00</strong><span>Horas</span></div>
+              <div class="time"><strong id="minutes">00</strong><span>Min</span></div>
+              <div class="time"><strong id="seconds">00</strong><span>Seg</span></div>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="kicker">Detalles</div>
+            <h2>Nos vemos en la celebración</h2>
+            <div class="info-grid">
+              <div class="info"><i class="ti ti-clock"></i><strong id="outTime">17:30 hrs.</strong><span>Hora de inicio</span></div>
+              <div class="info"><i class="ti ti-map-pin"></i><strong id="outAddress">Valle de Guadalupe, Baja California</strong><span>Dirección del evento</span></div>
+              <div class="info"><i class="ti ti-tie"></i><strong id="outDress">Formal elegante</strong><span>Código de vestimenta</span></div>
+              <div class="info"><i class="ti ti-gift"></i><strong id="outGift">Liverpool / Sobre elegante</strong><span>Mesa de regalos</span></div>
+            </div>
+            <p style="margin-top:18px"><a class="button" id="outMap" href="https://maps.google.com" target="_blank" rel="noreferrer"><i class="ti ti-map-2"></i> Ver ubicación</a></p>
+          </section>
+
+          <section class="section dark">
+            <div class="kicker">Itinerario</div>
+            <h2>Una noche para recordar</h2>
+            <div class="info-grid">
+              <div class="info"><i class="ti ti-building-church"></i><strong id="outCeremony">Ceremonia civil y religiosa</strong><span>Momento principal</span></div>
+              <div class="info"><i class="ti ti-glass-champagne"></i><strong id="outReception">Cena, brindis y baile</strong><span>Recepción</span></div>
+              <div class="info"><i class="ti ti-music"></i><strong id="outMusic">Perfect - Ed Sheeran</strong><span>Canción especial</span></div>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="kicker">Galería</div>
+            <h2>Momentos de amor</h2>
+            <div class="gallery" id="gallery">
+              <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=700&q=86" alt="Boda elegante" />
+              <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=700&q=86" alt="Ceremonia de boda" />
+              <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=700&q=86" alt="Decoración de boda" />
+              <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=700&q=86" alt="Recepción de boda" />
+            </div>
+          </section>
+
+          <section class="section rsvp">
+            <div class="kicker">RSVP</div>
+            <h2>Confirma tu asistencia</h2>
+            <form id="rsvpForm">
+              <label>Nombre<input required id="guestName" placeholder="Tu nombre" /></label>
+              <label>Respuesta<select id="guestAnswer"><option>Confirmaré asistencia</option><option>No podré asistir</option></select></label>
+              <label>Mensaje<textarea id="guestMessage" placeholder="Mensaje opcional"></textarea></label>
+              <button class="button gold" type="submit"><i class="ti ti-check"></i> Enviar RSVP</button>
+              <div class="success" id="success">Tu respuesta quedó guardada en este dispositivo.</div>
+            </form>
+          </section>
+
+          <footer class="footer">Kompralo Invitaciones Digitales Premium · Código QR · WhatsApp · RSVP</footer>
+        </article>
+      </main>
+    </div>
+    <div class="toast" id="toast">Listo</div>
+
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const fields = ["name1","name2","message","date","time","venue","address","dress","gift","map","ceremony","reception","music","slug"];
+
+      function niceDate(value) {
+        if (!value) return "17 octubre 2026";
+        return new Date(value + "T12:00:00").toLocaleDateString("es-MX", { day: "numeric", month: "long", year: "numeric" });
+      }
+
+      function update() {
+        $("outName1").textContent = $("name1").value || "Andrea";
+        $("outName2").textContent = $("name2").value || "Mateo";
+        $("outMessage").textContent = $("message").value || "Nos casamos y queremos compartir este día contigo.";
+        $("outDate").textContent = niceDate($("date").value);
+        $("outTime").textContent = ($("time").value || "17:30") + " hrs.";
+        $("outVenue").textContent = $("venue").value || "Hacienda Santa Elena";
+        $("outAddress").textContent = $("address").value || "Valle de Guadalupe, Baja California";
+        $("outDress").textContent = $("dress").value || "Formal elegante";
+        $("outGift").textContent = $("gift").value || "Liverpool / Sobre elegante";
+        $("outMap").href = $("map").value || "https://maps.google.com";
+        $("outCeremony").textContent = $("ceremony").value || "Ceremonia civil y religiosa";
+        $("outReception").textContent = $("reception").value || "Cena, brindis y baile";
+        $("outMusic").textContent = $("music").value || "Perfect - Ed Sheeran";
+        updateCountdown();
+      }
+
+      function updateCountdown() {
+        const date = $("date").value || "2026-10-17";
+        const time = $("time").value || "17:30";
+        const diff = new Date(date + "T" + time + ":00").getTime() - Date.now();
+        const safe = Math.max(0, diff);
+        $("days").textContent = String(Math.floor(safe / 86400000)).padStart(2, "0");
+        $("hours").textContent = String(Math.floor((safe / 3600000) % 24)).padStart(2, "0");
+        $("minutes").textContent = String(Math.floor((safe / 60000) % 60)).padStart(2, "0");
+        $("seconds").textContent = String(Math.floor((safe / 1000) % 60)).padStart(2, "0");
+      }
+
+      function toast(text) {
+        $("toast").textContent = text;
+        $("toast").classList.add("show");
+        setTimeout(() => $("toast").classList.remove("show"), 2200);
+      }
+
+      document.querySelectorAll(".tab").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.querySelectorAll(".tab,.panel").forEach((el) => el.classList.remove("is-active"));
+          button.classList.add("is-active");
+          $(button.dataset.tab).classList.add("is-active");
+        });
+      });
+
+      document.querySelectorAll(".swatch").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.querySelectorAll(".swatch").forEach((el) => el.classList.remove("is-active"));
+          button.classList.add("is-active");
+          document.documentElement.style.setProperty("--wine", button.dataset.wine);
+          document.documentElement.style.setProperty("--gold", button.dataset.gold);
+        });
+      });
+
+      fields.forEach((id) => $(id).addEventListener("input", update));
+
+      $("heroUpload").addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          document.querySelector(".invite").style.setProperty("--hero-image", `url('${reader.result}')`);
+          $("heroPreview").src = reader.result;
+          $("heroPreview").style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      });
+
+      $("galleryUpload").addEventListener("change", (event) => {
+        const files = Array.from(event.target.files).slice(0, 4);
+        $("gallery").innerHTML = "";
+        files.forEach((file) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const image = document.createElement("img");
+            image.src = reader.result;
+            image.alt = "Foto de galería";
+            $("gallery").appendChild(image);
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      $("rsvpForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        localStorage.setItem("boda-deluxe-rsvp", JSON.stringify({
+          name: $("guestName").value,
+          answer: $("guestAnswer").value,
+          message: $("guestMessage").value,
+          savedAt: new Date().toISOString()
+        }));
+        $("success").classList.add("show");
+      });
+
+      $("copyLink").addEventListener("click", async () => {
+        const link = "https://kompralo.com.mx/templates/boda-deluxe/" + ($("slug").value || "andrea-y-mateo");
+        await navigator.clipboard.writeText(link).catch(() => null);
+        toast("Enlace copiado");
+      });
+
+      $("saveDraft").addEventListener("click", () => {
+        const data = Object.fromEntries(fields.map((id) => [id, $(id).value]));
+        localStorage.setItem("boda-deluxe-draft", JSON.stringify(data));
+        toast("Vista guardada");
+      });
+
+      const saved = localStorage.getItem("boda-deluxe-draft");
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          Object.entries(data).forEach(([key, value]) => { if ($(key)) $(key).value = value; });
+        } catch {}
+      }
+
+      update();
+      setInterval(updateCountdown, 1000);
+    </script>
+  </body>
+</html>

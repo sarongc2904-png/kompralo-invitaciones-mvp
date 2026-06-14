@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getStripe } from "@/lib/stripe";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { prisma } from "@/lib/prisma";
 
 export const runtime = "nodejs";
 
@@ -26,6 +27,17 @@ export async function POST(request: NextRequest) {
     const checkoutSession = event.data.object as Stripe.Checkout.Session;
     const userId = checkoutSession.metadata?.user_id;
     const planSlug = checkoutSession.metadata?.plan_slug;
+    const weddingInvitationId = checkoutSession.metadata?.wedding_invitation_id;
+
+    // ── Wedding invitation payment ─────────────────────────────────────────
+    if (weddingInvitationId) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (prisma as any).weddingInvitation.update({
+        where: { id: weddingInvitationId },
+        data: { pagado: true },
+      }).catch(() => null);
+      return NextResponse.json({ received: true });
+    }
 
     if (!userId || !planSlug) {
       return NextResponse.json({ error: "Metadata incompleta." }, { status: 400 });

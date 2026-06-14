@@ -89,7 +89,7 @@ function PaymentRequiredInvitation() {
             Ver planes y pagar
           </Link>
           <Link
-            href="/formulario"
+            href="/crear"
             className="inline-flex items-center justify-center rounded-md border border-ink/15 bg-white px-6 py-4 text-sm font-bold text-ink transition hover:border-gold hover:text-gold"
           >
             Editar borrador

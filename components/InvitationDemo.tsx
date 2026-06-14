@@ -5,6 +5,7 @@ import { Cormorant_Garamond, Fraunces, Lora, Playfair_Display } from "next/font/
 import { CalendarDays, Clock, Gift, MapPin, MessageCircle, Music, QrCode, Shirt, Sparkles } from "lucide-react";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import type { DemoEvent } from "@/types";
+import { BabyShowerEditableShowcase } from "./BabyShowerEditableShowcase";
 import { Countdown } from "./Countdown";
 import { RSVPForm } from "./RSVPForm";
 
@@ -126,7 +127,8 @@ export function InvitationDemo({ event }: { event: DemoEvent }) {
               Abrir Google Maps
             </Link>
           </div>
-          <div className="grid gap-4 sm:grid-cols-3">
+          {event.slug === "baby-shower" && <BabyShowerEditableShowcase />}
+          <div className={event.slug === "baby-shower" ? "hidden" : "grid gap-4 sm:grid-cols-3"}>
             {event.gallery.map((image, index) => (
               <div key={image} className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] shadow-[0_24px_70px_rgba(17,17,20,0.14)]">
                 <Image src={image} alt={`${event.title} galería ${index + 1}`} fill loading="lazy" sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition duration-700 hover:scale-105" />

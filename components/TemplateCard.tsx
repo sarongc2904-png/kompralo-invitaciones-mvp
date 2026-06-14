@@ -50,7 +50,7 @@ export function TemplateCard({ template, variant = "default" }: { template: Temp
             Ver demo
           </Link>
           <Link
-            href={`/formulario?modelo=${template.id}`}
+            href={`/crear`}
             className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/12 bg-pearl px-4 py-3 text-sm font-black text-ink transition hover:border-gold hover:bg-gold"
           >
             <SlidersHorizontal size={16} />

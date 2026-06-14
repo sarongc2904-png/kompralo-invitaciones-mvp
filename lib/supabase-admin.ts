@@ -8,6 +8,7 @@ export type SupabaseOrder = {
   plan_slug: string;
   stripe_session_id: string | null;
   paid_at: string | null;
+  created_at?: string | null;
 };
 
 export type SupabaseInvitation = {
@@ -28,6 +29,8 @@ export type SupabaseInvitation = {
   visual_style: Record<string, unknown> | null;
   revision_notes: string | null;
   status: "draft" | "in_review" | "delivered";
+  created_at?: string | null;
+  updated_at?: string | null;
 };
 
 export function getSupabaseAdmin() {

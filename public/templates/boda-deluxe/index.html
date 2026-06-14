@@ -1,0 +1,4106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invitación Digital de Boda · Plantilla Premium</title>
+  <meta name="description" content="Invitación digital de boda premium con animaciones, cuenta regresiva y editor personalizable." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       VARIABLES & RESET
+    ============================================= */
+    :root {
+      --burgundy: #6B2737;
+      --burgundy-dark: #4A1526;
+      --burgundy-light: #8B3A4F;
+      --gold: #C9A84C;
+      --gold-light: #E8D08A;
+      --gold-pale: #F5EDD0;
+      --cream: #FAF6F0;
+      --cream-dark: #F0E8DC;
+      --white: #FFFFFF;
+      --text-dark: #2C1810;
+      --text-mid: #5C3A2E;
+      --text-light: #8B6B5E;
+      --shadow-soft: 0 8px 40px rgba(107,39,55,0.15);
+      --shadow-card: 0 20px 60px rgba(107,39,55,0.20);
+      --radius: 4px;
+      --transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --palette-grad-cover: linear-gradient(160deg, #4A1526 0%, #6B2737 60%, #9B304B 100%);
+      --palette-grad-flap: linear-gradient(160deg, #4A1526, #5A1E30);
+      --palette-grad-countdown: linear-gradient(135deg, #6B2737 0%, #350F1B 100%);
+      --palette-grad-music: linear-gradient(135deg, #350F1B, #521927);
+      --palette-grad-closing: linear-gradient(160deg, #350F1B 0%, #6B2737 100%);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #1a0a0e;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* =============================================
+       BACKGROUND CINEMATIC
+    ============================================= */
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(ellipse at 20% 50%, #3d0d18 0%, #1a0a0e 40%, #0d0508 100%);
+    }
+
+    .bg-particles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0;
+      animation: float-particle linear infinite;
+    }
+
+    @keyframes float-particle {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* =============================================
+       EDITOR BAR
+    ============================================= */
+    #editor-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, var(--burgundy-dark), #2C0E1A);
+      border-bottom: 1px solid var(--gold);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+      transform: translateY(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    #editor-bar.visible { transform: translateY(0); }
+
+    .editor-logo {
+      font-family: 'Great Vibes', cursive;
+      color: var(--gold);
+      font-size: 1.4rem;
+      margin-right: 8px;
+    }
+
+    .editor-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border: 1px solid;
+      border-radius: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: var(--transition);
+      text-transform: uppercase;
+    }
+
+    .btn-edit { background: var(--gold); color: var(--burgundy-dark); border-color: var(--gold); }
+    .btn-edit:hover { background: var(--gold-light); transform: scale(1.03); }
+    .btn-save { background: transparent; color: var(--gold); border-color: var(--gold); }
+    .btn-save:hover { background: rgba(201,168,76,0.15); }
+    .btn-preview { background: transparent; color: #aaa; border-color: #555; }
+    .btn-preview:hover { color: var(--gold); border-color: var(--gold); }
+
+    .editor-tip {
+      margin-left: auto;
+      color: rgba(201,168,76,0.6);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    @media (max-width: 768px) {
+      #editor-bar {
+        padding: 8px 12px;
+        gap: 8px;
+        overflow-x: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        -webkit-overflow-scrolling: touch;
+      }
+      #editor-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .editor-logo {
+        font-size: 1.1rem;
+        margin-right: 4px;
+        flex-shrink: 0;
+      }
+      .editor-btn {
+        padding: 5px 12px;
+        font-size: 0.64rem;
+        flex-shrink: 0;
+      }
+      .editor-tip {
+        display: none;
+      }
+    }
+
+    @keyframes swipe-hand-anim {
+      0%, 100% { transform: translateX(3px); }
+      50% { transform: translateX(-3px); }
+    }
+
+    /* =============================================
+       FLOATING EDIT BUTTON
+    ============================================= */
+    #floating-edit {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #A07830);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(201,168,76,0.5), 0 0 0 0 rgba(201,168,76,0.3);
+      animation: pulse-gold 2.5s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    #floating-edit:hover { transform: scale(1.12); }
+
+    @keyframes pulse-gold {
+      0%, 100% { box-shadow: 0 8px 32px rgba(201,168,76,0.5), 0 0 0 0 rgba(201,168,76,0.3); }
+      50% { box-shadow: 0 8px 32px rgba(201,168,76,0.5), 0 0 0 15px rgba(201,168,76,0); }
+    }
+
+    #floating-edit svg { width: 24px; height: 24px; fill: var(--burgundy-dark); }
+
+    /* Inline change date button */
+    .btn-change-date-inline {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 20px auto 0;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(201,168,76,0.15);
+    }
+    .btn-change-date-inline:hover {
+      background: rgba(201,168,76,0.15);
+      transform: translateY(-1.5px);
+      box-shadow: 0 6px 20px rgba(201,168,76,0.25);
+    }
+    .btn-change-date-inline svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+    body.edit-mode .btn-change-date-inline {
+      display: inline-flex;
+    }
+
+    /* =============================================
+       MAIN CARD WRAPPER
+    ============================================= */
+    #invitation {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding-top: 0;
+      padding-bottom: 60px;
+    }
+
+    /* =============================================
+       SECTION BASE
+    ============================================= */
+    .inv-section {
+      position: relative;
+      background: var(--cream);
+      margin-bottom: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .inv-section.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Edit mode outline */
+    body.edit-mode .editable {
+      outline: 2px dashed rgba(201,168,76,0.5);
+      outline-offset: 2px;
+      cursor: text;
+      border-radius: 2px;
+      transition: outline 0.2s;
+    }
+    body.edit-mode .editable:hover { outline-color: var(--gold); }
+    body.edit-mode .editable:focus { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+    body.edit-mode .photo-upload-zone { cursor: pointer; }
+    body.edit-mode .photo-upload-zone:hover { filter: brightness(0.85) sepia(0.3); }
+
+    /* =============================================
+       SECTION 1 — ENVELOPE / COVER
+    ============================================= */
+    #s-cover {
+      background: var(--palette-grad-cover);
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px 50px;
+      position: relative;
+    }
+
+    .cover-flap {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 200px;
+      background: var(--palette-grad-flap);
+      clip-path: polygon(0 0, 100% 0, 50% 70%);
+      opacity: 0.7;
+    }
+
+    .cover-floral-top {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      height: 100px;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100"><circle cx="40" cy="60" r="18" fill="%23C9A84C" opacity="0.3"/><circle cx="80" cy="45" r="12" fill="%23E8D08A" opacity="0.25"/><circle cx="160" cy="35" r="22" fill="%23C9A84C" opacity="0.35"/><circle cx="240" cy="45" r="12" fill="%23E8D08A" opacity="0.25"/><circle cx="280" cy="60" r="18" fill="%23C9A84C" opacity="0.3"/></svg>');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .cover-seal {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      position: relative;
+      animation: rotate-seal 20s linear infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes rotate-seal {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .cover-seal-inner {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      animation: rotate-seal 20s linear infinite reverse;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cover-seal-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+
+    .cover-seal-ring {
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 50%;
+    }
+
+    .cover-monogram {
+      font-family: 'Great Vibes', cursive;
+      font-size: 5rem;
+      color: var(--white);
+      text-align: center;
+      line-height: 1;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      margin-bottom: 8px;
+      animation: shimmer-text 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes shimmer-text {
+      from { text-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+      to { text-shadow: 0 4px 30px rgba(201,168,76,0.4), 0 0 60px rgba(201,168,76,0.1); }
+    }
+
+    .cover-ampersand {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: var(--gold);
+      text-align: center;
+      display: block;
+      margin: -12px 0;
+    }
+
+    .cover-divider {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 20px auto;
+    }
+
+    .cover-date {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      letter-spacing: 0.3em;
+      color: var(--gold-light);
+      text-align: center;
+    }
+
+    .cover-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* Corner floral ornaments */
+    .corner-ornament {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      opacity: 0.4;
+    }
+    .corner-ornament.tl { top: 16px; left: 16px; transform: rotate(0deg); }
+    .corner-ornament.tr { top: 16px; right: 16px; transform: rotate(90deg); }
+    .corner-ornament.bl { bottom: 16px; left: 16px; transform: rotate(270deg); }
+    .corner-ornament.br { bottom: 16px; right: 16px; transform: rotate(180deg); }
+
+    /* =============================================
+       SECTION 2 — COUNTDOWN
+    ============================================= */
+    #s-countdown {
+      background: var(--palette-grad-countdown);
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .countdown-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .countdown-date-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.15em;
+      margin-bottom: 30px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .cd-unit {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 8px;
+      padding: 16px 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cd-unit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%);
+    }
+
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 2.6rem;
+      color: var(--white);
+      display: block;
+      line-height: 1;
+      animation: flip-in 0.4s ease;
+    }
+
+    @keyframes flip-in {
+      from { transform: rotateX(90deg); opacity: 0; }
+      to { transform: rotateX(0deg); opacity: 1; }
+    }
+
+    .cd-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .cd-separator {
+      color: var(--gold);
+      font-size: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      align-self: center;
+      line-height: 1;
+      animation: blink-sep 1s ease infinite;
+    }
+
+    @keyframes blink-sep {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .countdown-expired-msg {
+      font-family: 'Great Vibes', cursive;
+      color: var(--gold);
+      font-size: 2rem;
+    }
+
+    /* =============================================
+       SECTION 3 — BIBLE VERSE / OPENING
+    ============================================= */
+    #s-verse {
+      background-image: url('fabric_bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 50px 40px 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .verse-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      line-height: 1.9;
+      margin-bottom: 12px;
+    }
+
+    .verse-ref {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--text-light);
+      text-transform: uppercase;
+    }
+
+    .verse-ornament {
+      font-family: 'Great Vibes', cursive;
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: 0.2;
+      position: absolute;
+      top: 10px;
+      left: 30px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* =============================================
+       SECTION 4 — MONOGRAM (Merged with Section 3)
+     ============================================= */
+
+    .mono-letters {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--burgundy);
+      letter-spacing: 0.1em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .mono-letters span { color: var(--gold); }
+
+    .mono-subtitle {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.8rem;
+      color: var(--text-mid);
+    }
+
+    .mono-divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--burgundy), transparent);
+      margin: 16px auto;
+    }
+
+    /* =============================================
+       SECTION 5 — HERO PHOTO
+    ============================================= */
+    .photo-zone {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .photo-zone img,
+    .photo-zone .photo-placeholder {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .photo-zone:hover img { transform: scale(1.03); }
+
+    .photo-placeholder {
+      background: linear-gradient(135deg, var(--cream-dark), var(--cream));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text-light);
+      min-height: 280px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      border: 2px dashed rgba(107,39,55,0.2);
+    }
+
+    .photo-placeholder svg { width: 40px; height: 40px; opacity: 0.4; }
+
+    .photo-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(transparent, var(--cream));
+    }
+
+    /* =============================================
+       SECTION 6 — EVENT INFO
+    ============================================= */
+    #s-event {
+      background: var(--cream);
+      padding: 40px 36px;
+      text-align: center;
+    }
+
+    .event-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      color: var(--burgundy);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .event-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 300;
+      color: var(--burgundy-dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .event-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      color: var(--burgundy);
+      margin-bottom: 6px;
+    }
+
+    .event-venue {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text-mid);
+      margin-bottom: 20px;
+    }
+
+    .event-address {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .btn-maps {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--burgundy);
+      color: var(--white);
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: var(--transition);
+      box-shadow: 0 6px 20px rgba(107,39,55,0.3);
+    }
+
+    .btn-maps:hover {
+      background: var(--burgundy-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(107,39,55,0.4);
+    }
+
+    /* =============================================
+       SECTION 7 — TIMELINE
+    ============================================= */
+    #s-timeline {
+      background: linear-gradient(160deg, var(--cream-dark) 0%, var(--cream) 100%);
+      padding: 60px 30px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 50px;
+      margin: 40px 0 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: linear-gradient(180deg, 
+        transparent 0%, 
+        var(--gold) 15%, 
+        var(--gold) 85%, 
+        transparent 100%);
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 35px;
+      text-align: left;
+      display: block;
+    }
+
+    .tl-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .tl-icon {
+      position: absolute;
+      left: -50px;
+      top: 2px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(107, 39, 55, 0.15), 0 0 0 3px var(--cream);
+      transition: var(--transition);
+      z-index: 2;
+    }
+
+    .tl-item:hover .tl-icon {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(201, 168, 76, 0.35), 0 0 0 5px var(--cream);
+      background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light));
+    }
+
+    .tl-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--gold-light);
+      transition: var(--transition);
+    }
+    
+    .tl-item:hover .tl-icon svg {
+      fill: var(--white);
+    }
+
+    .tl-content {
+      padding-left: 10px;
+    }
+
+    .tl-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .tl-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1.2;
+    }
+
+    .tl-desc {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      color: var(--text-mid);
+      margin-top: 6px;
+      line-height: 1.6;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    /* =============================================
+       SECTION 8 — DRESSCODE
+    ============================================= */
+    #s-dresscode {
+      background: var(--cream);
+      padding: 50px 40px;
+      text-align: center;
+    }
+
+    .dresscode-swatch {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .swatch {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid rgba(107,39,55,0.2);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+      cursor: default;
+    }
+
+    .swatch:hover { transform: scale(1.15); }
+    .swatch.s1 { background: var(--burgundy); }
+    .swatch.s2 { background: #F5F0EB; border-color: var(--cream-dark); }
+    .swatch.s3 { background: var(--gold); }
+    .swatch.s4 { background: #2C3E50; }
+    .swatch.s5 { background: #8B7B8B; }
+
+    .dresscode-main {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.4rem;
+      color: var(--burgundy);
+      margin-bottom: 8px;
+    }
+
+    .dresscode-note {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text-light);
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* =============================================
+       SECTION 9 — SECOND PHOTO
+    ============================================= */
+    #s-photo2 {
+      background: var(--cream);
+      padding: 10px 30px 30px;
+    }
+
+    .photo2-frame {
+      position: relative;
+      border: 8px solid var(--white);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .photo2-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(201,168,76,0.3);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* =============================================
+       SECTION 10 — GIFTS
+    ============================================= */
+    #s-gifts {
+      background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
+      padding: 50px 30px;
+      text-align: center;
+    }
+
+    #s-gifts .section-title,
+    #s-gifts .section-subtitle { color: var(--gold-light); }
+    #s-gifts .section-subtitle { color: rgba(255,255,255,0.5); }
+
+    .gifts-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 300px;
+      margin: 0 auto 28px;
+      line-height: 1.8;
+    }
+
+    .btn-lluvia {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--gold);
+      text-decoration: none;
+      padding: 13px 32px;
+      border: 1px solid var(--gold);
+      border-radius: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-lluvia:hover {
+      background: rgba(201,168,76,0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.2);
+    }
+
+    /* =============================================
+       SECTION 11 — HOTEL
+    ============================================= */
+    #s-hotel {
+      background: var(--cream);
+      padding: 50px 30px;
+    }
+
+    .hotel-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 14px;
+      border: 1px solid var(--cream-dark);
+      box-shadow: 0 4px 20px rgba(107,39,55,0.08);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: var(--transition);
+    }
+
+    .hotel-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(107,39,55,0.15);
+    }
+
+    .hotel-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: var(--burgundy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hotel-icon svg { width: 24px; height: 24px; fill: var(--gold-light); }
+
+    .hotel-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+
+    .hotel-dist {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+    }
+
+    .hotel-link {
+      margin-left: auto;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      color: var(--burgundy);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--burgundy);
+      padding-bottom: 1px;
+      white-space: nowrap;
+    }
+
+    /* =============================================
+       SECTION 12 — MUSIC
+    ============================================= */
+    #s-music {
+      background: var(--palette-grad-music);
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .music-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .music-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.8rem;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .music-artist {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 24px;
+    }
+
+    .music-player {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .music-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .music-btn:hover { background: rgba(255,255,255,0.18); }
+    .music-btn.play { width: 56px; height: 56px; background: var(--gold); }
+    .music-btn.play:hover { background: var(--gold-light); transform: scale(1.08); }
+    .music-btn svg { width: 18px; height: 18px; fill: white; }
+    .music-btn.play svg { fill: var(--burgundy-dark); width: 22px; height: 22px; }
+
+    .music-progress {
+      width: 100%;
+      max-width: 300px;
+      height: 3px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+      margin: 0 auto;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .music-progress-bar {
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .music-progress-bar::after {
+      content: '';
+      position: absolute;
+      right: -5px;
+      top: -3px;
+      width: 9px;
+      height: 9px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(201,168,76,0.8);
+    }
+
+    /* =============================================
+       SECTION 13 — RSVP
+    ============================================= */
+    #s-rsvp {
+      background: var(--cream);
+      padding: 50px 36px;
+      text-align: center;
+    }
+
+    .rsvp-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-mid);
+      max-width: 300px;
+      margin: 0 auto 28px;
+      line-height: 1.8;
+    }
+
+    .rsvp-deadline {
+      display: inline-block;
+      background: rgba(107,39,55,0.08);
+      border: 1px solid rgba(107,39,55,0.2);
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      color: var(--burgundy);
+      letter-spacing: 0.12em;
+      margin-bottom: 24px;
+    }
+
+    .btn-rsvp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
+      color: var(--white);
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: var(--transition);
+      box-shadow: 0 8px 30px rgba(107,39,55,0.35);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-rsvp:hover {
+      background: linear-gradient(135deg, var(--burgundy-light), var(--burgundy));
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(107,39,55,0.5);
+    }
+
+    /* =============================================
+       SECTION 14 — PARENTS
+    ============================================= */
+    #s-parents {
+      background: linear-gradient(160deg, var(--cream) 0%, var(--cream-dark) 100%);
+      padding: 50px 40px;
+      text-align: center;
+    }
+
+    .parents-block {
+      margin-bottom: 28px;
+    }
+
+    .parents-family {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      color: var(--text-light);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .parents-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      line-height: 1.8;
+    }
+
+    .parents-divider {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, transparent, var(--burgundy), transparent);
+      margin: 0 auto;
+    }
+
+    /* =============================================
+       SECTION 15 — CLOSING
+    ============================================= */
+    #s-closing {
+      background: var(--palette-grad-closing);
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #s-closing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%);
+    }
+
+    .closing-main {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .closing-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.15em;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .closing-hashtag {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 10px 24px;
+      border-radius: 30px;
+      display: inline-block;
+      position: relative;
+    }
+
+    /* =============================================
+       GOLD ORNAMENT SVG DIVIDERS
+    ============================================= */
+    .gold-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 0;
+      position: relative;
+    }
+
+    .gold-ornament svg {
+      width: 220px;
+      height: auto;
+      filter: drop-shadow(0 2px 8px rgba(201,168,76,0.25));
+      transition: filter 0.4s ease;
+    }
+
+    .gold-ornament:hover svg {
+      filter: drop-shadow(0 4px 16px rgba(201,168,76,0.45));
+    }
+
+    .gold-ornament.small svg { width: 140px; }
+    .gold-ornament.large svg { width: 300px; }
+
+    .gold-ornament.light svg {
+      opacity: 0.55;
+    }
+
+    /* Animated ornament glow */
+    .gold-ornament.animated svg {
+      animation: ornament-glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes ornament-glow {
+      from { filter: drop-shadow(0 2px 8px rgba(201,168,76,0.2)); }
+      to { filter: drop-shadow(0 4px 20px rgba(201,168,76,0.5)); }
+    }
+
+    /* Section photo with overlay */
+    .section-photo {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .section-photo img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 8s ease;
+    }
+
+    .section-photo:hover img {
+      transform: scale(1.05);
+    }
+
+    .section-photo .overlay-gradient {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .section-photo .overlay-gradient.to-cream {
+      background: linear-gradient(to bottom, transparent 60%, var(--cream) 100%);
+    }
+
+    .section-photo .overlay-gradient.to-burgundy {
+      background: linear-gradient(to bottom, transparent 50%, var(--burgundy-dark) 100%);
+    }
+
+    .section-photo .overlay-gradient.from-cream {
+      background: linear-gradient(to bottom, var(--cream) 0%, transparent 40%);
+    }
+
+    .section-photo .overlay-gradient.from-burgundy {
+      background: linear-gradient(to bottom, var(--burgundy-dark) 0%, transparent 40%);
+    }
+
+    .section-photo .overlay-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(74,21,38,0.4) 100%);
+      pointer-events: none;
+    }
+
+    /* Legacy floral-divider fallback */
+    .floral-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px 0;
+    }
+
+    .floral-divider .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+      max-width: 80px;
+    }
+
+    .floral-divider .line.r {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .floral-divider .flower {
+      font-size: 1.2rem;
+      color: var(--gold);
+    }
+
+    .floral-divider.light .line { background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4)); }
+    .floral-divider.light .line.r { background: linear-gradient(90deg, rgba(201,168,76,0.4), transparent); }
+    .floral-divider.light .flower { color: rgba(201,168,76,0.7); }
+
+    /* =============================================
+       MODAL — RSVP FORM
+    ============================================= */
+    #modal-rsvp {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(10,2,6,0.85);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #modal-rsvp.open { display: flex; }
+
+    .modal-card {
+      background: var(--cream);
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 420px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      animation: modal-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    @keyframes modal-in {
+      from { transform: scale(0.85) translateY(20px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--cream-dark);
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover { background: var(--cream-dark); }
+
+    .modal-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.4rem;
+      color: var(--burgundy);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .modal-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--cream-dark);
+      border-radius: 8px;
+      background: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      transition: border-color 0.25s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus { border-color: var(--burgundy); }
+
+    .rsvp-choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .rsvp-choice {
+      border: 1px solid var(--cream-dark);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      background: var(--white);
+    }
+
+    .rsvp-choice:hover, .rsvp-choice.active {
+      border-color: var(--burgundy);
+      background: rgba(107,39,55,0.04);
+    }
+
+    .rsvp-choice.active { background: var(--burgundy); color: var(--white); }
+    .rsvp-choice.active span { color: var(--white); }
+
+    .rsvp-choice-icon { font-size: 1.6rem; display: block; margin-bottom: 4px; }
+
+    .rsvp-choice-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    /* =============================================
+       TOAST NOTIFICATION
+    ============================================= */
+    #toast {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      z-index: 3000;
+      background: var(--burgundy-dark);
+      color: var(--gold-light);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      padding: 14px 22px;
+      border-radius: 10px;
+      border-left: 3px solid var(--gold);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      transform: translateX(120%);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      max-width: 320px;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      width: calc(100% - 60px);
+    }
+
+    #toast.show { transform: translateX(0); }
+
+    /* =============================================
+       EDIT MODE INDICATOR
+    ============================================= */
+    #edit-indicator {
+      position: fixed;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      background: var(--gold);
+      color: var(--burgundy-dark);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 0 0 12px 12px;
+      display: none;
+    }
+
+    body.edit-mode #edit-indicator { display: block; }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 520px) {
+      #invitation { padding-top: 10px; }
+      .cover-monogram { font-size: 3.8rem; }
+      .modal-card { padding: 36px 24px; }
+    }
+
+    /* =============================================
+       LOADING SCREEN
+    ============================================= */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: linear-gradient(135deg, var(--burgundy-dark), #0d040a);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    #loader.hidden { opacity: 0; visibility: hidden; }
+
+    .loader-text {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: var(--gold);
+      animation: loader-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes loader-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.97); }
+    }
+
+    .loader-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .loader-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: dot-bounce 1.2s ease infinite;
+    }
+
+    .loader-dot:nth-child(2) { animation-delay: 0.2s; }
+    .loader-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dot-bounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    /* =============================================
+       PHOTO COUNTER BADGE
+    ============================================= */
+    .photo-change-badge {
+      display: none;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 5;
+      background: rgba(107,39,55,0.85);
+      color: var(--gold-light);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    body.edit-mode .photo-change-badge { display: block; }
+
+    /* =============================================
+       EDIT MODE: SECTION CONTROLS & TOGGLES
+     ============================================= */
+    .inv-section {
+      position: relative;
+    }
+
+    .section-edit-actions {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 100;
+      display: none;
+      gap: 8px;
+    }
+
+    body.edit-mode .section-edit-actions {
+      display: flex;
+    }
+
+    .btn-section-action {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      background: rgba(107, 39, 55, 0.9);
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: var(--transition);
+    }
+
+    .btn-section-action:hover {
+      background: var(--gold);
+      color: var(--burgundy-dark);
+      transform: scale(1.1);
+    }
+
+    .btn-section-action svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Delete button for timeline items */
+    .btn-tl-delete {
+      position: absolute;
+      top: -8px;
+      left: -58px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      background: rgba(107, 39, 55, 0.95);
+      color: var(--gold-light);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: var(--transition);
+      z-index: 15;
+    }
+
+    .btn-tl-delete:hover {
+      background: var(--gold);
+      color: var(--burgundy-dark);
+      transform: scale(1.15);
+    }
+
+    .btn-tl-delete svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    body.edit-mode .btn-tl-delete {
+      display: flex;
+    }
+
+    /* Hidden Timeline Item States */
+    .tl-item.is-hidden-tl-item {
+      display: none !important;
+    }
+
+    /* Hidden Section States */
+    .inv-section.is-hidden-section {
+      display: none !important;
+    }
+
+    body.edit-mode .inv-section.is-hidden-section {
+      display: flex !important;
+      min-height: 80px;
+      height: 80px;
+      background: rgba(107, 39, 55, 0.04);
+      border: 2px dashed rgba(201, 168, 76, 0.3);
+      border-radius: 8px;
+      margin: 15px auto;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      max-width: 480px;
+      padding: 0 !important;
+    }
+
+    body.edit-mode .inv-section.is-hidden-section > *:not(.section-hidden-banner):not(.section-edit-actions) {
+      display: none !important;
+    }
+
+    .section-hidden-banner {
+      display: none;
+      width: 100%;
+      padding: 10px 20px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      box-sizing: border-box;
+    }
+
+    body.edit-mode .inv-section.is-hidden-section .section-hidden-banner {
+      display: flex;
+    }
+
+    .hidden-banner-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-light);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hidden-banner-content svg {
+      color: var(--gold);
+    }
+
+    .btn-restore-inline {
+      background: var(--gold);
+      color: var(--burgundy-dark);
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-restore-inline:hover {
+      background: var(--gold-light);
+      transform: scale(1.05);
+    }
+
+    /* Toggles in Modal */
+    .sections-list-container {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+      text-align: left;
+      padding-right: 8px;
+    }
+
+    .sections-list-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .sections-list-container::-webkit-scrollbar-track {
+      background: rgba(107,39,55,0.05);
+    }
+    .sections-list-container::-webkit-scrollbar-thumb {
+      background: var(--gold);
+      border-radius: 3px;
+    }
+
+    .section-toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 8px;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .switch-container {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .switch-container input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      transition: 0.4s;
+    }
+
+    .switch-slider::before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+
+    .switch-container input:checked + .switch-slider {
+      background-color: var(--burgundy);
+    }
+
+    .switch-container input:checked + .switch-slider::before {
+      transform: translateX(20px);
+      background-color: var(--gold-light);
+    }
+
+    /* Modal general styles */
+    #modal-rsvp, #modal-sections, .modal-container {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(10,2,6,0.85);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #modal-rsvp.open, #modal-sections.open, .modal-container.open {
+      display: flex;
+    }
+
+    .palette-option.selected {
+      border-color: var(--burgundy) !important;
+      box-shadow: 0 4px 15px rgba(107,39,55,0.15);
+      background: rgba(107,39,55,0.02) !important;
+    }
+
+    /* =============================================
+       TOUR OVERLAY STYLE
+     ============================================= */
+    .tour-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 2, 6, 0.4);
+      z-index: 2500;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: none;
+    }
+    .tour-backdrop.active {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .tour-highlight {
+      position: absolute;
+      z-index: 2501;
+      box-shadow: 0 0 0 9999px rgba(10, 2, 6, 0.65);
+      border-radius: 8px;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      border: 2px solid var(--gold);
+    }
+
+    .tour-card {
+      position: absolute;
+      z-index: 2502;
+      background: var(--cream);
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 20px;
+      width: 290px;
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+      text-align: left;
+    }
+
+    .tour-card-step {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .tour-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .tour-card-body {
+      font-size: 0.72rem;
+      line-height: 1.6;
+      color: var(--text-mid);
+      margin-bottom: 16px;
+    }
+
+    .tour-card-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .btn-tour-nav {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+    }
+    .btn-tour-nav:hover {
+      background: rgba(201,168,76,0.1);
+    }
+    .btn-tour-nav.primary {
+      background: var(--burgundy);
+      color: var(--white);
+      border-color: var(--burgundy);
+    }
+    .btn-tour-nav.primary:hover {
+      background: var(--burgundy-light);
+      border-color: var(--burgundy-light);
+    }
+    .btn-tour-nav.text-only {
+      border-color: transparent;
+      color: var(--text-light);
+    }
+    .btn-tour-nav.text-only:hover {
+      background: rgba(0,0,0,0.05);
+      color: var(--text-dark);
+    }
+  </style>
+</head>
+<body data-wedding-date="2026-12-06T17:00:00">
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <div class="loader-text">Marcos &amp; Mariana</div>
+  <div class="loader-dots">
+    <div class="loader-dot"></div>
+    <div class="loader-dot"></div>
+    <div class="loader-dot"></div>
+  </div>
+</div>
+
+<!-- BG CANVAS -->
+<div class="bg-canvas"></div>
+<div class="bg-particles" id="particles"></div>
+
+<!-- EDITOR BAR -->
+<div id="editor-bar">
+  <span class="editor-logo">Editor</span>
+  <button class="editor-btn btn-edit" onclick="startTour()" style="background: transparent; color: var(--gold); border-color: var(--gold); margin-right: 8px;">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h-2v-6h3v6h1v2zm-1-9.75c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25 0.56 1.25 1.25-.56 1.25-1.25 1.25z"/></svg>
+    Manual
+  </button>
+  <button class="editor-btn btn-edit" onclick="toggleEdit()">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+    <span id="edit-btn-label">Activar Editor</span>
+  </button>
+  
+  <!-- Formato de texto (Color y Tamaño) -->
+  <div id="editor-formatting-controls" style="display: none; align-items: center; gap: 8px; border-left: 1px solid rgba(201,168,76,0.3); padding-left: 12px; margin-left: 4px; flex-shrink: 0;">
+    <select id="editor-font-size" onchange="applyTextFormatting('fontSize', this.value)" style="background: transparent; color: var(--gold-light); border: 1px solid var(--gold); border-radius: 4px; padding: 4px 8px; font-family:'Montserrat',sans-serif; font-size:0.75rem; cursor: pointer; outline: none; flex-shrink: 0;">
+      <option value="" style="background: var(--burgundy-dark); color: #aaa;">Tamaño</option>
+      <option value="12px" style="background: var(--burgundy-dark);">12px</option>
+      <option value="14px" style="background: var(--burgundy-dark);">14px</option>
+      <option value="16px" style="background: var(--burgundy-dark);">16px</option>
+      <option value="18px" style="background: var(--burgundy-dark);">18px</option>
+      <option value="20px" style="background: var(--burgundy-dark);">20px</option>
+      <option value="24px" style="background: var(--burgundy-dark);">24px</option>
+      <option value="28px" style="background: var(--burgundy-dark);">28px</option>
+      <option value="32px" style="background: var(--burgundy-dark);">32px</option>
+      <option value="36px" style="background: var(--burgundy-dark);">36px</option>
+      <option value="40px" style="background: var(--burgundy-dark);">40px</option>
+      <option value="48px" style="background: var(--burgundy-dark);">48px</option>
+      <option value="56px" style="background: var(--burgundy-dark);">56px</option>
+      <option value="64px" style="background: var(--burgundy-dark);">64px</option>
+    </select>
+    <div style="display: flex; align-items: center; gap: 4px; color: var(--gold-light); font-family:'Montserrat',sans-serif; font-size:0.7rem; flex-shrink: 0;">
+      <span>Color:</span>
+      <input type="color" id="editor-text-color" title="Color de Texto" onchange="applyTextFormatting('color', this.value)" style="width: 26px; height: 26px; border: 1px solid var(--gold); border-radius: 4px; padding: 0; cursor: pointer; background: transparent; flex-shrink: 0;">
+    </div>
+  </div>
+  <button class="editor-btn btn-save" id="btn-sections-bar" onclick="openSectionsModal()" style="background: transparent; color: var(--gold); border-color: var(--gold); display: none;">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+    Personalizar
+  </button>
+  <button class="editor-btn btn-save" id="btn-undo" onclick="undo()" style="background: transparent; color: var(--gold); border-color: var(--gold); display: none;" title="Deshacer (Ctrl+Z)">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+    Deshacer
+  </button>
+  <button class="editor-btn btn-save" id="btn-redo" onclick="redo()" style="background: transparent; color: var(--gold); border-color: var(--gold); display: none;" title="Rehacer (Ctrl+Y)">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.06-5.5 7.6-5.5 1.96 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z"/></svg>
+    Rehacer
+  </button>
+  <button class="editor-btn btn-save" onclick="saveCard()">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+    Guardar
+  </button>
+  <button class="editor-btn btn-save" id="btn-export-bar" onclick="exportEditedHTML()" style="background: transparent; color: #5cb85c; border-color: #5cb85c; display: none;">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+    Exportar HTML
+  </button>
+  <button class="editor-btn btn-preview" onclick="toggleEditorBar()">✕ Cerrar</button>
+  <span class="editor-tip">✦ Haz click en cualquier texto o foto para editar</span>
+</div>
+
+<!-- MOBILE SWIPE HINT -->
+<div id="mobile-swipe-hint" style="display: none; position: fixed; top: 54px; left: 50%; transform: translateX(-50%) translateY(-10px); z-index: 1001; background: rgba(201, 168, 76, 0.96); color: #2C1810; padding: 8px 16px; border-radius: 20px; font-family:'Montserrat',sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.05em; align-items:center; gap:8px; box-shadow:0 8px 24px rgba(0,0,0,0.35); pointer-events:none; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 0;">
+  <span>Desliza la barra para ver más opciones</span>
+  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="animation: swipe-hand-anim 1.5s ease-in-out infinite;"><path d="M10 21.8c-1.7 0-3.3-.7-4.5-1.8l-4.7-4.7c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0l3.9 3.9v-12c0-.6.4-1 1-1s1 .4 1 1v7c0 .6.4 1 1 1s1-.4 1-1v-8c0-.6.4-1 1-1s1 .4 1 1v8c0 .6.4 1 1 1s1-.4 1-1v-6c0-.6.4-1 1-1s1 .4 1 1v8c0 .6.4 1 1 1s1-.4 1-1v-3.5c0-.6.4-1 1-1s1 .4 1 1V17c0 2.7-2.2 4.8-4.8 4.8z"/></svg>
+</div>
+
+<!-- EDIT INDICATOR -->
+<div id="edit-indicator">✏ Modo Edición Activo</div>
+
+<!-- FLOATING EDIT BUTTON -->
+<button id="floating-edit" title="Abrir Editor" onclick="toggleEditorBar()">
+  <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+</button>
+
+<!-- TOAST -->
+<div id="toast">✓ Cambios guardados</div>
+
+<!-- RSVP MODAL -->
+<div id="modal-rsvp" class="modal-container">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeRSVP()">✕</button>
+    <div class="modal-title editable" contenteditable="false">Confirmar</div>
+    <div class="modal-subtitle editable" contenteditable="false">Tu asistencia es nuestro regalo</div>
+
+    <div class="rsvp-choices">
+      <div class="rsvp-choice active" onclick="selectRSVP(this, 'yes')">
+        <span class="rsvp-choice-icon">💍</span>
+        <span class="rsvp-choice-label editable" contenteditable="false">¡Sí, asistiré!</span>
+      </div>
+      <div class="rsvp-choice" onclick="selectRSVP(this, 'no')">
+        <span class="rsvp-choice-icon">💔</span>
+        <span class="rsvp-choice-label editable" contenteditable="false">No podré ir</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="editable" contenteditable="false">Nombre completo</label>
+      <input type="text" id="rsvp-name" placeholder="Tu nombre y apellido" />
+    </div>
+    <div class="form-group">
+      <label class="editable" contenteditable="false">¿Cuántos asistirán?</label>
+      <select id="rsvp-count">
+        <option>Solo yo (1 persona)</option>
+        <option>Nosotros dos (2 personas)</option>
+        <option>3 personas</option>
+        <option>4 personas</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="editable" contenteditable="false">Mensaje para los novios (opcional)</label>
+      <textarea id="rsvp-msg" rows="3" placeholder="Un mensaje con amor..." style="resize:none;"></textarea>
+    </div>
+    <button class="btn-rsvp" style="width:100%; justify-content:center;" onclick="submitRSVP()">
+      <span class="editable" contenteditable="false">💌 Confirmar Asistencia</span>
+    </button>
+  </div>
+</div>
+
+<!-- SECTIONS MODAL -->
+<div id="modal-sections" class="modal-container">
+  <div class="modal-card" style="max-width: 440px;">
+    <button class="modal-close" onclick="closeSectionsModal()">✕</button>
+    <div class="modal-title" style="font-size: 2rem;">Personalizar</div>
+    <div class="modal-subtitle">Cambia la paleta de colores y gestiona las secciones</div>
+    
+    <!-- WEDDING DATE PICKER -->
+    <div style="margin-bottom: 20px; text-align: left;">
+      <h3 style="font-family:'Montserrat',sans-serif; font-size:0.75rem; letter-spacing:0.1em; color:var(--text-light); text-transform:uppercase; margin-bottom: 12px; border-bottom: 1px solid var(--cream-dark); padding-bottom: 6px;">Fecha y Hora del Evento</h3>
+      <input type="datetime-local" id="wedding-date-input" onchange="updateWeddingDate(this.value)" style="width: 100%; padding: 10px; border: 1px solid var(--cream-dark); border-radius: 8px; font-family:'Montserrat',sans-serif; font-size:0.8rem; box-sizing:border-box; background: var(--white); color: var(--text-dark);">
+    </div>
+    
+    <!-- COLOR PALETTES -->
+    <div style="margin-bottom: 24px; text-align: left;">
+      <h3 style="font-family:'Montserrat',sans-serif; font-size:0.75rem; letter-spacing:0.1em; color:var(--text-light); text-transform:uppercase; margin-bottom: 12px; border-bottom: 1px solid var(--cream-dark); padding-bottom: 6px;">Paleta de Colores</h3>
+      <div class="palettes-container" style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+        <!-- Burgundy -->
+        <div class="palette-option selected" data-palette="burgundy" onclick="changePalette('burgundy')" style="display:flex; align-items:center; justify-content:space-between; padding: 12px; border:1px solid var(--cream-dark); border-radius:10px; cursor:pointer; background:var(--white); transition:var(--transition);">
+          <div style="display:flex; flex-direction:column; gap:2px;">
+            <span style="font-family:'Montserrat',sans-serif; font-size:0.78rem; font-weight:600; color:var(--text-dark);">Clásica Borgoña</span>
+            <span style="font-family:'Montserrat',sans-serif; font-size:0.62rem; color:var(--text-light);">Elegante y tradicional</span>
+          </div>
+          <div style="display:flex; gap:4px;">
+            <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#6B2737; border:1px solid rgba(0,0,0,0.1);"></span>
+            <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#C9A84C; border:1px solid rgba(0,0,0,0.1);"></span>
+            <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#FAF6F0; border:1px solid rgba(0,0,0,0.1);"></span>
+          </div>
+        </div>
+        <!-- Eucalyptus -->
+        <div class="palette-option" data-palette="emerald" onclick="changePalette('emerald')" style="display:flex; align-items:center; justify-content:space-between; padding: 12px; border:1px solid var(--cream-dark); border-radius:10px; cursor:pointer; background:var(--white); transition:var(--transition);">
+          <div style="display:flex; flex-direction:column; gap:2px;">
+            <span style="font-family:'Montserrat',sans-serif; font-size:0.78rem; font-weight:600; color:#1B2621;">Verde Eucalipto</span>
+            <span style="font-family:'Montserrat',sans-serif; font-size:0.62rem; color:var(--text-light);">Fresco y botánico</span>
+          </div>
+          <div style="display:flex; gap:4px;">
+            <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#2E4A3F; border:1px solid rgba(0,0,0,0.1);"></span>
+            <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#B8A17D; border:1px solid rgba(0,0,0,0.1);"></span>
+            <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#F4F6F4; border:1px solid rgba(0,0,0,0.1);"></span>
+          </div>
+        </div>
+        <!-- Midnight -->
+        <div class="palette-option" data-palette="midnight" onclick="changePalette('midnight')" style="display:flex; align-items:center; justify-content:space-between; padding: 12px; border:1px solid var(--cream-dark); border-radius:10px; cursor:pointer; background:var(--white); transition:var(--transition);">
+          <div style="display:flex; flex-direction:column; gap:2px;">
+            <span style="font-family:'Montserrat',sans-serif; font-size:0.78rem; font-weight:600; color:#0F172A;">Azul Medianoche</span>
+            <span style="font-family:'Montserrat',sans-serif; font-size:0.62rem; color:var(--text-light);">Estelar y clásico moderno</span>
+          </div>
+          <div style="display:flex; gap:4px;">
+            <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#1D2D44; border:1px solid rgba(0,0,0,0.1);"></span>
+            <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#94A3B8; border:1px solid rgba(0,0,0,0.1);"></span>
+            <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#F8FAFC; border:1px solid rgba(0,0,0,0.1);"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTIONS -->
+    <div style="text-align: left;">
+      <h3 style="font-family:'Montserrat',sans-serif; font-size:0.75rem; letter-spacing:0.1em; color:var(--text-light); text-transform:uppercase; margin-bottom: 12px; border-bottom: 1px solid var(--cream-dark); padding-bottom: 6px;">Secciones Activas</h3>
+      <div class="sections-list-container">
+        <!-- Checkboxes populated dynamically -->
+      </div>
+    </div>
+
+    <!-- ITINERARY EVENTS -->
+    <div style="text-align: left; margin-top: 18px;">
+      <h3 style="font-family:'Montserrat',sans-serif; font-size:0.75rem; letter-spacing:0.1em; color:var(--text-light); text-transform:uppercase; margin-bottom: 12px; border-bottom: 1px solid var(--cream-dark); padding-bottom: 6px;">Eventos del Itinerario</h3>
+      <div class="timeline-list-container" style="max-height: 160px; overflow-y: auto; padding-right: 8px;">
+        <!-- Checkboxes populated dynamically -->
+      </div>
+    </div>
+    
+    <!-- RSVP FORM TEXT EDITOR TRIGGER -->
+    <button class="btn-rsvp" style="width:100%; justify-content:center; background:transparent; border:1px solid var(--burgundy); color:var(--burgundy); margin-top:20px; margin-bottom:10px; box-shadow:none;" onclick="closeSectionsModal(); openRSVP(true);">
+      📋 Editar Formulario RSVP
+    </button>
+
+    <button class="btn-rsvp" style="width:100%; justify-content:center;" onclick="closeSectionsModal()">
+      ✓ Guardar Cambios
+    </button>
+  </div>
+</div>
+
+<!-- ============================================
+     MAIN INVITATION
+============================================= -->
+<div id="invitation">
+
+  <!-- 1. COVER -->
+  <section class="inv-section" id="s-cover">
+    <!-- Corner ornaments SVG -->
+    <svg class="corner-ornament tl" viewBox="0 0 80 80" fill="none">
+      <path d="M4 4 Q30 4 40 20 Q50 4 76 4" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      <path d="M4 4 Q4 30 20 40 Q4 50 4 76" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      <circle cx="4" cy="4" r="3" fill="#C9A84C" opacity="0.6"/>
+    </svg>
+    <svg class="corner-ornament tr" viewBox="0 0 80 80" fill="none">
+      <path d="M4 4 Q30 4 40 20 Q50 4 76 4" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      <path d="M4 4 Q4 30 20 40 Q4 50 4 76" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      <circle cx="4" cy="4" r="3" fill="#C9A84C" opacity="0.6"/>
+    </svg>
+    <svg class="corner-ornament bl" viewBox="0 0 80 80" fill="none">
+      <path d="M4 4 Q30 4 40 20 Q50 4 76 4" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      <path d="M4 4 Q4 30 20 40 Q4 50 4 76" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      <circle cx="4" cy="4" r="3" fill="#C9A84C" opacity="0.6"/>
+    </svg>
+    <svg class="corner-ornament br" viewBox="0 0 80 80" fill="none">
+      <path d="M4 4 Q30 4 40 20 Q50 4 76 4" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      <path d="M4 4 Q4 30 20 40 Q4 50 4 76" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      <circle cx="4" cy="4" r="3" fill="#C9A84C" opacity="0.6"/>
+    </svg>
+
+    <!-- Rotating seal -->
+    <div class="cover-seal">
+      <svg viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%;">
+        <path id="seal-circle-path" d="M 50,50 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0" fill="none"/>
+        <text font-family="Montserrat,sans-serif" font-size="7" fill="#C9A84C" letter-spacing="3" font-weight="300">
+          <textPath href="#seal-circle-path">NOS CASAMOS  ✦  WEDDING  ✦  AMOR  ✦ </textPath>
+        </text>
+      </svg>
+      <div class="cover-seal-inner">
+        <span class="cover-seal-text editable" contenteditable="false">MM</span>
+      </div>
+    </div>
+
+    <div class="cover-monogram editable" contenteditable="false">Marcos</div>
+    <span class="cover-ampersand editable" contenteditable="false">&amp;</span>
+    <div class="cover-monogram editable" contenteditable="false">Mariana</div>
+
+    <div class="cover-divider"></div>
+
+    <div class="cover-date editable" data-date-format="long-uppercase" contenteditable="false">DOMINGO · 06 · DICIEMBRE · 2026</div>
+    <div class="cover-tagline editable" contenteditable="false">¡Nos casamos!</div>
+  </section>
+
+
+  <!-- 2. COUNTDOWN -->
+  <section class="inv-section" id="s-countdown">
+    <div class="countdown-label editable" contenteditable="false">Faltan</div>
+    <div class="countdown-date-display editable" data-date-format="medium" contenteditable="false">Diciembre · Domingo 06 · 2026</div>
+
+    <div class="countdown-grid" id="cd-grid">
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-days">00</span>
+        <div class="cd-label editable" contenteditable="false">Días</div>
+      </div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-hours">00</span>
+        <div class="cd-label editable" contenteditable="false">Horas</div>
+      </div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-mins">00</span>
+        <div class="cd-label editable" contenteditable="false">Min</div>
+      </div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-secs">00</span>
+        <div class="cd-label editable" contenteditable="false">Seg</div>
+      </div>
+    </div>
+
+    <button class="btn-change-date-inline" onclick="openSectionsModal()">
+      <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM7 11h5v5H7z"/></svg>
+      Cambiar Fecha y Hora
+    </button>
+  </section>
+
+  <!-- 3. BIBLE VERSE & MONOGRAM -->
+  <section class="inv-section" id="s-verse">
+    <div class="verse-ornament">"</div>
+    <div class="gold-ornament animated">
+      <svg viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 30 C190 15, 175 8, 160 15 C145 22, 145 38, 160 45 C175 52, 190 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M200 30 C210 15, 225 8, 240 15 C255 22, 255 38, 240 45 C225 52, 210 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M155 30 Q130 30 110 22 Q90 14 70 20 Q50 26 40 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M245 30 Q270 30 290 22 Q310 14 330 20 Q350 26 360 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M40 38 Q30 44 20 38 Q10 32 15 22 Q20 12 30 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M360 38 Q370 44 380 38 Q390 32 385 22 Q380 12 370 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="15" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="385" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <line x1="110" y1="20" x2="100" y2="12" stroke="#C9A84C" stroke-width="1" opacity="0.6" stroke-linecap="round"/>
+        <line x1="120" y1="18" x2="115" y2="8" stroke="#C9A84C" stroke-width="1" opacity="0.6" stroke-linecap="round"/>
+        <line x1="290" y1="20" x2="300" y2="12" stroke="#C9A84C" stroke-width="1" opacity="0.6" stroke-linecap="round"/>
+        <line x1="280" y1="18" x2="285" y2="8" stroke="#C9A84C" stroke-width="1" opacity="0.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p class="verse-quote editable" contenteditable="false">
+      "Y sobre todas estas cosas, vístanse<br/>de amor, que es el vínculo perfecto."
+    </p>
+    <div class="verse-ref editable" contenteditable="false">Colosenses 3:14</div>
+    <div class="gold-ornament animated">
+      <svg viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 30 C190 15, 175 8, 160 15 C145 22, 145 38, 160 45 C175 52, 190 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M200 30 C210 15, 225 8, 240 15 C255 22, 255 38, 240 45 C225 52, 210 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M155 30 Q130 30 110 22 Q90 14 70 20 Q50 26 40 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M245 30 Q270 30 290 22 Q310 14 330 20 Q350 26 360 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M40 38 Q30 44 20 38 Q10 32 15 22 Q20 12 30 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M360 38 Q370 44 380 38 Q390 32 385 22 Q380 12 370 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="15" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="385" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Monograma -->
+    <div class="mono-letters" style="display: flex; justify-content: center; align-items: center; gap: 4px; margin-top: 30px;">
+      <span class="editable" data-edit-key="mono-letra-1" contenteditable="false">M</span>
+      <span class="editable" data-edit-key="mono-separador" contenteditable="false" style="color: var(--gold); font-size: 4.5rem; line-height: 1; margin: 0 4px;">❧</span>
+      <span class="editable" data-edit-key="mono-letra-2" contenteditable="false">M</span>
+    </div>
+    <div class="mono-divider"></div>
+    <div class="mono-subtitle editable" contenteditable="false" style="margin-bottom: 20px;">¡Nos Casamos!</div>
+  </section>
+
+  <!-- 5. HERO PHOTO -->
+  <section class="inv-section" id="s-photo1">
+    <div class="section-photo photo-upload-zone" id="photo1-zone" onclick="triggerPhotoUpload('photo1-zone', 'photo1-img', 380)">
+      <img id="photo1-img" src="wedding_couple_1.png" alt="Foto de los novios" style="min-height:360px;" />
+      <div class="photo-placeholder" id="photo1-placeholder" style="display:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="m21 15-5-5L5 21"/>
+        </svg>
+        <span>Click para subir foto de los novios</span>
+      </div>
+      <div class="overlay-gradient to-cream"></div>
+      <div class="overlay-vignette"></div>
+      <div class="photo-change-badge">📷 Cambiar foto</div>
+    </div>
+  </section>
+
+  <!-- ORNAMENT BETWEEN PHOTO & EVENT -->
+  <div class="inv-section" style="background:var(--cream); padding:0;">
+    <div class="gold-ornament animated">
+      <svg viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 30 C190 15, 175 8, 160 15 C145 22, 145 38, 160 45 C175 52, 190 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M200 30 C210 15, 225 8, 240 15 C255 22, 255 38, 240 45 C225 52, 210 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M155 30 Q130 30 110 22 Q90 14 70 20 Q50 26 40 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M245 30 Q270 30 290 22 Q310 14 330 20 Q350 26 360 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M40 38 Q30 44 20 38 Q10 32 15 22 Q20 12 30 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M360 38 Q370 44 380 38 Q390 32 385 22 Q380 12 370 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="15" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="385" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <line x1="110" y1="20" x2="100" y2="12" stroke="#C9A84C" stroke-width="1" opacity="0.6" stroke-linecap="round"/>
+        <line x1="120" y1="18" x2="115" y2="8" stroke="#C9A84C" stroke-width="1" opacity="0.6" stroke-linecap="round"/>
+        <line x1="290" y1="20" x2="300" y2="12" stroke="#C9A84C" stroke-width="1" opacity="0.6" stroke-linecap="round"/>
+        <line x1="280" y1="18" x2="285" y2="8" stroke="#C9A84C" stroke-width="1" opacity="0.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 6. EVENT INFO -->
+  <section class="inv-section" id="s-event">
+    <div class="event-eyebrow editable" contenteditable="false">Ceremonia &amp; Recepción</div>
+    <div class="event-time editable" contenteditable="false">17:00 hrs.</div>
+    <div class="event-name editable" contenteditable="false">Salón Vendimia</div>
+    <div class="event-venue editable" contenteditable="false">El salón de tus sueños</div>
+    <div class="event-address editable" contenteditable="false">
+      Nueva Cruz de la Sierra<br/>Calle Los Almendros 234
+    </div>
+    <div class="gold-ornament small">
+      <svg viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 30 C190 15, 175 8, 160 15 C145 22, 145 38, 160 45 C175 52, 190 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M200 30 C210 15, 225 8, 240 15 C255 22, 255 38, 240 45 C225 52, 210 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M155 30 Q130 30 110 22 Q90 14 70 20 Q50 26 40 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M245 30 Q270 30 290 22 Q310 14 330 20 Q350 26 360 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M40 38 Q30 44 20 38 Q10 32 15 22 Q20 12 30 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M360 38 Q370 44 380 38 Q390 32 385 22 Q380 12 370 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="15" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="385" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+    <a class="btn-maps" id="maps-link" href="#" target="_blank" onclick="return openMaps(event)">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+      </svg>
+      <span class="editable" contenteditable="false">Ver Ubicación en Maps</span>
+    </a>
+  </section>
+
+  <!-- 7. TIMELINE -->
+  <section class="inv-section" id="s-timeline">
+    <div class="section-title editable" data-edit-key="tl-section-title" contenteditable="false">Itinerario</div>
+    <div class="section-subtitle editable" data-edit-key="tl-section-subtitle" contenteditable="false">El día más especial</div>
+
+    <div class="timeline">
+      <!-- Item 1: Llegada -->
+      <div class="tl-item" id="tl-item-1">
+        <button class="btn-tl-delete" onclick="toggleTimelineItem('tl-item-1')" title="Ocultar evento">
+          <svg viewBox="0 0 24 24" class="icon-delete"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <svg viewBox="0 0 24 24" class="icon-restore" style="display:none;"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        </button>
+        <div class="tl-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        </div>
+        <div class="tl-content">
+          <div class="tl-time editable" data-edit-key="tl-time-1" contenteditable="false">15:30 hrs</div>
+          <div class="tl-title editable" data-edit-key="tl-title-1" contenteditable="false">Llegada de Invitados</div>
+          <div class="tl-desc editable" data-edit-key="tl-desc-1" contenteditable="false">Recepción de los asistentes en el vestíbulo principal con música suave de bienvenida.</div>
+        </div>
+      </div>
+
+      <!-- Item 2: Ceremonia -->
+      <div class="tl-item" id="tl-item-2">
+        <button class="btn-tl-delete" onclick="toggleTimelineItem('tl-item-2')" title="Ocultar evento">
+          <svg viewBox="0 0 24 24" class="icon-delete"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <svg viewBox="0 0 24 24" class="icon-restore" style="display:none;"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        </button>
+        <div class="tl-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        </div>
+        <div class="tl-content">
+          <div class="tl-time editable" data-edit-key="tl-time-2" contenteditable="false">17:00 hrs</div>
+          <div class="tl-title editable" data-edit-key="tl-title-2" contenteditable="false">Ceremonia</div>
+          <div class="tl-desc editable" data-edit-key="tl-desc-2" contenteditable="false">Unión matrimonial bajo la bendición de nuestros seres queridos en el altar principal.</div>
+        </div>
+      </div>
+
+      <!-- Item 3: Cocktail -->
+      <div class="tl-item" id="tl-item-3">
+        <button class="btn-tl-delete" onclick="toggleTimelineItem('tl-item-3')" title="Ocultar evento">
+          <svg viewBox="0 0 24 24" class="icon-delete"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <svg viewBox="0 0 24 24" class="icon-restore" style="display:none;"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        </button>
+        <div class="tl-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 3H4l8 9.46V19H8v2h8v-2h-4v-6.54L20 3z"/></svg>
+        </div>
+        <div class="tl-content">
+          <div class="tl-time editable" data-edit-key="tl-time-3" contenteditable="false">18:30 hrs</div>
+          <div class="tl-title editable" data-edit-key="tl-title-3" contenteditable="false">Cocktail</div>
+          <div class="tl-desc editable" data-edit-key="tl-desc-3" contenteditable="false">Brindis de honor, barra de tragos premium y deliciosos bocadillos en los jardines.</div>
+        </div>
+      </div>
+
+      <!-- Item 4: Cena -->
+      <div class="tl-item" id="tl-item-4">
+        <button class="btn-tl-delete" onclick="toggleTimelineItem('tl-item-4')" title="Ocultar evento">
+          <svg viewBox="0 0 24 24" class="icon-delete"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <svg viewBox="0 0 24 24" class="icon-restore" style="display:none;"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        </button>
+        <div class="tl-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+        </div>
+        <div class="tl-content">
+          <div class="tl-time editable" data-edit-key="tl-time-4" contenteditable="false">20:00 hrs</div>
+          <div class="tl-title editable" data-edit-key="tl-title-4" contenteditable="false">Recepción &amp; Cena</div>
+          <div class="tl-desc editable" data-edit-key="tl-desc-4" contenteditable="false">Gran banquete de gala, palabras de agradecimiento y el primer baile de los novios.</div>
+        </div>
+      </div>
+
+      <!-- Item 5: Fiesta -->
+      <div class="tl-item" id="tl-item-5">
+        <button class="btn-tl-delete" onclick="toggleTimelineItem('tl-item-5')" title="Ocultar evento">
+          <svg viewBox="0 0 24 24" class="icon-delete"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <svg viewBox="0 0 24 24" class="icon-restore" style="display:none;"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        </button>
+        <div class="tl-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+        </div>
+        <div class="tl-content">
+          <div class="tl-time editable" data-edit-key="tl-time-5" contenteditable="false">21:30 hrs</div>
+          <div class="tl-title editable" data-edit-key="tl-title-5" contenteditable="false">Hora Loca</div>
+          <div class="tl-desc editable" data-edit-key="tl-desc-5" contenteditable="false">Apertura de la pista de baile con DJ en vivo, cotillón y sorpresas especiales.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. DRESSCODE -->
+  <section class="inv-section" id="s-dresscode">
+    <div class="gold-ornament small" style="padding-top:28px;">
+      <svg viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 30 C190 15, 175 8, 160 15 C145 22, 145 38, 160 45 C175 52, 190 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M200 30 C210 15, 225 8, 240 15 C255 22, 255 38, 240 45 C225 52, 210 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M155 30 Q130 30 110 22 Q90 14 70 20 Q50 26 40 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M245 30 Q270 30 290 22 Q310 14 330 20 Q350 26 360 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M40 38 Q30 44 20 38 Q10 32 15 22 Q20 12 30 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M360 38 Q370 44 380 38 Q390 32 385 22 Q380 12 370 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="15" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="385" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+    <div class="section-title editable" contenteditable="false" style="color:var(--burgundy);">Código de Vestimenta</div>
+    <div class="dresscode-icons-container" style="display: flex; justify-content: center; gap: 40px; margin: 24px 0; color: var(--gold);">
+      <!-- Hombres (Traje) -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+        <div style="width: 70px; height: 70px; border-radius: 50%; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; background: rgba(201, 168, 76, 0.05); box-shadow: 0 4px 15px rgba(201, 168, 76, 0.15);">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 3 L3 12 L7 21h10l4-9-2-9Z" />
+            <path d="M5 3 L12 12 L19 3" />
+            <path d="M9.5 5.5h5L12 7.5Z" fill="currentColor" />
+            <path d="M14.5 5.5h-5L12 7.5Z" fill="currentColor" />
+            <line x1="12" y1="12" x2="12" y2="21" />
+            <circle cx="12" cy="15" r="1" fill="currentColor" />
+          </svg>
+        </div>
+        <span style="font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-mid); font-weight: 500;">Hombres</span>
+      </div>
+      
+      <!-- Mujeres (Vestido) -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+        <div style="width: 70px; height: 70px; border-radius: 50%; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; background: rgba(201, 168, 76, 0.05); box-shadow: 0 4px 15px rgba(201, 168, 76, 0.15);">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 8 3 L 9 10 L 5 21 H 19 L 15 10 L 16 3 C 14 5, 10 5, 8 3 Z" />
+            <line x1="9" y1="10" x2="15" y2="10" />
+          </svg>
+        </div>
+        <span style="font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-mid); font-weight: 500;">Mujeres</span>
+      </div>
+    </div>
+    <div class="dresscode-main editable" contenteditable="false">Formal</div>
+    <div class="gold-ornament small">
+      <svg viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 30 C190 15, 175 8, 160 15 C145 22, 145 38, 160 45 C175 52, 190 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M200 30 C210 15, 225 8, 240 15 C255 22, 255 38, 240 45 C225 52, 210 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M155 30 Q130 30 110 22 Q90 14 70 20 Q50 26 40 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M245 30 Q270 30 290 22 Q310 14 330 20 Q350 26 360 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M40 38 Q30 44 20 38 Q10 32 15 22 Q20 12 30 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M360 38 Q370 44 380 38 Q390 32 385 22 Q380 12 370 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="15" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="385" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+    <p class="dresscode-note editable" contenteditable="false">
+      Con mucho cariño, les pedimos <strong>evitar vestir de blanco o marfil</strong>
+      para que nuestra novia pueda brillar en su día tan especial.
+    </p>
+  </section>
+
+  <!-- 9. SECOND PHOTO -->
+  <section class="inv-section" id="s-photo2">
+    <div class="photo2-frame">
+      <div class="section-photo photo-upload-zone" id="photo2-zone" onclick="triggerPhotoUpload('photo2-zone', 'photo2-img', 300)">
+        <img id="photo2-img" src="wedding_couple_2.png" alt="Foto secundaria de los novios" style="min-height:280px;" />
+        <div class="photo-placeholder" id="photo2-placeholder" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-5-5L5 21"/>
+          </svg>
+          <span>Segunda foto de los novios</span>
+        </div>
+        <div class="overlay-vignette"></div>
+        <div class="photo-change-badge">📷 Cambiar foto</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. GIFTS -->
+  <section class="inv-section" id="s-gifts">
+    <div style="font-size:2.5rem;margin-bottom:12px;">🎁</div>
+    <div class="section-title editable" contenteditable="false" style="color:var(--gold-light);">Lluvia de Sobres</div>
+    <div class="section-subtitle editable" contenteditable="false" style="color:rgba(255,255,255,0.45);">Sugerencia de Regalos</div>
+    <p class="gifts-desc editable" contenteditable="false">
+      El mejor regalo es tu presencia, pero si deseas tener un detalle con nosotros,
+      les dejamos esta opción con todo el amor.
+    </p>
+    <button class="btn-lluvia" onclick="if(!editMode) showToast('¡Gracias por tu generosidad! 💛')">
+      <span class="editable" contenteditable="false">💌 Lluvia de Sobres</span>
+    </button>
+  </section>
+
+  <!-- 11. HOTELS -->
+  <section class="inv-section" id="s-hotel">
+    <div class="section-title editable" contenteditable="false" style="font-size:2rem;">Hospedaje</div>
+    <div class="section-subtitle editable" contenteditable="false">Para visitantes de otras ciudades</div>
+
+    <div class="hotel-card">
+      <div class="hotel-icon">
+        <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+      </div>
+      <div>
+        <div class="hotel-name editable" contenteditable="false">Hotel Regina Resort</div>
+        <div class="hotel-dist editable" contenteditable="false">A 5 min del salón</div>
+      </div>
+      <a class="hotel-link" href="#" target="_blank"><span class="editable" contenteditable="false">Más info</span></a>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-icon">
+        <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+      </div>
+      <div>
+        <div class="hotel-name editable" contenteditable="false">Casa Villa Altena</div>
+        <div class="hotel-dist editable" contenteditable="false">A 8 min del salón</div>
+      </div>
+      <a class="hotel-link" href="#" target="_blank"><span class="editable" contenteditable="false">Más info</span></a>
+    </div>
+  </section>
+
+  <!-- 12. MUSIC -->
+  <section class="inv-section" id="s-music">
+    <div class="music-label editable" contenteditable="false">Nuestra canción</div>
+    <div class="music-title editable" contenteditable="false">Perfect</div>
+    <div class="music-artist editable" contenteditable="false">Ed Sheeran</div>
+
+    <div class="music-player">
+      <button class="music-btn" onclick="showToast('⏮ Anterior')">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+      </button>
+      <button class="music-btn play" id="play-btn" onclick="togglePlay()">
+        <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button class="music-btn" onclick="showToast('⏭ Siguiente')">
+        <svg viewBox="0 0 24 24"><path d="m6 18 8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+      </button>
+    </div>
+
+    <div class="music-progress">
+      <div class="music-progress-bar" id="progress-bar"></div>
+    </div>
+  </section>
+
+  <!-- 13. RSVP -->
+  <section class="inv-section" id="s-rsvp">
+    <div style="font-size:2.5rem;margin-bottom:16px;">💌</div>
+    <div class="section-title editable" contenteditable="false" style="color:var(--burgundy);">Confirmar Asistencia</div>
+    <div class="section-subtitle editable" contenteditable="false">¡Tu presencia es nuestro mayor regalo!</div>
+    <p class="rsvp-desc editable" contenteditable="false">
+      Agradecemos que confirmes tu asistencia antes del
+      <strong>01 de noviembre</strong>.
+    </p>
+    <div class="rsvp-deadline editable" contenteditable="false">
+      ✦ FECHA LÍMITE: 01 DE NOVIEMBRE 2025 ✦
+    </div>
+    <br/>
+    <button class="btn-rsvp" onclick="openRSVP()">
+      <span class="editable" contenteditable="false">💍 Confirmar mi Asistencia</span>
+    </button>
+  </section>
+
+  <!-- 14. THIRD PHOTO -->
+  <section class="inv-section" id="s-photo3">
+    <div class="section-photo photo-upload-zone" id="photo3-zone" onclick="triggerPhotoUpload('photo3-zone', 'photo3-img', 320)">
+      <img id="photo3-img" src="wedding_couple_3.png" alt="Foto adicional" style="min-height:300px;" />
+      <div class="photo-placeholder" id="photo3-placeholder" style="display:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="m21 15-5-5L5 21"/>
+        </svg>
+        <span>Tercera foto (puente, jardín...)</span>
+      </div>
+      <div class="overlay-gradient to-cream"></div>
+      <div class="overlay-vignette"></div>
+      <div class="photo-change-badge">📷 Cambiar foto</div>
+    </div>
+  </section>
+
+  <!-- 15. PARENTS -->
+  <section class="inv-section" id="s-parents">
+    <div class="section-title editable" contenteditable="false" style="font-size:1.8rem; color:var(--burgundy);">Con el Amor de Nuestros Padres</div>
+    <div class="gold-ornament small animated">
+      <svg viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 30 C190 15, 175 8, 160 15 C145 22, 145 38, 160 45 C175 52, 190 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M200 30 C210 15, 225 8, 240 15 C255 22, 255 38, 240 45 C225 52, 210 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M155 30 Q130 30 110 22 Q90 14 70 20 Q50 26 40 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M245 30 Q270 30 290 22 Q310 14 330 20 Q350 26 360 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M40 38 Q30 44 20 38 Q10 32 15 22 Q20 12 30 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M360 38 Q370 44 380 38 Q390 32 385 22 Q380 12 370 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="15" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="385" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+
+    <div class="parents-block">
+      <div class="parents-family editable" contenteditable="false">Padres del Novio</div>
+      <div class="parents-name editable" contenteditable="false">
+        Pablo Méndez Sánchez<br/>
+        Oliver Perea Gutiérrez<br/>
+        <em style="font-family:'Cormorant Garamond',serif; font-size:0.9em;">&amp;</em><br/>
+        Gustavo Delgado Angus
+      </div>
+    </div>
+
+    <div class="parents-divider"></div>
+
+    <div class="parents-block" style="margin-top:20px;">
+      <div class="parents-family editable" contenteditable="false">Padres de la Novia</div>
+      <div class="parents-name editable" contenteditable="false">
+        María López Flores<br/>
+        &amp; Roberto Sánchez Peña
+      </div>
+    </div>
+
+    <div class="gold-ornament small">
+      <svg viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 30 C190 15, 175 8, 160 15 C145 22, 145 38, 160 45 C175 52, 190 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M200 30 C210 15, 225 8, 240 15 C255 22, 255 38, 240 45 C225 52, 210 45, 200 30Z" fill="#C9A84C" opacity="0.9"/>
+        <path d="M155 30 Q130 30 110 22 Q90 14 70 20 Q50 26 40 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M245 30 Q270 30 290 22 Q310 14 330 20 Q350 26 360 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M40 38 Q30 44 20 38 Q10 32 15 22 Q20 12 30 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M360 38 Q370 44 380 38 Q390 32 385 22 Q380 12 370 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="15" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="385" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+
+    <p style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--text-mid); font-size:0.95rem; max-width:280px; margin:0 auto;" class="editable" contenteditable="false">
+      Unimos nuestras vidas en el sacramento del matrimonio
+    </p>
+  </section>
+
+  <!-- 16. CLOSING -->
+  <section class="inv-section" id="s-closing">
+    <div class="gold-ornament light" style="padding-top:28px;">
+      <svg viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 30 C190 15, 175 8, 160 15 C145 22, 145 38, 160 45 C175 52, 190 45, 200 30Z" fill="#C9A84C" opacity="0.7"/>
+        <path d="M200 30 C210 15, 225 8, 240 15 C255 22, 255 38, 240 45 C225 52, 210 45, 200 30Z" fill="#C9A84C" opacity="0.7"/>
+        <path d="M155 30 Q130 30 110 22 Q90 14 70 20 Q50 26 40 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <path d="M245 30 Q270 30 290 22 Q310 14 330 20 Q350 26 360 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <path d="M40 38 Q30 44 20 38 Q10 32 15 22 Q20 12 30 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <path d="M360 38 Q370 44 380 38 Q390 32 385 22 Q380 12 370 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <circle cx="15" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <circle cx="385" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="closing-main editable" contenteditable="false">Muchas Gracias</div>
+    <p class="closing-sub editable" contenteditable="false">Esperamos contar con su presencia</p>
+    <div class="closing-hashtag editable" contenteditable="false">#MarcosMarianaForever</div>
+    <div class="gold-ornament light" style="margin-top:28px;">
+      <svg viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 30 C190 15, 175 8, 160 15 C145 22, 145 38, 160 45 C175 52, 190 45, 200 30Z" fill="#C9A84C" opacity="0.7"/>
+        <path d="M200 30 C210 15, 225 8, 240 15 C255 22, 255 38, 240 45 C225 52, 210 45, 200 30Z" fill="#C9A84C" opacity="0.7"/>
+        <path d="M155 30 Q130 30 110 22 Q90 14 70 20 Q50 26 40 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <path d="M245 30 Q270 30 290 22 Q310 14 330 20 Q350 26 360 38" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <path d="M40 38 Q30 44 20 38 Q10 32 15 22 Q20 12 30 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <path d="M360 38 Q370 44 380 38 Q390 32 385 22 Q380 12 370 18" stroke="#C9A84C" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <circle cx="15" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <circle cx="385" cy="30" r="8" stroke="#C9A84C" stroke-width="1.5" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+    <p class="editable" contenteditable="false" style="font-family:'Montserrat',sans-serif; font-size:0.58rem; letter-spacing:0.2em; color:rgba(255,255,255,0.25); margin-top:20px;">
+      TARJETA DIGITAL · INVITACIÓN PREMIUM
+    </p>
+  </section>
+
+</div><!-- end #invitation -->
+
+<!-- TOUR OVERLAY -->
+<div id="tour-backdrop" class="tour-backdrop"></div>
+<div id="tour-highlight" class="tour-highlight" style="display:none;"></div>
+<div id="tour-card" class="tour-card" style="display:none;">
+  <div class="tour-card-step" id="tour-step-indicator">Paso 1 de 7</div>
+  <div class="tour-card-title" id="tour-step-title">Título del Paso</div>
+  <div class="tour-card-body" id="tour-step-body">Descripción del paso...</div>
+  <div class="tour-card-buttons">
+    <button class="btn-tour-nav text-only" onclick="endTour()">Omitir</button>
+    <div style="display:flex; gap:6px;">
+      <button class="btn-tour-nav" id="btn-tour-back" onclick="prevTourStep()">Atrás</button>
+      <button class="btn-tour-nav primary" id="btn-tour-next" onclick="nextTourStep()">Siguiente</button>
+    </div>
+  </div>
+</div>
+
+<!-- HIDDEN FILE INPUTS -->
+<input type="file" id="file-photo1" accept="image/*" style="display:none" onchange="handlePhotoChange('photo1-zone','photo1-img','photo1-placeholder',this)" />
+<input type="file" id="file-photo2" accept="image/*" style="display:none" onchange="handlePhotoChange('photo2-zone','photo2-img','photo2-placeholder',this)" />
+<input type="file" id="file-photo3" accept="image/*" style="display:none" onchange="handlePhotoChange('photo3-zone','photo3-img','photo3-placeholder',this)" />
+
+<script>
+/* ==========================================
+   PARTICLES BACKGROUND
+========================================== */
+(function createParticles(){
+  const container = document.getElementById('particles');
+  const count = 35;
+  for(let i=0; i<count; i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random()*3+1;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      animation-duration:${Math.random()*15+10}s;
+      animation-delay:${Math.random()*10}s;
+      opacity:0;
+    `;
+    // Make some gold, some white
+    if(Math.random() > 0.5) p.style.background = '#C9A84C';
+    else p.style.background = 'rgba(255,255,255,0.4)';
+    container.appendChild(p);
+  }
+})();
+
+/* ==========================================
+   LOADER
+========================================== */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    // Trigger first visible sections
+    observeSections();
+  }, 1400);
+});
+
+/* ==========================================
+   INTERSECTION OBSERVER — SCROLL ANIMATIONS
+========================================== */
+function observeSections() {
+  const sections = document.querySelectorAll('.inv-section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('in-view');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  sections.forEach(s => observer.observe(s));
+}
+
+/* ==========================================
+   COUNTDOWN TIMER
+========================================== */
+let weddingDateStr = document.body.getAttribute('data-wedding-date') || '2026-12-06T17:00:00';
+let weddingDate = new Date(weddingDateStr);
+
+function updateCountdown(){
+  const now = new Date();
+  const diff = weddingDate - now;
+
+  if(diff <= 0){
+    document.getElementById('cd-grid').innerHTML = '<div class="countdown-expired-msg">¡Hoy es el gran día! 💍</div>';
+    return;
+  }
+
+  const days  = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins  = Math.floor((diff % 3600000)  / 60000);
+  const secs  = Math.floor((diff % 60000)    / 1000);
+
+  const pad = n => String(n).padStart(2,'0');
+  const set = (id, val) => {
+    const el = document.getElementById(id);
+    if(el && el.textContent !== pad(val)){
+      el.textContent = pad(val);
+      el.style.animation = 'none';
+      el.offsetHeight; // reflow
+      el.style.animation = 'flip-in 0.35s ease';
+    }
+  };
+
+  set('cd-days',  days);
+  set('cd-hours', hours);
+  set('cd-mins',  mins);
+  set('cd-secs',  secs);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+function formatWeddingDate(date, formatType) {
+  const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+  const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  
+  const dayName = daysOfWeek[date.getDay()];
+  const dayNum = String(date.getDate()).padStart(2, '0');
+  const monthName = months[date.getMonth()];
+  const year = date.getFullYear();
+  
+  if (formatType === 'long-uppercase') {
+    return `${dayName} · ${dayNum} · ${monthName} · ${year}`.toUpperCase();
+  } else if (formatType === 'medium') {
+    return `${monthName} · ${dayName} ${dayNum} · ${year}`;
+  }
+  return '';
+}
+
+function syncDateTextDisplays() {
+  document.querySelectorAll('[data-date-format]').forEach(el => {
+    const format = el.getAttribute('data-date-format');
+    const formatted = formatWeddingDate(weddingDate, format);
+    if (formatted) el.innerHTML = formatted;
+  });
+}
+
+/* ==========================================
+   EDITOR TOGGLE
+========================================== */
+let editMode = false;
+let editorBarVisible = false;
+let activeEditableElement = null;
+
+function toggleEditorBar(){
+  editorBarVisible = !editorBarVisible;
+  const bar = document.getElementById('editor-bar');
+  if(editorBarVisible) {
+    bar.classList.add('visible');
+    if (window.innerWidth <= 768) {
+      showMobileSwipeHint();
+    }
+  }
+  else bar.classList.remove('visible');
+}
+
+function toggleEdit(){
+  editMode = !editMode;
+  document.body.classList.toggle('edit-mode', editMode);
+  const editables = document.querySelectorAll('.editable');
+  editables.forEach(el => el.contentEditable = editMode ? 'true' : 'false');
+  
+  // Toggle visibility of additional editor buttons
+  const sectionsBtn = document.getElementById('btn-sections-bar');
+  const exportBtn = document.getElementById('btn-export-bar');
+  if (sectionsBtn) sectionsBtn.style.display = editMode ? 'flex' : 'none';
+  if (exportBtn) exportBtn.style.display = editMode ? 'flex' : 'none';
+  
+  const undoBtn = document.getElementById('btn-undo');
+  const redoBtn = document.getElementById('btn-redo');
+  if (undoBtn) undoBtn.style.display = editMode ? 'flex' : 'none';
+  if (redoBtn) redoBtn.style.display = editMode ? 'flex' : 'none';
+  
+  const formatControls = document.getElementById('editor-formatting-controls');
+  if (formatControls) formatControls.style.display = editMode ? 'flex' : 'none';
+  
+  document.getElementById('edit-btn-label').textContent = editMode ? 'Desactivar Editor' : 'Activar Editor';
+  showToast(editMode ? '✏ Editor activado — haz click en texto o fotos' : '✓ Editor desactivado');
+  
+  updateUndoRedoButtons();
+
+  if (editMode && window.innerWidth <= 768) {
+    showMobileSwipeHint();
+  }
+}
+
+function showMobileSwipeHint() {
+  const hint = document.getElementById('mobile-swipe-hint');
+  if (!hint) return;
+  
+  hint.style.display = 'flex';
+  hint.offsetHeight; // force reflow
+  
+  hint.style.opacity = '1';
+  hint.style.transform = 'translateX(-50%) translateY(0)';
+  
+  setTimeout(() => {
+    hint.style.opacity = '0';
+    hint.style.transform = 'translateX(-50%) translateY(-10px)';
+    setTimeout(() => {
+      if (hint.style.opacity === '0') {
+        hint.style.display = 'none';
+      }
+    }, 500);
+  }, 3500);
+}
+
+function applyStyleToSelection(styleName, value) {
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed || sel.rangeCount === 0) return false;
+  
+  const range = sel.getRangeAt(0);
+  
+  // Make sure selection is inside an editable element
+  let node = range.commonAncestorContainer;
+  let isInsideEditable = false;
+  while (node) {
+    if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('editable')) {
+      isInsideEditable = true;
+      break;
+    }
+    node = node.parentNode;
+  }
+  if (!isInsideEditable) return false;
+  
+  // Create a span element with the styling
+  const span = document.createElement('span');
+  if (styleName === 'color') {
+    span.style.color = value;
+  } else if (styleName === 'fontSize') {
+    span.style.fontSize = value;
+  }
+  
+  try {
+    // Extract selection contents and place them inside span
+    const content = range.extractContents();
+    span.appendChild(content);
+    range.insertNode(span);
+    sel.removeAllRanges();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function applyTextFormatting(styleName, value) {
+  if (!editMode || !value) return;
+  
+  // First try to apply to the active highlighted text selection
+  const appliedToSelection = applyStyleToSelection(styleName, value);
+  
+  if (!appliedToSelection && activeEditableElement) {
+    // If no text was selected, apply to the entire active editable element
+    if (styleName === 'color') {
+      activeEditableElement.style.color = value;
+    } else if (styleName === 'fontSize') {
+      activeEditableElement.style.fontSize = value;
+    }
+    // Save state to undo stack
+    pushState();
+  } else if (appliedToSelection) {
+    // Save state to undo stack
+    pushState();
+  }
+  
+  // Reset selector choice to default
+  if (styleName === 'fontSize') {
+    document.getElementById('editor-font-size').value = '';
+  }
+}
+
+/* ==========================================
+   UNDO / REDO HISTORY ENGINE
+========================================== */
+let undoStack = [];
+let redoStack = [];
+const maxStackSize = 50;
+let isApplyingState = false;
+
+function getEditorState() {
+  const editableTexts = [];
+  document.querySelectorAll('.editable').forEach((el, index) => {
+    editableTexts.push({
+      index: index,
+      html: el.innerHTML,
+      color: el.style.color || '',
+      fontSize: el.style.fontSize || ''
+    });
+  });
+
+  const photoStates = {};
+  ['photo1', 'photo2', 'photo3'].forEach(id => {
+    const img = document.getElementById(id + '-img');
+    const ph = document.getElementById(id + '-placeholder');
+    photoStates[id] = {
+      src: img ? img.src : null,
+      imgVisible: img ? img.style.display !== 'none' : false,
+      phVisible: ph ? ph.style.display !== 'none' : true
+    };
+  });
+
+  return {
+    texts: editableTexts,
+    photos: photoStates,
+    savedPhotos: JSON.parse(JSON.stringify(savedPhotos || {})),
+    hiddenSections: [...(savedHiddenSections || [])],
+    hiddenTimelineItems: [...(savedHiddenTimelineItems || [])],
+    palette: currentPalette,
+    weddingDate: document.body.getAttribute('data-wedding-date') || '2026-12-06T17:00:00'
+  };
+}
+
+function restoreEditorState(state) {
+  if (!state) return;
+
+  // Restore texts
+  state.texts.forEach(item => {
+    const el = document.querySelectorAll('.editable')[item.index];
+    if (el) {
+      el.innerHTML = item.html;
+      el.style.color = item.color || '';
+      el.style.fontSize = item.fontSize || '';
+    }
+  });
+
+  // Restore photos
+  Object.entries(state.photos).forEach(([id, photo]) => {
+    const img = document.getElementById(id + '-img');
+    const ph = document.getElementById(id + '-placeholder');
+    if (img) {
+      img.src = photo.src;
+      img.style.display = photo.imgVisible ? 'block' : 'none';
+    }
+    if (ph) {
+      ph.style.display = photo.phVisible ? 'block' : 'none';
+    }
+  });
+
+  savedPhotos = JSON.parse(JSON.stringify(state.savedPhotos));
+
+  // Restore hidden sections
+  document.querySelectorAll('.inv-section').forEach(sec => {
+    sec.classList.remove('is-hidden-section');
+  });
+  state.hiddenSections.forEach(id => {
+    const sec = document.getElementById(id);
+    if (sec) sec.classList.add('is-hidden-section');
+  });
+  savedHiddenSections = [...state.hiddenSections];
+
+  // Restore hidden timeline items
+  document.querySelectorAll('.timeline .tl-item').forEach(item => {
+    item.classList.remove('is-hidden-tl-item');
+  });
+  state.hiddenTimelineItems.forEach(id => {
+    const item = document.getElementById(id);
+    if (item) item.classList.add('is-hidden-tl-item');
+  });
+  savedHiddenTimelineItems = [...state.hiddenTimelineItems];
+
+  // Restore palette
+  if (state.palette && state.palette !== currentPalette) {
+    changePalette(state.palette, true);
+  }
+
+  // Restore wedding date
+  if (state.weddingDate) {
+    document.body.setAttribute('data-wedding-date', state.weddingDate);
+    weddingDate = new Date(state.weddingDate);
+    const dateInput = document.getElementById('wedding-date-input');
+    if (dateInput) {
+      dateInput.value = state.weddingDate;
+    }
+    updateCountdown();
+  }
+
+  // Sync checkboxes and UI
+  updateSectionsModalCheckboxes();
+  syncLoaderText();
+}
+
+function pushState() {
+  if (isApplyingState) return;
+  const state = getEditorState();
+  
+  if (undoStack.length > 0) {
+    const lastState = undoStack[undoStack.length - 1];
+    if (JSON.stringify(lastState) === JSON.stringify(state)) {
+      return;
+    }
+  }
+
+  undoStack.push(state);
+  if (undoStack.length > maxStackSize) {
+    undoStack.shift();
+  }
+  
+  redoStack = [];
+  updateUndoRedoButtons();
+}
+
+function undo() {
+  if (!editMode || undoStack.length <= 1) return;
+  
+  isApplyingState = true;
+  
+  const currentState = undoStack.pop();
+  redoStack.push(currentState);
+  
+  const prevState = undoStack[undoStack.length - 1];
+  restoreEditorState(prevState);
+  
+  isApplyingState = false;
+  updateUndoRedoButtons();
+  showToast('↩ Deshacer');
+}
+
+function redo() {
+  if (!editMode || redoStack.length === 0) return;
+  
+  isApplyingState = true;
+  
+  const nextState = redoStack.pop();
+  undoStack.push(nextState);
+  restoreEditorState(nextState);
+  
+  isApplyingState = false;
+  updateUndoRedoButtons();
+  showToast('↪ Rehacer');
+}
+
+function updateUndoRedoButtons() {
+  const undoBtn = document.getElementById('btn-undo');
+  const redoBtn = document.getElementById('btn-redo');
+  
+  if (undoBtn) {
+    const canUndo = undoStack.length > 1;
+    undoBtn.disabled = !canUndo;
+    undoBtn.style.opacity = canUndo ? '1' : '0.4';
+    undoBtn.style.pointerEvents = canUndo ? 'auto' : 'none';
+  }
+  
+  if (redoBtn) {
+    const canRedo = redoStack.length > 0;
+    redoBtn.disabled = !canRedo;
+    redoBtn.style.opacity = canRedo ? '1' : '0.4';
+    redoBtn.style.pointerEvents = canRedo ? 'auto' : 'none';
+  }
+}
+
+function updateWeddingDate(val) {
+  if (!val) return;
+  document.body.setAttribute('data-wedding-date', val);
+  weddingDate = new Date(val);
+  updateCountdown();
+  syncDateTextDisplays();
+  pushState();
+}
+
+function saveCard(){
+  // Sync loader text first
+  syncLoaderText();
+  
+  // Collect all editable texts
+  const data = {};
+  document.querySelectorAll('.editable').forEach((el, i) => {
+    const key = el.getAttribute('data-edit-key') || 'field_' + i;
+    data[key] = {
+      html: el.innerHTML,
+      color: el.style.color || '',
+      fontSize: el.style.fontSize || ''
+    };
+  });
+  // Save to localStorage
+  try {
+    localStorage.setItem('boda_card_data', JSON.stringify(data));
+    localStorage.setItem('boda_photos', JSON.stringify(savedPhotos));
+    localStorage.setItem('boda_hidden_sections', JSON.stringify(savedHiddenSections));
+    localStorage.setItem('boda_hidden_timeline_items', JSON.stringify(savedHiddenTimelineItems));
+    localStorage.setItem('boda_palette', currentPalette);
+    localStorage.setItem('boda_wedding_date', document.body.getAttribute('data-wedding-date') || '2026-12-06T17:00:00');
+    showToast('✓ Tarjeta guardada exitosamente');
+  } catch(e) {
+    showToast('✓ Cambios guardados');
+  }
+}
+
+// Auto-load saved data
+function loadSavedData(){
+  try {
+    const data = JSON.parse(localStorage.getItem('boda_card_data') || 'null');
+    if(data){
+      const editables = document.querySelectorAll('.editable');
+      editables.forEach((el, i) => {
+        const key = el.getAttribute('data-edit-key') || 'field_' + i;
+        if(data[key]) {
+          if (typeof data[key] === 'object' && data[key] !== null) {
+            el.innerHTML = data[key].html;
+            el.style.color = data[key].color || '';
+            el.style.fontSize = data[key].fontSize || '';
+          } else {
+            el.innerHTML = data[key];
+          }
+        }
+      });
+    }
+    const photos = JSON.parse(localStorage.getItem('boda_photos') || 'null');
+    if(photos){
+      Object.entries(photos).forEach(([imgId, src]) => {
+        const img = document.getElementById(imgId);
+        const phId = imgId.replace('-img', '-placeholder');
+        const ph = document.getElementById(phId);
+        if(img && src){
+          img.src = src;
+          img.style.display = 'block';
+          if(ph) ph.style.display = 'none';
+        }
+      });
+    }
+    
+    // Load hidden sections
+    try {
+      savedHiddenSections = JSON.parse(localStorage.getItem('boda_hidden_sections') || '[]');
+    } catch(e) {
+      savedHiddenSections = [];
+    }
+    
+    savedHiddenSections.forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.classList.add('is-hidden-section');
+    });
+
+    // Load hidden timeline items
+    try {
+      savedHiddenTimelineItems = JSON.parse(localStorage.getItem('boda_hidden_timeline_items') || '[]');
+    } catch(e) {
+      savedHiddenTimelineItems = [];
+    }
+    
+    savedHiddenTimelineItems.forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.classList.add('is-hidden-tl-item');
+    });
+
+    // Load active palette
+    const activePalette = localStorage.getItem('boda_palette') || 'burgundy';
+    changePalette(activePalette, true);
+    
+    // Load wedding date
+    const savedDate = localStorage.getItem('boda_wedding_date');
+    if (savedDate) {
+      document.body.setAttribute('data-wedding-date', savedDate);
+      weddingDate = new Date(savedDate);
+      const dateInput = document.getElementById('wedding-date-input');
+      if (dateInput) {
+        dateInput.value = savedDate;
+      }
+      updateCountdown();
+    } else {
+      const defaultDate = document.body.getAttribute('data-wedding-date') || '2026-12-06T17:00:00';
+      const dateInput = document.getElementById('wedding-date-input');
+      if (dateInput) {
+        dateInput.value = defaultDate;
+      }
+    }
+    
+    // Sync names into loader
+    syncLoaderText();
+    // Sync date text displays
+    syncDateTextDisplays();
+  } catch(e){}
+}
+
+/* ==========================================
+   PHOTO UPLOAD
+========================================== */
+let currentPhotoTarget = null;
+let savedPhotos = {};
+
+const photoMap = {
+  'photo1-zone': 'file-photo1',
+  'photo2-zone': 'file-photo2',
+  'photo3-zone': 'file-photo3',
+};
+
+function triggerPhotoUpload(zoneId, imgId, minHeight){
+  if(!editMode) return;
+  const fileId = photoMap[zoneId];
+  if(fileId) document.getElementById(fileId).click();
+}
+
+function handlePhotoChange(zoneId, imgId, phId, input){
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const src = e.target.result;
+    const img = document.getElementById(imgId);
+    const ph = document.getElementById(phId);
+    if(img){
+      img.src = src;
+      img.style.display = 'block';
+      if(ph) ph.style.display = 'none';
+      savedPhotos[imgId] = src;
+      pushState();
+    }
+    showToast('📷 Foto actualizada');
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+/* ==========================================
+   RSVP MODAL
+========================================== */
+let rsvpAnswer = 'yes';
+
+function openRSVP(force = false){
+  if (editMode && !force) return; // Ignore normal clicks in edit mode to allow text selection on button
+  document.getElementById('modal-rsvp').classList.add('open');
+}
+function closeRSVP(){ document.getElementById('modal-rsvp').classList.remove('open'); }
+
+function selectRSVP(el, val){
+  rsvpAnswer = val;
+  document.querySelectorAll('.rsvp-choice').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function submitRSVP(){
+  if (editMode) {
+    showToast('✓ Vista previa: Formulario no enviado');
+    closeRSVP();
+    return;
+  }
+  const name = document.getElementById('rsvp-name').value.trim();
+  if(!name){ document.getElementById('rsvp-name').focus(); return; }
+  closeRSVP();
+  if(rsvpAnswer === 'yes'){
+    showToast('🎉 ¡Gracias ' + name + '! Nos vemos en la boda!');
+  } else {
+    showToast('💔 Gracias por responder, ' + name + '. ¡Te extrañaremos!');
+  }
+}
+
+// Close modal on backdrop click
+document.getElementById('modal-rsvp').addEventListener('click', function(e){
+  if(e.target === this) closeRSVP();
+});
+
+/* ==========================================
+   MAPS LINK
+========================================== */
+function openMaps(e){
+  if(document.body.classList.contains('edit-mode')) return false;
+  const mapsUrl = 'https://maps.google.com/?q=Nueva+Cruz+de+la+Sierra';
+  window.open(mapsUrl, '_blank');
+  return false;
+}
+
+/* ==========================================
+   TOAST
+========================================== */
+let toastTimer;
+function showToast(msg, showUndo = false){
+  const t = document.getElementById('toast');
+  if (!t) return;
+  
+  if (showUndo && editMode) {
+    t.innerHTML = `
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%;">
+        <span>${msg}</span>
+        <button onclick="undo(); hideToast();" style="background: var(--gold); color: var(--burgundy-dark); border: none; border-radius: 20px; padding: 4px 12px; font-family:'Montserrat',sans-serif; font-size:0.62rem; font-weight:700; text-transform:uppercase; cursor:pointer; transition:var(--transition); flex-shrink:0; letter-spacing:0.05em; box-shadow:0 2px 6px rgba(201,168,76,0.3);">Deshacer</button>
+      </div>
+    `;
+  } else {
+    t.textContent = msg;
+  }
+  
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+function hideToast() {
+  const t = document.getElementById('toast');
+  if (t) t.classList.remove('show');
+}
+
+/* ==========================================
+   MUSIC PLAYER (SIMULATED)
+========================================== */
+let isPlaying = false;
+let progressWidth = 35;
+let musicInterval;
+
+function togglePlay(){
+  isPlaying = !isPlaying;
+  const icon = document.getElementById('play-icon');
+  if(isPlaying){
+    icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+    musicInterval = setInterval(() => {
+      progressWidth = Math.min(100, progressWidth + 0.1);
+      document.getElementById('progress-bar').style.width = progressWidth + '%';
+      if(progressWidth >= 100){
+        progressWidth = 0;
+        isPlaying = false;
+        icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        clearInterval(musicInterval);
+      }
+    }, 100);
+  } else {
+    icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    clearInterval(musicInterval);
+  }
+}
+
+/* ==========================================
+   SECTION VISIBILITY CONTROLS
+========================================== */
+const sectionNames = {
+  's-cover': 'Portada',
+  's-countdown': 'Cuenta Regresiva',
+  's-verse': 'Versículo y Monograma',
+  's-photo1': 'Foto Principal',
+  's-event': 'Información del Evento',
+  's-timeline': 'Itinerario',
+  's-dresscode': 'Código de Vestimenta',
+  's-photo2': 'Segunda Foto',
+  's-gifts': 'Lluvia de Sobres',
+  's-hotel': 'Hospedaje',
+  's-music': 'Música',
+  's-rsvp': 'Confirmación RSVP',
+  's-photo3': 'Tercera Foto',
+  's-parents': 'Padres',
+  's-closing': 'Agradecimiento / Cierre'
+};
+
+let savedHiddenSections = [];
+let savedHiddenTimelineItems = [];
+
+function toggleTimelineItem(id) {
+  const item = document.getElementById(id);
+  if (!item) return;
+  
+  const isHidden = item.classList.contains('is-hidden-tl-item');
+  if (isHidden) {
+    item.classList.remove('is-hidden-tl-item');
+    savedHiddenTimelineItems = savedHiddenTimelineItems.filter(x => x !== id);
+    showToast('✓ Evento restaurado', true);
+  } else {
+    item.classList.add('is-hidden-tl-item');
+    if (!savedHiddenTimelineItems.includes(id)) {
+      savedHiddenTimelineItems.push(id);
+    }
+    showToast('👁️ Evento ocultado', true);
+  }
+  
+  updateTimelineModalCheckboxes();
+  pushState();
+}
+
+function toggleTimelineItemFromModal(id, show) {
+  const item = document.getElementById(id);
+  if (!item) return;
+  
+  if (show) {
+    item.classList.remove('is-hidden-tl-item');
+    savedHiddenTimelineItems = savedHiddenTimelineItems.filter(x => x !== id);
+    showToast('✓ Evento restaurado', true);
+  } else {
+    item.classList.add('is-hidden-tl-item');
+    if (!savedHiddenTimelineItems.includes(id)) {
+      savedHiddenTimelineItems.push(id);
+    }
+    showToast('👁️ Evento ocultado', true);
+  }
+  pushState();
+}
+
+function updateTimelineModalCheckboxes() {
+  const tlItems = document.querySelectorAll('.timeline .tl-item');
+  tlItems.forEach(itemEl => {
+    const id = itemEl.id;
+    const chk = document.getElementById(`chk-${id}`);
+    if (chk) {
+      chk.checked = !savedHiddenTimelineItems.includes(id);
+    }
+  });
+}
+
+function initSectionControls() {
+  const sections = document.querySelectorAll('.inv-section');
+  sections.forEach(sec => {
+    const id = sec.id;
+    if (!id || !sectionNames[id]) return;
+    
+    // Create edit actions overlay
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'section-edit-actions';
+    actionsDiv.innerHTML = `
+      <button class="btn-section-action" onclick="hideSection('${id}')" title="Ocultar esta sección">
+        <svg viewBox="0 0 24 24"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.82l2.92 2.92c1.51-1.2 2.7-2.78 3.44-4.74-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78 3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>
+      </button>
+    `;
+    sec.appendChild(actionsDiv);
+    
+    // Create hidden section banner
+    const bannerDiv = document.createElement('div');
+    bannerDiv.className = 'section-hidden-banner';
+    bannerDiv.innerHTML = `
+      <div class="hidden-banner-content">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-4C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 3zm0 18c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"/></svg>
+        <span>Sección Oculta: <strong>${sectionNames[id]}</strong></span>
+      </div>
+      <button class="btn-restore-inline" onclick="restoreSection('${id}')">Restaurar</button>
+    `;
+    sec.appendChild(bannerDiv);
+  });
+  
+  // Close sections modal when clicking backdrop
+  const secModal = document.getElementById('modal-sections');
+  if (secModal) {
+    secModal.addEventListener('click', function(e) {
+      if (e.target === this) closeSectionsModal();
+    });
+  }
+}
+
+function hideSection(id) {
+  const section = document.getElementById(id);
+  if (section) {
+    section.classList.add('is-hidden-section');
+    if (!savedHiddenSections.includes(id)) {
+      savedHiddenSections.push(id);
+    }
+    updateSectionsModalCheckboxes();
+    showToast('👁️ Sección ocultada', true);
+    pushState();
+  }
+}
+
+function restoreSection(id) {
+  const section = document.getElementById(id);
+  if (section) {
+    section.classList.remove('is-hidden-section');
+    section.classList.add('in-view');
+    savedHiddenSections = savedHiddenSections.filter(x => x !== id);
+    updateSectionsModalCheckboxes();
+    showToast('✓ Sección restaurada', true);
+    pushState();
+  }
+}
+
+/* ==========================================
+   SECTIONS MODAL LOGIC
+========================================== */
+function openSectionsModal() {
+  populateSectionsModal();
+  document.getElementById('modal-sections').classList.add('open');
+}
+
+function closeSectionsModal() {
+  document.getElementById('modal-sections').classList.remove('open');
+}
+
+function populateSectionsModal() {
+  const container = document.querySelector('.sections-list-container');
+  if (container) {
+    container.innerHTML = '';
+    Object.entries(sectionNames).forEach(([id, name]) => {
+      const isHidden = savedHiddenSections.includes(id);
+      const item = document.createElement('div');
+      item.className = 'section-toggle-item';
+      
+      item.innerHTML = `
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.8rem; font-weight:500; color:var(--text-dark);">${name}</span>
+        <label class="switch-container">
+          <input type="checkbox" id="chk-${id}" ${!isHidden ? 'checked' : ''} onchange="toggleSectionFromModal('${id}', this.checked)">
+          <span class="switch-slider"></span>
+        </label>
+      `;
+      container.appendChild(item);
+    });
+  }
+
+  // Populate timeline events
+  const tlContainer = document.querySelector('.timeline-list-container');
+  if (tlContainer) {
+    tlContainer.innerHTML = '';
+    const tlItems = document.querySelectorAll('.timeline .tl-item');
+    tlItems.forEach(itemEl => {
+      const id = itemEl.id;
+      if (!id) return;
+      
+      const titleEl = itemEl.querySelector('.tl-title');
+      const titleText = (titleEl && titleEl.textContent.trim()) ? titleEl.textContent.trim() : 'Evento ' + id.replace('tl-item-', '');
+      
+      const isHidden = savedHiddenTimelineItems.includes(id);
+      const toggleRow = document.createElement('div');
+      toggleRow.className = 'section-toggle-item';
+      toggleRow.innerHTML = `
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.8rem; font-weight:500; color:var(--text-dark);">${titleText}</span>
+        <label class="switch-container">
+          <input type="checkbox" id="chk-${id}" ${!isHidden ? 'checked' : ''} onchange="toggleTimelineItemFromModal('${id}', this.checked)">
+          <span class="switch-slider"></span>
+        </label>
+      `;
+      tlContainer.appendChild(toggleRow);
+    });
+  }
+}
+
+function toggleSectionFromModal(id, show) {
+  if (show) {
+    restoreSection(id);
+  } else {
+    hideSection(id);
+  }
+}
+
+function updateSectionsModalCheckboxes() {
+  Object.keys(sectionNames).forEach(id => {
+    const chk = document.getElementById(`chk-${id}`);
+    if (chk) {
+      chk.checked = !savedHiddenSections.includes(id);
+    }
+  });
+  updateTimelineModalCheckboxes();
+}
+
+/* ==========================================
+   COLOR PALETTES LOGIC
+========================================== */
+const palettes = {
+  burgundy: {
+    '--burgundy': '#6B2737',
+    '--burgundy-dark': '#4A1526',
+    '--burgundy-light': '#8B3A4F',
+    '--gold': '#C9A84C',
+    '--gold-light': '#E8D08A',
+    '--gold-pale': '#F5EDD0',
+    '--cream': '#FAF6F0',
+    '--cream-dark': '#F0E8DC',
+    '--text-dark': '#2C1810',
+    '--text-mid': '#5C3A2E',
+    '--text-light': '#8B6B5E',
+    'body-bg': '#1a0a0e',
+    'canvas-bg': 'radial-gradient(ellipse at 20% 50%, #3d0d18 0%, #1a0a0e 40%, #0d0508 100%)',
+    '--palette-grad-cover': 'linear-gradient(160deg, #4A1526 0%, #6B2737 60%, #9B304B 100%)',
+    '--palette-grad-flap': 'linear-gradient(160deg, #4A1526, #5A1E30)',
+    '--palette-grad-countdown': 'linear-gradient(135deg, #6B2737 0%, #350F1B 100%)',
+    '--palette-grad-music': 'linear-gradient(135deg, #350F1B, #521927)',
+    '--palette-grad-closing': 'linear-gradient(160deg, #350F1B 0%, #6B2737 100%)'
+  },
+  emerald: {
+    '--burgundy': '#2E4A3F',
+    '--burgundy-dark': '#1A2E26',
+    '--burgundy-light': '#426657',
+    '--gold': '#B8A17D',
+    '--gold-light': '#D4C5B3',
+    '--gold-pale': '#EAE2D8',
+    '--cream': '#F4F6F4',
+    '--cream-dark': '#E5EAE5',
+    '--text-dark': '#1B2621',
+    '--text-mid': '#3B4C44',
+    '--text-light': '#677C72',
+    'body-bg': '#0d1713',
+    'canvas-bg': 'radial-gradient(ellipse at 20% 50%, #1e382d 0%, #0d1713 40%, #050a08 100%)',
+    '--palette-grad-cover': 'linear-gradient(160deg, #1A2E26 0%, #2E4A3F 60%, #4A6E5F 100%)',
+    '--palette-grad-flap': 'linear-gradient(160deg, #1A2E26, #2E4A3F)',
+    '--palette-grad-countdown': 'linear-gradient(135deg, #2E4A3F 0%, #12211C 100%)',
+    '--palette-grad-music': 'linear-gradient(135deg, #12211C, #253D34)',
+    '--palette-grad-closing': 'linear-gradient(160deg, #12211C 0%, #2E4A3F 100%)'
+  },
+  midnight: {
+    '--burgundy': '#1D2D44',
+    '--burgundy-dark': '#0F172A',
+    '--burgundy-light': '#3E5C76',
+    '--gold': '#94A3B8',
+    '--gold-light': '#CBD5E1',
+    '--gold-pale': '#F1F5F9',
+    '--cream': '#F8FAFC',
+    '--cream-dark': '#E2E8F0',
+    '--text-dark': '#0F172A',
+    '--text-mid': '#334155',
+    '--text-light': '#64748B',
+    'body-bg': '#090e1a',
+    'canvas-bg': 'radial-gradient(ellipse at 20% 50%, #0f1e3d 0%, #090e1a 40%, #04060d 100%)',
+    '--palette-grad-cover': 'linear-gradient(160deg, #0F172A 0%, #1D2D44 60%, #344E73 100%)',
+    '--palette-grad-flap': 'linear-gradient(160deg, #0F172A, #1D2D44)',
+    '--palette-grad-countdown': 'linear-gradient(135deg, #1D2D44 0%, #090F1E 100%)',
+    '--palette-grad-music': 'linear-gradient(135deg, #090F1E, #18283F)',
+    '--palette-grad-closing': 'linear-gradient(160deg, #090F1E 0%, #1D2D44 100%)'
+  }
+};
+
+let currentPalette = 'burgundy';
+
+function changePalette(name, silent = false) {
+  const p = palettes[name];
+  if (!p) return;
+  currentPalette = name;
+  
+  const root = document.documentElement;
+  Object.entries(p).forEach(([key, val]) => {
+    if (key === 'body-bg') {
+      document.body.style.backgroundColor = val;
+    } else if (key === 'canvas-bg') {
+      const canvas = document.querySelector('.bg-canvas');
+      if (canvas) canvas.style.background = val;
+    } else {
+      root.style.setProperty(key, val);
+    }
+  });
+  
+  // Update UI selection state in modal
+  document.querySelectorAll('.palette-option').forEach(el => {
+    el.classList.toggle('selected', el.getAttribute('data-palette') === name);
+  });
+  
+  if (!silent) {
+    showToast(`🎨 Paleta cambiada: ${getPaletteDisplayName(name)}`);
+    pushState();
+  }
+}
+
+function getPaletteDisplayName(name) {
+  if (name === 'burgundy') return 'Clásica Borgoña';
+  if (name === 'emerald') return 'Verde Eucalipto';
+  if (name === 'midnight') return 'Azul Medianoche';
+  return name;
+}
+
+/* ==========================================
+   INTERACTIVE MANUAL (TOUR) LOGIC
+========================================== */
+let tourActive = false;
+let tourStep = 0;
+const tourSteps = [
+  {
+    target: '#editor-bar',
+    title: 'Barra de Edición',
+    body: 'Este es tu panel de control principal. Aquí puedes ver el manual, activar la edición en vivo, cambiar el diseño y exportar la invitación final.',
+    pos: 'bottom'
+  },
+  {
+    target: '.btn-edit',
+    title: 'Modo Edición',
+    body: 'Haz clic aquí para activar el editor. Al hacerlo, verás bordes punteados dorados alrededor de todos los textos y fotos editables.',
+    pos: 'bottom'
+  },
+  {
+    target: '#btn-sections-bar',
+    title: 'Personalizar Diseño',
+    body: 'Desde este menú puedes cambiar instantáneamente entre 3 paletas de colores de lujo y elegir qué secciones activar o desactivar.',
+    pos: 'bottom'
+  },
+  {
+    target: '.cover-monogram',
+    title: 'Editar Textos',
+    body: 'Simplemente haz clic en cualquier texto editable para modificar nombres, fechas, lugares o frases. ¡Escribe lo que desees!',
+    pos: 'bottom'
+  },
+  {
+    target: '#photo1-zone',
+    title: 'Subir tus Fotos',
+    body: 'Haz clic sobre los recuadros de fotos para subir las imágenes tuyas y de tu pareja directamente desde tu dispositivo.',
+    pos: 'center'
+  },
+  {
+    target: '#s-hotel',
+    title: 'Ocultar Secciones Rápido',
+    body: 'Cada sección tiene un botón de "ojo tachado" arriba a la derecha. Úsalo para ocultar las secciones que no apliquen a tu boda (ej. Hospedaje).',
+    pos: 'top'
+  },
+  {
+    target: '#btn-export-bar',
+    title: 'Exportar e Imprimir',
+    body: 'Al terminar, haz clic aquí para exportar y descargar tu archivo HTML final completamente limpio, autogestionable y listo para enviar a tus invitados.',
+    pos: 'bottom'
+  }
+];
+
+function startTour() {
+  const bar = document.getElementById('editor-bar');
+  if (!bar.classList.contains('visible')) {
+    bar.classList.add('visible');
+    editorBarVisible = true;
+  }
+  
+  if (!editMode) {
+    toggleEdit();
+  }
+  
+  tourActive = true;
+  tourStep = 0;
+  
+  const backdrop = document.getElementById('tour-backdrop');
+  backdrop.classList.add('active');
+  
+  showTourStep();
+}
+
+function showTourStep() {
+  if (!tourActive || tourStep < 0 || tourStep >= tourSteps.length) {
+    endTour();
+    return;
+  }
+  
+  const step = tourSteps[tourStep];
+  let targetEl = document.querySelector(step.target);
+  
+  if (!targetEl) {
+    if (step.target === '#s-hotel') {
+      targetEl = document.getElementById('s-hotel');
+    } else {
+      nextTourStep();
+      return;
+    }
+  }
+  
+  targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  
+  setTimeout(() => {
+    const highlight = document.getElementById('tour-highlight');
+    const card = document.getElementById('tour-card');
+    
+    const rect = targetEl.getBoundingClientRect();
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+    
+    const pad = 6;
+    const hTop = rect.top + scrollTop - pad;
+    const hLeft = rect.left + scrollLeft - pad;
+    const hWidth = rect.width + (pad * 2);
+    const hHeight = rect.height + (pad * 2);
+    
+    highlight.style.top = `${hTop}px`;
+    highlight.style.left = `${hLeft}px`;
+    highlight.style.width = `${hWidth}px`;
+    highlight.style.height = `${hHeight}px`;
+    highlight.style.display = 'block';
+    
+    let cardTop = hTop + hHeight + 12;
+    let cardLeft = hLeft + (hWidth / 2) - 145;
+    
+    if (step.pos === 'bottom') {
+      cardTop = hTop + hHeight + 12;
+    } else if (step.pos === 'top') {
+      cardTop = hTop - 210 - 12;
+    } else if (step.pos === 'center') {
+      cardTop = hTop + (hHeight / 2) - 100;
+    }
+    
+    const maxLeft = window.innerWidth - 310;
+    cardLeft = Math.max(10, Math.min(cardLeft, maxLeft));
+    cardTop = Math.max(window.scrollY + 10, cardTop);
+    
+    card.style.top = `${cardTop}px`;
+    card.style.left = `${cardLeft}px`;
+    card.style.display = 'block';
+    
+    document.getElementById('tour-step-indicator').textContent = `Paso ${tourStep + 1} de ${tourSteps.length}`;
+    document.getElementById('tour-step-title').textContent = step.title;
+    document.getElementById('tour-step-body').textContent = step.body;
+    
+    const backBtn = document.getElementById('btn-tour-back');
+    const nextBtn = document.getElementById('btn-tour-next');
+    
+    backBtn.style.visibility = tourStep === 0 ? 'hidden' : 'visible';
+    nextBtn.textContent = tourStep === tourSteps.length - 1 ? 'Finalizar' : 'Siguiente';
+  }, 350);
+}
+
+function nextTourStep() {
+  tourStep++;
+  if (tourStep >= tourSteps.length) {
+    endTour();
+  } else {
+    showTourStep();
+  }
+}
+
+function prevTourStep() {
+  tourStep = Math.max(0, tourStep - 1);
+  showTourStep();
+}
+
+function endTour() {
+  tourActive = false;
+  document.getElementById('tour-backdrop').classList.remove('active');
+  document.getElementById('tour-highlight').style.display = 'none';
+  document.getElementById('tour-card').style.display = 'none';
+  showToast('✓ Manual de edición finalizado');
+}
+
+window.addEventListener('resize', () => {
+  if (tourActive) showTourStep();
+});
+
+/* ==========================================
+   EXPORT HTML FILE
+========================================== */
+function syncLoaderText() {
+  const monograms = document.querySelectorAll('#s-cover .cover-monogram');
+  const loaderText = document.querySelector('#loader .loader-text');
+  if (monograms.length >= 2 && loaderText) {
+    const name1 = monograms[0].textContent.trim();
+    const name2 = monograms[1].textContent.trim();
+    loaderText.innerHTML = `${name1} &amp; ${name2}`;
+  }
+}
+
+function exportEditedHTML() {
+  // Ensure we are in clean state (no active edit outlines)
+  if (editMode) toggleEdit();
+  
+  // Sync names to loader text in the current DOM before cloning
+  syncLoaderText();
+
+  // Clone current document
+  const clone = document.documentElement.cloneNode(true);
+  
+  // Elements to strip out completely
+  const elementsToRemove = [
+    '#editor-bar',
+    '#floating-edit',
+    '#edit-indicator',
+    '#modal-sections',
+    '.section-edit-actions',
+    '.section-hidden-banner',
+    '.photo-change-badge',
+    '#tour-backdrop',
+    '#tour-highlight',
+    '#tour-card',
+    '.btn-tl-delete',
+    '.btn-change-date-inline'
+  ];
+  
+  elementsToRemove.forEach(selector => {
+    clone.querySelectorAll(selector).forEach(el => el.remove());
+  });
+
+  // Remove completely hidden timeline items from final production HTML
+  clone.querySelectorAll('.tl-item.is-hidden-tl-item').forEach(el => {
+    el.remove();
+  });
+  
+  // Remove contenteditable attribute and clean up edit mode classes
+  clone.querySelectorAll('.editable').forEach(el => {
+    el.removeAttribute('contenteditable');
+  });
+  
+  clone.body.classList.remove('edit-mode');
+  
+  // If a section is hidden, make sure it remains completely invisible in production
+  clone.querySelectorAll('.inv-section.is-hidden-section').forEach(el => {
+    el.style.display = 'none';
+  });
+  
+  // Update exported page title dynamically based on customized names
+  const monograms = clone.querySelectorAll('#s-cover .cover-monogram');
+  if (monograms.length >= 2) {
+    const name1 = monograms[0].textContent.trim();
+    const name2 = monograms[1].textContent.trim();
+    const titleEl = clone.querySelector('title');
+    if (titleEl) {
+      titleEl.textContent = `Invitación de Boda · ${name1} & ${name2}`;
+    }
+  }
+  
+  // Generate file download
+  const htmlContent = '<!DOCTYPE html>\n' + clone.outerHTML;
+  const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'invitacion_boda_final.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  
+  showToast('✓ Invitación exportada para descargar');
+}
+
+/* ==========================================
+   INIT
+========================================== */
+window.addEventListener('DOMContentLoaded', () => {
+  initSectionControls();
+  loadSavedData();
+  
+  // Establish baseline history state
+  pushState();
+  
+  // Watch editable text fields for modifications
+  document.querySelectorAll('.editable').forEach(el => {
+    el.addEventListener('blur', () => {
+      pushState();
+    });
+    el.addEventListener('focus', () => {
+      activeEditableElement = el;
+    });
+    el.addEventListener('click', () => {
+      activeEditableElement = el;
+    });
+  });
+  
+  // Listen for Undo/Redo keyboard shortcuts
+  window.addEventListener('keydown', (e) => {
+    if (!editMode) return;
+    
+    // Command/Control key
+    if (e.ctrlKey || e.metaKey) {
+      if (e.key === 'z' || e.key === 'Z') {
+        e.preventDefault();
+        if (e.shiftKey) {
+          redo();
+        } else {
+          undo();
+        }
+      } else if (e.key === 'y' || e.key === 'Y') {
+        e.preventDefault();
+        redo();
+      }
+    }
+  });
+
+  // Auto show editor bar after 2s to hint user
+  setTimeout(() => {
+    toggleEditorBar();
+  }, 2200);
+});
+</script>
+
+</body>
+</html>

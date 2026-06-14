@@ -5,11 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "db:generate": "prisma generate --schema=prisma/schema.prisma",
-    "db:push": "prisma db push --schema=prisma/schema.prisma",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
+    "db:admin": "node scripts/create-admin.js",
     "db:studio": "prisma studio",
-    "postinstall": "prisma generate --schema=prisma/schema.prisma",
+    "postinstall": "prisma generate",
     "start": "node scripts/start.js",
     "lint": "next lint"
   },

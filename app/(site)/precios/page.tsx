@@ -14,7 +14,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 export const metadata = {
   title: "Precios | Kompralo Invitaciones Digitales",
-  description: "Elige tu invitacion digital premium, paga seguro y recibe una experiencia lista para compartir por WhatsApp."
+  description: "Elige tu invitación digital premium, paga seguro y recibe una experiencia lista para compartir por WhatsApp."
 };
 
 const stats = [
@@ -26,22 +26,22 @@ const stats = [
 
 const testimonials = [
   {
-    quote: "La invitacion se sintio elegante desde el primer vistazo. Mis invitados confirmaron en minutos.",
+    quote: "La invitación se sintió elegante desde el primer vistazo. Mis invitados confirmaron en minutos.",
     name: "Mariana G.",
-    event: "Boda en Queretaro"
+    event: "Boda en Querétaro"
   },
   {
-    quote: "Me resolvieron todo rapido: musica, mapa, QR y mesa de regalos. Se veia muy premium.",
+    quote: "Me resolvieron todo rápido: música, mapa, QR y mesa de regalos. Se veía muy premium.",
     name: "Fernanda R.",
-    event: "XV anos en Monterrey"
+    event: "XV años en Monterrey"
   },
   {
-    quote: "La compartimos por WhatsApp y dejamos de perseguir confirmaciones. Super practico.",
+    quote: "La compartimos por WhatsApp y dejamos de perseguir confirmaciones. Súper práctico.",
     name: "Luis A.",
     event: "Bautizo en CDMX"
   },
   {
-    quote: "Compre el plan completo y en menos de 24 horas ya tenia todo listo para enviar.",
+    quote: "Compré el plan completo y en menos de 24 horas ya tenía todo listo para enviar.",
     name: "Paola M.",
     event: "Baby Shower en Guadalajara"
   }
@@ -68,7 +68,7 @@ export default async function PreciosPage({
               Elige la experiencia que tus invitados van a recordar.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-black/68 sm:text-lg">
-              Paga seguro, personaliza tu evento y recibe una invitacion digital elegante, facil de compartir por WhatsApp y preparada para confirmar asistencia sin perseguir invitados.
+              Paga seguro, personaliza tu evento y recibe una invitación digital elegante, fácil de compartir por WhatsApp y preparada para confirmar asistencia sin perseguir invitados.
             </p>
             {params?.cancelado ? (
               <p className="mt-5 rounded-full bg-white px-4 py-2 text-sm font-bold text-[#b05a5f] shadow-sm">
@@ -177,10 +177,10 @@ export default async function PreciosPage({
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d2ae5f]">Compra asistida</p>
                 <h2 className="mt-2 font-display text-3xl">Te ayudamos a elegir el plan ideal.</h2>
-                <p className="mt-2 text-sm leading-6 text-white/65">Escribenos por WhatsApp y te recomendamos el plan segun tu evento.</p>
+                <p className="mt-2 text-sm leading-6 text-white/65">Escríbenos por WhatsApp y te recomendamos el plan según tu evento.</p>
               </div>
               <Link
-                href={buildWhatsAppUrl("Hola, quiero ayuda para elegir mi invitacion digital.")}
+                href={buildWhatsAppUrl("Hola, quiero ayuda para elegir mi invitación digital.")}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25d366] px-6 py-4 text-sm font-black text-black"
               >
                 <IconBrandWhatsapp size={20} />

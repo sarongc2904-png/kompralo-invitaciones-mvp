@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Check, ChevronRight, Gem, MessageCircle, Palette, Send, Sparkles, SquarePen, Star, Wand2 } from "lucide-react";
 import { faqs } from "@/data/faqs";
@@ -7,58 +7,56 @@ import { PricingCards } from "@/components/PricingCards";
 import { TemplateCard } from "@/components/TemplateCard";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
-const heroImage = "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=85";
-
 const socialProof = [
   {
     value: "+100",
-    label: "invitaciones creadas",
-    detail: "Bodas, XV anos, bautizos, cumpleanos y baby showers."
+    label: "eventos elevados",
+    detail: "Bodas, XV años, bautizos, cumpleaños y baby showers con presencia premium."
   },
   {
     value: "4.9/5",
-    label: "satisfaccion de clientes",
-    detail: "Por diseno, rapidez y facilidad para compartir."
+    label: "experiencia del invitado",
+    detail: "Valorada por claridad, estética y facilidad para confirmar asistencia."
   },
   {
     value: "24 h",
-    label: "entrega express disponible",
-    detail: "Para eventos cercanos que necesitan verse premium."
+    label: "entrega disponible",
+    detail: "Ideal cuando tu evento necesita verse impecable sin perder tiempo."
   }
 ];
 
 const testimonials = [
   {
-    quote: "La invitacion se veia mucho mas elegante que una imagen normal. Todos confirmaron por WhatsApp rapidisimo.",
+    quote: "Mis invitados no sintieron que les mandé un link. Sintieron que el evento empezaba desde el mensaje.",
     name: "Mariana G.",
     event: "Boda en Monterrey"
   },
   {
-    quote: "Incluia mapa, musica, fotos y RSVP. Se sintio como una experiencia, no como un simple link.",
+    quote: "Pudimos compartir música, ubicación, fotos y confirmación. Todo se sintió cuidado, elegante y fácil.",
     name: "Fernanda L.",
-    event: "XV anos en CDMX"
+    event: "XV años en CDMX"
   }
 ];
 
 const steps = [
   {
-    title: "Elige tu diseno",
+    title: "Elige tu diseño",
     text: "Selecciona una plantilla premium que conecte con el estilo de tu evento.",
     icon: Palette
   },
   {
     title: "Personaliza tus datos",
-    text: "Agrega fecha, ubicacion, musica, fotos, dress code y detalles importantes.",
+    text: "Agrega fecha, ubicación, música, fotos, dress code y detalles importantes.",
     icon: SquarePen
   },
   {
-    title: "Recibe tu invitacion digital",
+    title: "Recibe tu invitación digital",
     text: "Te entregamos una experiencia lista para enviar, revisar y compartir.",
     icon: Send
   },
   {
-    title: "Compartela por WhatsApp",
-    text: "Tus invitados abren el link, ven la informacion y confirman asistencia.",
+    title: "Compártela por WhatsApp",
+    text: "Tus invitados abren el link, ven la información y confirman asistencia.",
     icon: MessageCircle
   }
 ];
@@ -77,8 +75,19 @@ export default function InvitacionesPage() {
   return (
     <>
       <section id="inicio" className="relative min-h-screen scroll-mt-24 overflow-hidden bg-ink text-pearl">
-        <Image src={heroImage} alt="Invitaciones digitales premium Kompralo" fill priority sizes="100vw" className="object-cover opacity-72" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(198,161,91,0.24),transparent_28%),linear-gradient(90deg,rgba(8,8,10,0.94),rgba(8,8,10,0.58)_50%,rgba(8,8,10,0.25))]" />
+        <video
+          className="absolute inset-0 h-full w-full object-cover opacity-80"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="/videos/hero-invitaciones.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(198,161,91,0.24),transparent_28%),linear-gradient(90deg,rgba(8,8,10,0.96),rgba(8,8,10,0.70)_52%,rgba(8,8,10,0.38))]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
         <div className="relative mx-auto grid min-h-screen max-w-7xl items-end px-4 pb-10 pt-28 sm:px-6 lg:px-8">
           <div className="max-w-5xl pb-10">
             <div className="reveal inline-flex items-center gap-2 rounded-full border border-pearl/18 bg-pearl/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-gold backdrop-blur-xl">
@@ -96,7 +105,7 @@ export default function InvitacionesPage() {
                 Ver modelos
                 <ArrowRight size={17} />
               </Link>
-              <Link href="/formulario" className="inline-flex items-center justify-center gap-2 rounded-full border border-pearl/22 bg-pearl/10 px-7 py-4 text-sm font-bold text-pearl backdrop-blur-xl transition hover:border-gold hover:text-gold">
+              <Link href="/crear" className="inline-flex items-center justify-center gap-2 rounded-full border border-pearl/22 bg-pearl/10 px-7 py-4 text-sm font-bold text-pearl backdrop-blur-xl transition hover:border-gold hover:text-gold">
                 Crear mi invitación
               </Link>
             </div>
@@ -109,45 +118,100 @@ export default function InvitacionesPage() {
         </div>
       </section>
 
-      <section id="prueba-social" className="relative scroll-mt-24 overflow-hidden bg-ink px-4 py-14 text-pearl sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(198,161,91,0.16),transparent_28%),radial-gradient(circle_at_85%_35%,rgba(255,255,255,0.08),transparent_22%)]" />
-        <div className="relative mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1fr_0.9fr] lg:items-stretch">
-          <div className="grid gap-4 sm:grid-cols-3">
-            {socialProof.map((item) => (
-              <article key={item.label} className="rounded-[1.35rem] border border-pearl/12 bg-white/[0.07] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl">
-                <div className="flex items-center gap-1 text-gold">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <Star key={index} size={14} fill="currentColor" />
-                  ))}
-                </div>
-                <p className="mt-5 font-display text-5xl leading-none text-gold">{item.value}</p>
-                <p className="mt-2 text-base font-black text-white">{item.label}</p>
-                <p className="mt-3 text-sm leading-6 text-pearl/68">{item.detail}</p>
-              </article>
-            ))}
-          </div>
+      <section id="prueba-social" className="relative scroll-mt-24 overflow-hidden bg-[#070708] px-4 py-10 text-pearl sm:px-6 lg:px-8">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_12%,rgba(198,161,91,0.18),transparent_28%),radial-gradient(circle_at_85%_42%,rgba(255,255,255,0.06),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent_42%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+        <div className="relative mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+            <div>
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-gold/20 bg-gold/5 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.2em] text-gold">
+                <Gem size={12} />
+                Prueba social deluxe
+              </div>
+              <h2 className="mt-4 max-w-xl font-display text-2xl leading-none text-white sm:text-4xl">
+                La diferencia se nota desde el primer mensaje.
+              </h2>
+              <p className="mt-3 max-w-lg text-xs leading-relaxed text-pearl/50 sm:text-sm">
+                No vendemos una imagen bonita. Diseñamos el primer momento emocional de tu evento:
+                elegante, claro y listo para que cada invitado confirme sin fricción.
+              </p>
+            </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-            {testimonials.map((testimonial) => (
-              <article key={testimonial.name} className="rounded-[1.35rem] border border-gold/24 bg-[linear-gradient(135deg,rgba(255,255,255,0.13),rgba(255,255,255,0.05))] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.22)] backdrop-blur-xl">
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-1 text-gold">
+            <div className="grid gap-3 sm:grid-cols-3">
+              {socialProof.map((item) => (
+                <article key={item.label} className="group relative overflow-hidden rounded-xl border border-white/5 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-4 shadow-[0_20px_50px_rgba(0,0,0,0.25)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-gold/30">
+                  <div className="absolute -right-10 -top-10 size-20 rounded-full bg-gold/10 blur-xl transition duration-300 group-hover:bg-gold/15" />
+                  <div className="relative flex items-center gap-0.5 text-gold">
                     {Array.from({ length: 5 }).map((_, index) => (
-                      <Star key={index} size={15} fill="currentColor" />
+                      <Star key={index} size={10} fill="currentColor" />
                     ))}
                   </div>
-                  <BadgeCheck className="shrink-0 text-emerald" size={22} />
+                  <p className="relative mt-4 font-display text-3xl leading-none text-gold sm:text-4xl">{item.value}</p>
+                  <p className="relative mt-2 text-[10px] font-black uppercase tracking-[0.1em] text-white/90">{item.label}</p>
+                  <p className="relative mt-2 text-xs leading-relaxed text-pearl/45">{item.detail}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+            <article className="relative overflow-hidden rounded-xl border border-gold/15 bg-[linear-gradient(135deg,rgba(198,161,91,0.12),rgba(255,255,255,0.04)_42%,rgba(255,255,255,0.015))] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-xl sm:p-6">
+              <div className="absolute right-6 top-6 hidden rounded-full border border-gold/15 bg-black/20 px-3 py-1 text-[9px] font-black uppercase tracking-[0.15em] text-gold sm:block">
+                Experiencia real
+              </div>
+              <div className="flex items-center gap-0.5 text-gold">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Star key={index} size={12} fill="currentColor" />
+                ))}
+              </div>
+              <p className="mt-4 max-w-3xl font-display text-lg italic leading-relaxed text-white/90 sm:text-2xl">
+                &quot;Mis invitados no sintieron que les mandé un link. Sintieron que el evento empezaba desde el mensaje.&quot;
+              </p>
+              <div className="mt-5 flex flex-col gap-4 border-t border-white/5 pt-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-sm font-bold text-gold">Mariana G.</p>
+                  <p className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.15em] text-pearl/40">Boda en Monterrey</p>
                 </div>
-                <p className="mt-4 text-lg font-bold leading-7 text-white">&quot;{testimonial.quote}&quot;</p>
-                <div className="mt-5 border-t border-pearl/12 pt-4">
-                  <p className="text-sm font-black text-gold">{testimonial.name}</p>
-                  <p className="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-pearl/56">{testimonial.event}</p>
+                <div className="flex flex-wrap gap-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-pearl/60">
+                  {["WhatsApp", "RSVP", "Mapa", "Música"].map((item) => (
+                    <span key={item} className="rounded-full border border-white/5 bg-white/5 px-2 py-1">
+                      {item}
+                    </span>
+                  ))}
                 </div>
-              </article>
-            ))}
+              </div>
+            </article>
+
+            <article className="rounded-xl border border-white/5 bg-white/[0.04] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl sm:p-6">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-0.5 text-gold">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star key={index} size={12} fill="currentColor" />
+                  ))}
+                </div>
+                <BadgeCheck className="shrink-0 text-emerald" size={20} />
+              </div>
+              <p className="mt-4 text-base font-bold leading-snug text-white/90">
+                &quot;Pudimos compartir música, ubicación, fotos y confirmación. Todo se sintió cuidado, elegante y fácil.&quot;
+              </p>
+              <div className="mt-4 grid gap-2 border-t border-white/5 pt-4">
+                {["Los invitados entienden todo sin preguntar", "El evento se ve más exclusivo desde el celular", "La confirmación llega con menos fricción"].map((item) => (
+                  <div key={item} className="flex items-start gap-2.5 text-xs font-medium leading-relaxed text-pearl/50">
+                    <Check className="mt-0.5 shrink-0 text-gold" size={14} />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 flex flex-col">
+                <p className="text-xs font-bold text-gold">Fernanda L.</p>
+                <p className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.15em] text-pearl/40">XV años en CDMX</p>
+              </div>
+            </article>
           </div>
         </div>
-      </section>      <section id="como-funciona" className="scroll-mt-24 bg-pearl px-4 py-20 sm:px-6 lg:px-8">
+      </section>
+
+      <section id="como-funciona" className="scroll-mt-24 bg-pearl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
             <p className="eyebrow">¿Cómo funciona?</p>
@@ -268,7 +332,7 @@ export default function InvitacionesPage() {
             <div className="relative rounded-[2.75rem] border border-gold/25 bg-[linear-gradient(145deg,rgba(255,255,255,0.16),rgba(255,255,255,0.04))] p-3 shadow-[0_45px_140px_rgba(0,0,0,0.62)] backdrop-blur">
               <div className="overflow-hidden rounded-[2rem] bg-[#070708] ring-1 ring-white/10">
                 <div className="relative aspect-[9/16]">
-                  <Image src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=88" alt="Demo deluxe de invitacion digital para boda" fill sizes="360px" className="object-cover" />
+                  <Image src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=88" alt="Demo deluxe de invitación digital para boda" fill sizes="360px" className="object-cover" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_12%,rgba(255,255,255,0.22),transparent_26%),linear-gradient(180deg,rgba(0,0,0,0.10),rgba(0,0,0,0.38)_38%,rgba(0,0,0,0.92))]" />
                   <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
                     <span className="rounded-full border border-white/22 bg-black/35 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.24em] text-white shadow-[0_12px_30px_rgba(0,0,0,0.32)] backdrop-blur-xl">
@@ -286,7 +350,7 @@ export default function InvitacionesPage() {
                     ].map(([value, label]) => (
                       <div key={label} className="rounded-2xl border border-white/18 bg-black/38 px-3 py-3 text-center shadow-[0_18px_45px_rgba(0,0,0,0.32)] backdrop-blur-xl">
                         <p className="font-display text-2xl leading-none text-white">{value}</p>
-                        <p className="mt-1 text-[9px] font-black uppercase tracking-[0.22em] text-gold">{label}</p>
+                        <p className="mt-1 text-[9px] font-black uppercase tracking-[0.22em] text-black">{label}</p>
                       </div>
                     ))}
                   </div>
@@ -327,12 +391,16 @@ export default function InvitacionesPage() {
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
             <p className="eyebrow">Resultados</p>
-            <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">Hecho para vender valor, no solo una imagen bonita.</h2>
+            <h2 className="mt-4 font-display text-5xl leading-none text-ink sm:text-6xl">Que tus invitados sientan que el evento ya empezó.</h2>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-ink/68">
+              Cada detalle está pensado para provocar emoción desde el primer mensaje: abrir la invitación, escuchar la música,
+              ver el lugar, guardar la fecha y confirmar asistencia sin fricción.
+            </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
-            <Proof value="+40%" label="más intención de confirmar" />
-            <Proof value="1 link" label="para toda la experiencia" />
-            <Proof value="95+" label="objetivo Lighthouse" />
+            <Proof value="+100" label="momentos convertidos en experiencia" />
+            <Proof value="1 link" label="con todo lo que tus invitados necesitan" />
+            <Proof value="24 hrs" label="para tenerla lista y compartirla" />
           </div>
         </div>
       </section>

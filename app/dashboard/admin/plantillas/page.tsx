@@ -12,6 +12,7 @@ export const dynamic = "force-dynamic";
 const categoryOrder = ["Bodas", "XV años", "Bautizos", "Cumpleaños", "Baby Shower"];
 
 const commercialNames: Record<string, string> = {
+  "boda-deluxe": "Boda Deluxe",
   "boda-black-gold": "Elegancia Dorada",
   "xv-rosa-dorado": "Rosa Imperial",
   "xv-royal-blue": "Azul Majestuoso",

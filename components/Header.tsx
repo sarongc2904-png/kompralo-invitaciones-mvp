@@ -1,6 +1,6 @@
 "use client";
 
-import { IconArrowLeft, IconMenu2, IconX } from "@tabler/icons-react";
+import { IconArrowLeft, IconChevronRight, IconMenu2, IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,17 +10,14 @@ const navItems = [
   { href: "/invitaciones", label: "Inicio" },
   { href: "/modelos", label: "Modelos" },
   { href: "/precios", label: "Precios" },
-  { href: "/formulario", label: "Crear invitación" },
+  { href: "/crear", label: "Crear invitación" },
   { href: "/dashboard", label: "Dashboard" }
 ];
 
-const sectionItems = [
-  { href: "/invitaciones#inicio", label: "Inicio" },
-  { href: "/invitaciones#modelos", label: "Modelos" },
+const quickSectionItems = [
   { href: "/invitaciones#como-funciona", label: "Cómo funciona" },
   { href: "/invitaciones#beneficios", label: "Beneficios" },
   { href: "/invitaciones#comparativa", label: "Comparativa" },
-  { href: "/precios", label: "Precios" },
   { href: "/invitaciones#faq", label: "FAQ" }
 ];
 
@@ -89,47 +86,84 @@ export function Header() {
       </nav>
 
       {isMenuOpen ? (
-        <div className="border-t border-ink/5 bg-pearl/96 px-4 pb-5 pt-2 shadow-[0_24px_60px_rgba(17,17,20,0.12)] md:hidden">
-          <div className="mx-auto grid max-w-7xl gap-2">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-pearl/98 px-5 pb-8 pt-4 shadow-[0_24px_60px_rgba(17,17,20,0.16)] backdrop-blur-2xl md:hidden">
+          <div className="mx-auto flex max-w-lg items-center justify-between border-b border-ink/8 pb-4">
+            <Link href="/invitaciones" className="flex min-w-0 items-center gap-3 text-ink" onClick={closeMenu}>
+              <span className="relative block size-12 shrink-0 overflow-hidden rounded-full bg-ink shadow-[0_14px_35px_rgba(17,17,20,0.16)] ring-1 ring-gold/45">
+                <Image src="/brand/kompralo-k-icon.png" alt="Kompralo" fill sizes="48px" className="object-cover" priority />
+              </span>
+              <span className="truncate font-display text-3xl leading-none">
+                kompralo<span className="text-lg text-ink/70">.com.mx</span>
+              </span>
+            </Link>
             <button
               type="button"
-              onClick={goBack}
-              className="mb-2 inline-flex items-center justify-center gap-2 rounded-full border border-ink/10 bg-white/70 px-5 py-4 text-base font-black text-ink shadow-[0_12px_30px_rgba(17,17,20,0.08)]"
+              aria-label="Cerrar menú"
+              onClick={closeMenu}
+              className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-white/80 text-ink shadow-[0_12px_30px_rgba(17,17,20,0.08)] active:scale-95"
             >
-              <IconArrowLeft size={18} />
-              Volver atrás
+              <IconX size={22} stroke={2} />
             </button>
-            {navItems.map((item) => (
-              <Link
-                key={`mobile-${item.href}-${item.label}`}
-                href={item.href}
-                onClick={closeMenu}
-                className="rounded-2xl border border-ink/8 bg-white/64 px-4 py-4 text-base font-black text-ink transition active:scale-[0.99]"
+          </div>
+
+          <div className="mx-auto grid max-w-lg gap-5 pt-5">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={goBack}
+                className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/70 px-4 py-3 text-sm font-black text-ink shadow-[0_12px_30px_rgba(17,17,20,0.08)] active:scale-[0.99]"
               >
-                {item.label}
+                <IconArrowLeft size={17} />
+                Volver
+              </button>
+              <Link
+                href="/login"
+                onClick={closeMenu}
+                className="ml-auto rounded-full bg-ink px-5 py-3 text-sm font-black text-white shadow-[0_18px_40px_rgba(17,17,20,0.18)]"
+              >
+                Entrar
               </Link>
-            ))}
-            <div className="mt-4 rounded-[1.25rem] border border-ink/8 bg-white/48 p-3">
-              <p className="px-2 pb-2 text-[11px] font-black uppercase tracking-[0.22em] text-gold">Ir a sección</p>
-              <div className="grid grid-cols-2 gap-2">
-                {sectionItems.map((item) => (
+            </div>
+
+            <div>
+              <p className="mb-3 text-[11px] font-black uppercase tracking-[0.24em] text-gold">Navegación</p>
+              <div className="grid gap-2">
+                {navItems.map((item) => (
                   <Link
-                    key={`section-${item.href}-${item.label}`}
+                    key={`mobile-${item.href}-${item.label}`}
                     href={item.href}
                     onClick={closeMenu}
-                    className="rounded-2xl bg-pearl px-3 py-3 text-sm font-black text-ink/74 transition active:scale-[0.99]"
+                    className="group flex items-center justify-between rounded-[1.35rem] border border-ink/8 bg-white/72 px-4 py-4 text-base font-black text-ink shadow-[0_12px_30px_rgba(17,17,20,0.05)] transition active:scale-[0.99]"
+                  >
+                    {item.label}
+                    <IconChevronRight size={18} className="text-gold transition group-hover:translate-x-1" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[1.5rem] border border-ink/8 bg-white/54 p-4 shadow-[0_18px_45px_rgba(17,17,20,0.06)]">
+              <p className="pb-3 text-[11px] font-black uppercase tracking-[0.24em] text-gold">Secciones rápidas</p>
+              <div className="grid grid-cols-2 gap-2">
+                {quickSectionItems.map((item) => (
+                  <Link
+                    key={`quick-${item.href}-${item.label}`}
+                    href={item.href}
+                    onClick={closeMenu}
+                    className="rounded-2xl bg-pearl px-3 py-3 text-sm font-black text-ink/76 shadow-inner shadow-white/70 transition active:scale-[0.99]"
                   >
                     {item.label}
                   </Link>
                 ))}
               </div>
             </div>
+
             <Link
-              href="/login"
+              href="/modelos"
               onClick={closeMenu}
-              className="mt-2 rounded-full bg-ink px-5 py-4 text-center text-base font-black text-white shadow-[0_18px_40px_rgba(17,17,20,0.18)]"
+              className="rounded-full bg-ink px-5 py-4 text-center text-base font-black text-white shadow-[0_18px_40px_rgba(17,17,20,0.18)]"
             >
-              Entrar
+              Ver modelos disponibles
             </Link>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BarChart3, CalendarDays, Home, LayoutTemplate, Shield, Sparkles } from "lucide-react";
+import { BarChart3, CalendarDays, Heart, Home, LayoutTemplate, Shield, Sparkles } from "lucide-react";
 import { SignOutButton } from "./SignOutButton";
 
 type DashboardShellProps = {
@@ -12,8 +12,9 @@ type DashboardShellProps = {
 const dashboardNav = [
   { href: "/dashboard", label: "Inicio", icon: Home },
   { href: "/dashboard/eventos", label: "Eventos", icon: CalendarDays },
-  { href: "/dashboard/admin", label: "Admin", icon: Shield },
-  { href: "/dashboard/admin/plantillas", label: "Plantillas", icon: LayoutTemplate }
+  { href: "/dashboard/invitaciones", label: "Mis bodas", icon: Heart },
+  { href: "/dashboard/admin", label: "Admin", icon: Shield, adminOnly: true },
+  { href: "/dashboard/admin/plantillas", label: "Plantillas", icon: LayoutTemplate, adminOnly: true }
 ];
 
 export function DashboardShell({ title, description, role, children }: DashboardShellProps) {
@@ -32,7 +33,7 @@ export function DashboardShell({ title, description, role, children }: Dashboard
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            {dashboardNav.map((item) => (
+            {dashboardNav.filter((item) => !item.adminOnly || role === "ADMIN").map((item) => (
               <Link key={item.href} href={item.href} className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:border-gold hover:text-emerald">
                 <item.icon size={15} />
                 {item.label}
